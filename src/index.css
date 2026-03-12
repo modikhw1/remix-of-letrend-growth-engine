@@ -98,3 +98,46 @@
     box-shadow: 4px 4px 0px 0px hsl(var(--foreground));
   }
 }
+
+@keyframes tiktok-feed-scroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes tiktok-burst {
+  0%,
+  18% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  24%,
+  56% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  72%,
+  100% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+}
+
+.tiktok-feed-scroll-fast {
+  animation: tiktok-feed-scroll 8s linear infinite;
+  will-change: transform;
+}
+
+.tiktok-feed-scroll-slow {
+  animation: tiktok-feed-scroll 15s linear infinite;
+  will-change: transform;
+}
+
+.tiktok-follower-burst {
+  opacity: 0;
+  animation: tiktok-burst 4.8s ease-in-out infinite;
+  will-change: transform, opacity;
+}

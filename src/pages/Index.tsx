@@ -10,7 +10,7 @@ import { allCases } from "@/data/cases";
 import featureBentoIllustration from "@/assets/group-407.svg";
 import aiHumanIllustration from "@/assets/group-669-1.svg";
 import platformPreviewIllustration from "@/assets/group-749.svg";
-import TikTokMockup from "@/components/TikTokMockup";
+import TikTokMomentumShowcase from "@/components/TikTokMomentumShowcase";
 import GumballDecorations from "@/components/GumballDecorations";
 import LogoTicker from "@/components/LogoTicker";
 import {
@@ -163,9 +163,8 @@ const Index = () => {
         <GumballDecorations layout="tiktok-section" />
         <div className="container relative z-10">
           <div className="grid items-center gap-12 md:grid-cols-2">
-            <FadeIn className="flex justify-center gap-4">
-              <TikTokMockup username="@urbanslice" caption="POV: du beställer vår hemliga off-menu pizza 🍕🔥" likes="14.2K" comments="892" bgColor="bg-sage" />
-              <TikTokMockup username="@vesperbar" caption="Fredagskväll ✨ Negroni sbagliato, med prosecco i den" likes="8.7K" comments="341" bgColor="bg-brand" className="hidden md:flex mt-8" profileColor="bg-gold" />
+            <FadeIn>
+              <TikTokMomentumShowcase />
             </FadeIn>
             <FadeIn delay={0.1}>
               <p className="mb-2 text-sm font-bold uppercase tracking-widest text-accent">{content.tiktokPreview.kicker}</p>
