@@ -6,6 +6,8 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { images } from "@/data/images";
 import { index as content, global } from "@/data/content";
+import aiHumanIllustration from "@/assets/group-669.svg";
+import platformPreviewIllustration from "@/assets/group-749.svg";
 import TikTokMockup from "@/components/TikTokMockup";
 import GumballDecorations from "@/components/GumballDecorations";
 import LogoTicker from "@/components/LogoTicker";
@@ -200,7 +202,7 @@ const Index = () => {
               </div>
             </FadeIn>
             <FadeIn delay={0.15} direction="right" className="flex justify-center">
-              <img src={images.illustTeam.src} alt={images.illustTeam.alt} className="h-64 w-64 object-contain drop-shadow-xl md:h-80 md:w-80" />
+              <img src={aiHumanIllustration} alt="Teknologi + människa illustration" className="h-64 w-64 object-contain drop-shadow-xl md:h-80 md:w-80" />
             </FadeIn>
           </div>
         </div>
@@ -211,7 +213,11 @@ const Index = () => {
         <div className="container">
           <div className="grid items-center gap-12 md:grid-cols-2">
             <FadeIn className="order-2 md:order-1 flex justify-center">
-              <img src={images.illustPlatform.src} alt={images.illustPlatform.alt} className="h-64 w-64 object-contain drop-shadow-xl md:h-80 md:w-80" />
+              <img
+                src={platformPreviewIllustration}
+                alt="Plattformsförhandsvisning"
+                className="h-auto w-full max-w-[34rem] object-contain drop-shadow-xl"
+              />
             </FadeIn>
             <FadeIn delay={0.1} className="order-1 md:order-2">
               <p className="mb-2 text-sm font-bold uppercase tracking-widest text-accent">{content.platformPreview.kicker}</p>
