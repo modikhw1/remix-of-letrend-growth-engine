@@ -59,8 +59,8 @@ const HowItWorks = () => (
       </div>
     </section>
 
-    {/* 5-step process */}
-    <section className="border-b-2 border-foreground bg-foreground py-20 text-background md:py-28">
+    {/* 5-step process — replaced full black with warm cocoa */}
+    <section className="border-b-2 border-foreground bg-brand py-20 text-brand-foreground md:py-28">
       <div className="container">
         <FadeIn className="mx-auto max-w-2xl text-center mb-14">
           <h2 className="text-3xl font-black md:text-4xl">{content.steps.heading}</h2>
@@ -69,7 +69,7 @@ const HowItWorks = () => (
         <FadeIn delay={0.1}>
           <div className="mx-auto max-w-2xl space-y-4">
             {content.steps.items.map((s, idx) => (
-              <div key={s.num} className="rounded-2xl border-2 border-background/15 bg-background/5 p-6 backdrop-blur-sm">
+              <div key={s.num} className="rounded-2xl border-2 border-brand-foreground/15 bg-brand-foreground/5 p-6 backdrop-blur-sm">
                 <div className="flex items-center gap-4">
                   <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/20 text-lg font-black text-gold">{s.num}</span>
                   <h3 className="text-lg font-bold">{s.title}</h3>

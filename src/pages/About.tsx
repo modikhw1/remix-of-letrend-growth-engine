@@ -49,7 +49,7 @@ const About = () => (
     </section>
 
     {/* Team */}
-    <section className="relative border-b-2 border-foreground bg-foreground py-20 text-background md:py-28 overflow-hidden">
+    <section className="relative border-b-2 border-foreground bg-brand py-20 text-brand-foreground md:py-28 overflow-hidden">
       <GumballDecorations layout="minimal" light />
       <div className="container relative z-10">
         <FadeIn className="mx-auto max-w-2xl text-center mb-14">
@@ -57,13 +57,13 @@ const About = () => (
           <p className="mt-4 opacity-60">{content.team.subheading}</p>
         </FadeIn>
         <div className="grid gap-5 md:grid-cols-3">
-          {/* Managers showcase with photos */}
-          <FadeIn>
-            <div className="rounded-2xl border-2 border-background/15 bg-background/5 p-6 backdrop-blur-sm">
-              <div className="flex -space-x-4 justify-center mb-5">
-                <img src={images.teamManager1.src} alt={images.teamManager1.alt} className="h-20 w-20 rounded-full object-cover border-2 border-background/20" />
-                <img src={images.teamManager2.src} alt={images.teamManager2.alt} className="h-20 w-20 rounded-full object-cover border-2 border-background/20" />
-                <img src={images.teamManager3.src} alt={images.teamManager3.alt} className="h-20 w-20 rounded-full object-cover border-2 border-background/20" />
+          {/* Managers — large photos without frames */}
+          <FadeIn className="md:col-span-2">
+            <div className="h-full rounded-2xl border-2 border-brand-foreground/15 bg-brand-foreground/5 p-6 backdrop-blur-sm">
+              <div className="flex gap-4 justify-center mb-6">
+                <img src={images.teamManager1.src} alt={images.teamManager1.alt} className="h-32 w-32 md:h-40 md:w-40 rounded-2xl object-cover" />
+                <img src={images.teamManager2.src} alt={images.teamManager2.alt} className="h-32 w-32 md:h-40 md:w-40 rounded-2xl object-cover" />
+                <img src={images.teamManager3.src} alt={images.teamManager3.alt} className="h-32 w-32 md:h-40 md:w-40 rounded-2xl object-cover" />
               </div>
               <Users className="mx-auto mb-2 h-5 w-5 text-gold" />
               <h3 className="text-lg font-bold text-center">{content.team.managers.title}</h3>
@@ -71,15 +71,10 @@ const About = () => (
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <div className="h-full rounded-2xl border-2 border-background/15 bg-background/5 p-7 backdrop-blur-sm">
+            <div className="h-full rounded-2xl border-2 border-brand-foreground/15 bg-brand-foreground/5 p-7 backdrop-blur-sm">
               <Heart className="mb-4 h-6 w-6 text-gold" />
               <h3 className="text-xl font-bold">{content.team.founders.title}</h3>
               <p className="mt-3 text-sm opacity-60">{content.team.founders.body}</p>
-            </div>
-          </FadeIn>
-          <FadeIn delay={0.2}>
-            <div className="h-full rounded-2xl border-2 border-background/15 bg-background/5 p-6 flex items-center justify-center backdrop-blur-sm">
-              <img src={images.illustTeam.src} alt={images.illustTeam.alt} className="h-44 w-auto object-contain drop-shadow-lg" />
             </div>
           </FadeIn>
         </div>

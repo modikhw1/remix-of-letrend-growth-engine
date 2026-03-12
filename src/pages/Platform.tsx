@@ -15,7 +15,6 @@ const moduleIcons = [Lightbulb, Target, CalendarDays, Video, TrendingUp, Search]
 const techIcons = [Sparkles, Eye, Users, Cpu];
 const moduleColors = ["bg-gold/30", "bg-blush", "bg-sage/10", "bg-gold/20", "bg-blush/60", "bg-card"];
 
-// Map modules to their laptop mockup images (Videoinstruktioner uses Koncept as fallback)
 const moduleLaptopImages = [
   images.laptopKoncept,
   images.laptopGameplan,
@@ -70,8 +69,8 @@ const Platform = () => (
       );
     })}
 
-    {/* Tech behind */}
-    <section className="border-b-2 border-foreground bg-foreground py-20 text-background md:py-28">
+    {/* Tech behind — warm cocoa instead of full black */}
+    <section className="border-b-2 border-foreground bg-brand py-20 text-brand-foreground md:py-28">
       <div className="container">
         <FadeIn className="mx-auto max-w-2xl text-center mb-14">
           <h2 className="text-3xl font-black md:text-4xl">{content.techBehind.heading}</h2>
@@ -82,7 +81,7 @@ const Platform = () => (
             {content.techBehind.items.map((item, idx) => {
               const Icon = techIcons[idx];
               return (
-                <div key={item.title} className="flex items-start gap-3 rounded-2xl border-2 border-background/15 bg-background/5 p-6 backdrop-blur-sm">
+                <div key={item.title} className="flex items-start gap-3 rounded-2xl border-2 border-brand-foreground/15 bg-brand-foreground/5 p-6 backdrop-blur-sm">
                   <Icon className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
                   <div>
                     <h3 className="text-lg font-bold">{item.title}</h3>

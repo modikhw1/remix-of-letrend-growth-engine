@@ -23,7 +23,7 @@ const tiktokDataMap: Record<string, { username: string; caption: string; likes: 
   "vesper-social-bar": { username: "@vesperbar", caption: "Fredagskväll ✨ Negroni sbagliato, med prosecco i den", likes: "8.7K", comments: "341", followers: "3.1K", bio: "Cocktails & good vibes 🍸 Gbg", bgColor: "bg-brand" },
   "kvarterskafe-storstad": { username: "@kvarterskafe", caption: "Morgonrutinen ☕ Från bönor till kopp", likes: "5.1K", comments: "203", followers: "4.2K", bio: "Kaffe, böcker & lugn 📖☕ Malmö", bgColor: "bg-accent" },
   "trattoria-maggio": { username: "@trattoriamaggio", caption: "Så gör vi vår pasta från grunden 🇮🇹🍝", likes: "11.3K", comments: "567", followers: "2.8K", bio: "Äkta italienskt hantverk. Uppsala 🇮🇹", bgColor: "bg-sage" },
-  "neon-nights": { username: "@neonnights", caption: "Cocktail of the week: Smoky Old Fashioned 🥃", likes: "6.4K", comments: "289", followers: "3.5K", bio: "Craft cocktails. Dark vibes. Malmö 🌙", bgColor: "bg-foreground" },
+  "neon-nights": { username: "@neonnights", caption: "Cocktail of the week: Smoky Old Fashioned 🥃", likes: "6.4K", comments: "289", followers: "3.5K", bio: "Craft cocktails. Dark vibes. Malmö 🌙", bgColor: "bg-brand" },
   "bokcafeet": { username: "@bokcafeet", caption: "BookTok-rekommendationen denna vecka 📚✨", likes: "3.2K", comments: "156", followers: "1.9K", bio: "Böcker + kaffe = ❤️ Linköping", bgColor: "bg-brand" },
 };
 
@@ -157,27 +157,27 @@ const CaseDetail = () => {
         </div>
       </section>
 
-      {/* Before / After — improved contrast */}
-      <section className="border-b-2 border-foreground bg-foreground py-16 text-background md:py-24">
+      {/* Before / After — warm cocoa instead of black */}
+      <section className="border-b-2 border-foreground bg-brand py-16 text-brand-foreground md:py-24">
         <div className="container">
           <FadeIn className="mx-auto max-w-3xl text-center mb-12">
             <h2 className="text-3xl font-black md:text-4xl">Före &amp; efter LeTrend</h2>
           </FadeIn>
           <FadeIn delay={0.1} className="mx-auto max-w-3xl">
             <div className="grid gap-4 md:grid-cols-2">
-              <div className="rounded-2xl border-2 border-background/20 bg-background/8 p-6 backdrop-blur-sm">
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-background/10 px-3 py-1">
-                  <div className="h-2 w-2 rounded-full bg-background/40" />
-                  <p className="text-xs font-bold uppercase tracking-widest text-background/60">Före</p>
+              <div className="rounded-2xl border-2 border-brand-foreground/20 bg-brand-foreground/8 p-6 backdrop-blur-sm">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-brand-foreground/10 px-3 py-1">
+                  <div className="h-2 w-2 rounded-full bg-brand-foreground/40" />
+                  <p className="text-xs font-bold uppercase tracking-widest text-brand-foreground/60">Före</p>
                 </div>
-                <p className="text-background/70 leading-relaxed">{caseData.challenge}</p>
+                <p className="text-brand-foreground/70 leading-relaxed">{caseData.challenge}</p>
               </div>
               <div className="rounded-2xl border-2 border-gold/40 bg-gold/10 p-6 backdrop-blur-sm">
                 <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-gold/20 px-3 py-1">
                   <div className="h-2 w-2 rounded-full bg-gold" />
                   <p className="text-xs font-bold uppercase tracking-widest text-gold">Efter</p>
                 </div>
-                <p className="text-background/80 leading-relaxed">{caseData.result}</p>
+                <p className="text-brand-foreground/80 leading-relaxed">{caseData.result}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {caseData.stats.map((s) => (
                     <span key={s} className="inline-flex items-center gap-1.5 rounded-full bg-sage/20 px-3 py-1 text-xs font-bold text-sage">
