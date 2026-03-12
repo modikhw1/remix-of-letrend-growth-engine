@@ -91,7 +91,8 @@ export const allCases: CaseData[] = [
     result: "+200% profil-besök. Tydlig skiftning i gästprofil mot yngre segment.",
     stats: ["+200% profilbesök", "Ny målgrupp", "10 veckor"],
     quote: { text: "Vi visste att vi behövde nå yngre gäster men hade ingen aning om hur. LeTrend visade oss vägen.", author: "Giovanni M.", role: "Ägare, Trattoria Maggio" },
-    timeline: "10 veckor",
+    image: { src: illustBar, alt: "Restaurangägare" },
+    sticker: { src: stickerPhone, alt: "Telefon-sticker" },
   },
   {
     slug: "neon-nights",
