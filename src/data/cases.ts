@@ -1,3 +1,19 @@
+// Case images — swap these imports to change thumbnails site-wide
+import illustBar from "@/assets/illust-bar.png";
+import illustBartender from "@/assets/illust-bartender.png";
+import illustCafe from "@/assets/illust-cafe.png";
+import illustChefPerson from "@/assets/illust-chef-person.png";
+import illustBarista from "@/assets/illust-barista.png";
+import illustCreator from "@/assets/illust-creator.png";
+
+// Stickers used as decorative elements per case
+import stickerChef from "@/assets/sticker-chef.png";
+import stickerCocktail from "@/assets/sticker-cocktail.png";
+import stickerCoffee from "@/assets/sticker-coffee.png";
+import stickerCoin from "@/assets/sticker-coin.png";
+import stickerPhone from "@/assets/sticker-phone.png";
+import stickerAi from "@/assets/sticker-ai.png";
+
 export interface CaseData {
   slug: string;
   type: string;
@@ -11,6 +27,10 @@ export interface CaseData {
   stats: string[];
   quote?: { text: string; author: string; role: string };
   timeline: string;
+  /** Main illustration image */
+  image: { src: string; alt: string };
+  /** Decorative sticker */
+  sticker: { src: string; alt: string };
 }
 
 export const allCases: CaseData[] = [
