@@ -6,6 +6,7 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { images } from "@/data/images";
 import { index as content, global } from "@/data/content";
+import featureBentoIllustration from "@/assets/group-407.svg";
 import aiHumanIllustration from "@/assets/group-669-1.svg";
 import platformPreviewIllustration from "@/assets/group-749.svg";
 import TikTokMockup from "@/components/TikTokMockup";
@@ -62,7 +63,7 @@ const Index = () => {
                   <h2 className="text-3xl font-bold md:text-4xl">{content.featureBento.heading}</h2>
                   <p className="mt-3 text-muted-foreground">{content.featureBento.body}</p>
                 </div>
-                <img src={images.illustFilming.src} alt={images.illustFilming.alt} className="mt-6 h-36 w-36 object-contain drop-shadow-md md:mt-0 md:h-44 md:w-44" />
+                <img src={featureBentoIllustration} alt="Äkthet slår produktion illustration" className="mt-6 h-36 w-36 object-contain drop-shadow-md md:mt-0 md:h-44 md:w-44" />
               </div>
             </FadeIn>
 
