@@ -61,7 +61,8 @@ export const allCases: CaseData[] = [
     result: "Fullt hus på fredagar efter 8 veckor. Kö vid dörren. Stark lokal igenkänning.",
     stats: ["Fullt hus fredagar", "Kö vid dörren", "8 veckor"],
     quote: { text: "Inom åtta veckor hade vi fullt hus på fredagar. Det hade aldrig hänt med vår gamla approach.", author: "Erik S.", role: "Grundare, Vesper Social Bar" },
-    timeline: "8 veckor",
+    image: { src: illustBartender, alt: "Bartender" },
+    sticker: { src: stickerCocktail, alt: "Cocktail-sticker" },
   },
   {
     slug: "kvarterskafe-storstad",
