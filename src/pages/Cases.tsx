@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
 import FadeIn from "@/components/FadeIn";
-import FloatingDecorations from "@/components/FloatingDecorations";
+import GumballDecorations from "@/components/GumballDecorations";
 import { Quote, ArrowRight } from "lucide-react";
 import { allCases } from "@/data/cases";
 import { cases as content, global } from "@/data/content";
@@ -15,30 +15,30 @@ const Cases = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b-2 border-foreground bg-blush py-24 md:py-36">
-        <FloatingDecorations layout="minimal" />
+      <section className="relative overflow-hidden border-b-2 border-foreground bg-brand py-24 text-brand-foreground md:py-36">
+        <GumballDecorations layout="hero-cases" light />
         <div className="container relative z-10">
           <FadeIn className="mx-auto max-w-3xl text-center">
-            <p className="mb-4 text-sm font-bold uppercase tracking-[0.2em]">{content.hero.kicker}</p>
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-gold">{content.hero.kicker}</p>
             <h1 className="text-5xl font-black leading-tight md:text-7xl">{content.hero.heading}</h1>
-            <p className="mx-auto mt-6 max-w-xl text-lg text-foreground/70">{content.hero.body}</p>
+            <p className="mx-auto mt-6 max-w-xl text-lg opacity-70">{content.hero.body}</p>
           </FadeIn>
         </div>
       </section>
 
       {/* Featured quote */}
-      <section className="border-b-2 border-foreground bg-accent py-16 text-accent-foreground">
+      <section className="border-b-2 border-foreground bg-gold py-16">
         <div className="container">
           <FadeIn className="mx-auto max-w-2xl text-center">
-            <Quote className="mx-auto mb-4 h-8 w-8 opacity-60" />
+            <Quote className="mx-auto mb-4 h-8 w-8 opacity-40" />
             <p className="text-xl font-bold italic md:text-2xl">&quot;{content.quote.text}&quot;</p>
-            <p className="mt-4 text-sm opacity-70">{content.quote.author}</p>
+            <p className="mt-4 text-sm opacity-60">{content.quote.author}</p>
           </FadeIn>
         </div>
       </section>
 
       {/* Filter + grid */}
-      <section className="border-b-2 border-foreground py-20 md:py-28">
+      <section className="border-b-2 border-foreground bg-background py-20 md:py-28">
         <div className="container">
           <div className="mb-10 flex flex-wrap justify-center gap-2">
             {content.categories.map((cat) => (
@@ -69,7 +69,7 @@ const Cases = () => {
                     <p className="mt-2 text-sm text-muted-foreground flex-1">{c.challenge}</p>
                     <div className="mt-4 flex flex-wrap gap-2">
                       {c.stats.map((s) => (
-                        <span key={s} className="rounded-lg bg-accent/10 border border-accent/20 px-2.5 py-1 text-xs font-semibold text-accent">{s}</span>
+                        <span key={s} className="rounded-lg bg-sage/15 border border-sage/30 px-2.5 py-1 text-xs font-semibold text-sage">{s}</span>
                       ))}
                     </div>
                     <span className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-accent">
@@ -84,12 +84,12 @@ const Cases = () => {
       </section>
 
       {/* CTA */}
-      <section className="bg-sage py-20 text-center text-sage-foreground">
+      <section className="bg-foreground py-20 text-center text-background">
         <div className="container mx-auto max-w-xl">
           <FadeIn>
             <h2 className="text-3xl font-black md:text-4xl">{content.cta.heading}</h2>
-            <p className="mt-4 opacity-80">{content.cta.body}</p>
-            <Button asChild size="lg" className="mt-8 rounded-full border-2 border-foreground bg-foreground text-background shadow-hard px-8 transition-all active:shadow-none active:translate-x-[4px] active:translate-y-[4px]">
+            <p className="mt-4 opacity-60">{content.cta.body}</p>
+            <Button asChild size="lg" className="mt-8 rounded-full border-2 border-background bg-background text-foreground shadow-hard px-8 transition-all active:shadow-none active:translate-x-[4px] active:translate-y-[4px]">
               <Link to="/kom-igang">{global.cta.primary}</Link>
             </Button>
           </FadeIn>
