@@ -76,7 +76,8 @@ export const allCases: CaseData[] = [
     result: "4 200 följare. Synlig ökning av lunchgäster. Lokal uppmärksamhet.",
     stats: ["4 200 följare", "Fler lunchgäster", "12 veckor"],
     quote: { text: "Vi gick från noll till 4 200 följare utan att det kändes som extra jobb. Plattformen gör allt tydligt.", author: "Anna K.", role: "Delägare, Kvarterskafé Storstad" },
-    timeline: "12 veckor",
+    image: { src: illustCafe, alt: "Café-interiör" },
+    sticker: { src: stickerCoffee, alt: "Kaffe-sticker" },
   },
   {
     slug: "trattoria-maggio",
