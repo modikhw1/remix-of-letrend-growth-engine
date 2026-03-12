@@ -11,7 +11,7 @@ interface LaptopMockupProps {
 const LaptopMockup = ({ imageSrc, imageAlt = "", className, label }: LaptopMockupProps) => {
   return (
     <div className={cn("flex flex-col items-center", className)}>
-      <div className="relative w-full max-w-[480px]">
+      <div className="relative w-full max-w-[520px]">
         <img
           src={imageSrc}
           alt={imageAlt}
