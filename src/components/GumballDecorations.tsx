@@ -105,9 +105,9 @@ const GumballDecorations = ({ layout, light }: GumballDecorationsProps) => {
             src={d.src}
             alt=""
             className={cn(
-              "pointer-events-none select-none opacity-[0.12]",
+              "pointer-events-none select-none",
               animClass,
-              light && "brightness-0 invert opacity-[0.08]",
+              light ? "opacity-[0.15] brightness-[10] saturate-0" : "opacity-[0.22]",
               d.className
             )}
             style={{
