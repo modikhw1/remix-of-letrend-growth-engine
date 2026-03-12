@@ -24,13 +24,13 @@ const techIcons = [Sparkles, Eye, Users, Cpu];
 const moduleColors = ["bg-gold/30", "bg-blush", "bg-sage/10", "bg-gold/20", "bg-blush/60", "bg-card"];
 
 // NOTE:
-// There are currently 5 unique laptop images for 6 modules.
-// "Videoinstruktioner" has no dedicated asset yet and therefore reuses the closest matching thumbnail.
+// Koncept and Smart sok were previously cross-mapped.
+// Videoinstruktioner now has a dedicated transparent laptop thumbnail.
 const moduleLaptopImages = [
   images.laptopSmartsok, // Koncept
   images.laptopGameplan,
   images.laptopFeedplanner,
-  images.laptopSmartsok, // Videoinstruktioner (missing dedicated image)
+  images.laptopInstruktioner, // Videoinstruktioner
   images.laptopInsights,
   images.laptopKoncept, // Smart sok
 ];

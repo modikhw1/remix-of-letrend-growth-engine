@@ -30,6 +30,7 @@ import laptopFrame from "@/assets/laptop-frame.svg";
 import laptopKoncept from "@/assets/laptop-koncept.png";
 import laptopGameplan from "@/assets/laptop-gameplan.png";
 import laptopFeedplanner from "@/assets/laptop-feedplanner.png";
+import laptopInstruktioner from "@/assets/laptop-instruktioner.png";
 import laptopInsights from "@/assets/laptop-insights.png";
 import laptopSmartsok from "@/assets/laptop-smartsok.png";
 
@@ -69,6 +70,7 @@ export const images = {
   laptopKoncept: { src: laptopKoncept, alt: "Koncept-modulen i LeTrend-plattformen" },
   laptopGameplan: { src: laptopGameplan, alt: "Game Plan-modulen i LeTrend-plattformen" },
   laptopFeedplanner: { src: laptopFeedplanner, alt: "Feed Planner-modulen i LeTrend-plattformen" },
+  laptopInstruktioner: { src: laptopInstruktioner, alt: "Videoinstruktioner-modulen i LeTrend-plattformen" },
   laptopInsights: { src: laptopInsights, alt: "Insights-modulen i LeTrend-plattformen" },
   laptopSmartsok: { src: laptopSmartsok, alt: "Smart Sök-modulen i LeTrend-plattformen" },
 
