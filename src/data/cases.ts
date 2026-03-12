@@ -1,3 +1,19 @@
+// Case images — swap these imports to change thumbnails site-wide
+import illustBar from "@/assets/illust-bar.png";
+import illustBartender from "@/assets/illust-bartender.png";
+import illustCafe from "@/assets/illust-cafe.png";
+import illustChefPerson from "@/assets/illust-chef-person.png";
+import illustBarista from "@/assets/illust-barista.png";
+import illustCreator from "@/assets/illust-creator.png";
+
+// Stickers used as decorative elements per case
+import stickerChef from "@/assets/sticker-chef.png";
+import stickerCocktail from "@/assets/sticker-cocktail.png";
+import stickerCoffee from "@/assets/sticker-coffee.png";
+import stickerCoin from "@/assets/sticker-coin.png";
+import stickerPhone from "@/assets/sticker-phone.png";
+import stickerAi from "@/assets/sticker-ai.png";
+
 export interface CaseData {
   slug: string;
   type: string;
@@ -11,6 +27,10 @@ export interface CaseData {
   stats: string[];
   quote?: { text: string; author: string; role: string };
   timeline: string;
+  /** Main illustration image */
+  image: { src: string; alt: string };
+  /** Decorative sticker */
+  sticker: { src: string; alt: string };
 }
 
 export const allCases: CaseData[] = [
@@ -27,6 +47,8 @@ export const allCases: CaseData[] = [
     stats: ["+140% räckvidd", "3× direktbokningar", "6 veckor"],
     quote: { text: "LeTrend gav oss en struktur vi inte visste att vi behövde. Nu vet vi exakt vad vi ska filma varje vecka.", author: "Maria L.", role: "Ägare, Urban Slice" },
     timeline: "6 veckor",
+    image: { src: illustChefPerson, alt: "Kock i kök" },
+    sticker: { src: stickerChef, alt: "Kock-sticker" },
   },
   {
     slug: "vesper-social-bar",
@@ -41,6 +63,8 @@ export const allCases: CaseData[] = [
     stats: ["Fullt hus fredagar", "Kö vid dörren", "8 veckor"],
     quote: { text: "Inom åtta veckor hade vi fullt hus på fredagar. Det hade aldrig hänt med vår gamla approach.", author: "Erik S.", role: "Grundare, Vesper Social Bar" },
     timeline: "8 veckor",
+    image: { src: illustBartender, alt: "Bartender" },
+    sticker: { src: stickerCocktail, alt: "Cocktail-sticker" },
   },
   {
     slug: "kvarterskafe-storstad",
@@ -55,6 +79,8 @@ export const allCases: CaseData[] = [
     stats: ["4 200 följare", "Fler lunchgäster", "12 veckor"],
     quote: { text: "Vi gick från noll till 4 200 följare utan att det kändes som extra jobb. Plattformen gör allt tydligt.", author: "Anna K.", role: "Delägare, Kvarterskafé Storstad" },
     timeline: "12 veckor",
+    image: { src: illustCafe, alt: "Café-interiör" },
+    sticker: { src: stickerCoffee, alt: "Kaffe-sticker" },
   },
   {
     slug: "trattoria-maggio",
@@ -69,6 +95,8 @@ export const allCases: CaseData[] = [
     stats: ["+200% profilbesök", "Ny målgrupp", "10 veckor"],
     quote: { text: "Vi visste att vi behövde nå yngre gäster men hade ingen aning om hur. LeTrend visade oss vägen.", author: "Giovanni M.", role: "Ägare, Trattoria Maggio" },
     timeline: "10 veckor",
+    image: { src: illustBar, alt: "Restaurangägare" },
+    sticker: { src: stickerPhone, alt: "Telefon-sticker" },
   },
   {
     slug: "neon-nights",
@@ -82,6 +110,8 @@ export const allCases: CaseData[] = [
     result: "3 500 följare på 10 veckor. Ökat antal bordbokningar och tydlig repositionering.",
     stats: ["3 500 följare", "Fler bordbokningar", "10 veckor"],
     timeline: "10 veckor",
+    image: { src: illustBarista, alt: "Barista" },
+    sticker: { src: stickerCoin, alt: "Mynt-sticker" },
   },
   {
     slug: "bokcafeet",
@@ -95,5 +125,7 @@ export const allCases: CaseData[] = [
     result: "+80% fottrafik under kampanjperioden. Lokal press-uppmärksamhet.",
     stats: ["+80% fottrafik", "Lokal press", "8 veckor"],
     timeline: "8 veckor",
+    image: { src: illustCreator, alt: "Content creator" },
+    sticker: { src: stickerAi, alt: "AI-sticker" },
   },
 ];

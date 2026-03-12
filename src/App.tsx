@@ -13,6 +13,7 @@ import GetStarted from "./pages/GetStarted";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/om-oss" element={<About />} />
           <Route path="/kom-igang" element={<GetStarted />} />
           <Route path="/priser" element={<Index />} />
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
