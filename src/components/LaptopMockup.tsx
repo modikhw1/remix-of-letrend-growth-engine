@@ -1,16 +1,16 @@
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
-import laptopFrame from "@/assets/laptop-frame.svg";
 import { X } from "lucide-react";
 
 interface LaptopMockupProps {
-  children: ReactNode;
+  /** Static image of the full laptop with screen content baked in */
+  imageSrc: string;
+  imageAlt?: string;
   className?: string;
   label?: string;
-  flipped?: boolean;
 }
 
-const LaptopMockup = ({ children, className, label, flipped }: LaptopMockupProps) => {
+const LaptopMockup = ({ imageSrc, imageAlt = "", className, label }: LaptopMockupProps) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -18,31 +18,13 @@ const LaptopMockup = ({ children, className, label, flipped }: LaptopMockupProps
       <div className={cn("flex flex-col items-center", className)}>
         <button
           onClick={() => setExpanded(true)}
-          className={cn(
-            "relative w-full max-w-[480px] cursor-zoom-in transition-transform hover:scale-[1.02]",
-            flipped && "-scale-x-100"
-          )}
+          className="relative w-full max-w-[480px] cursor-zoom-in transition-transform hover:scale-[1.02]"
         >
           <img
-            src={laptopFrame}
-            alt=""
-            className="relative w-full h-auto pointer-events-none select-none"
+            src={imageSrc}
+            alt={imageAlt}
+            className="w-full h-auto object-contain"
           />
-          <div
-            className={cn("absolute z-20 overflow-hidden")}
-            style={{
-              top: "5.5%",
-              left: "12.5%",
-              width: "75%",
-              height: "58%",
-              borderRadius: "2px",
-              transform: flipped ? "scaleX(-1)" : undefined,
-            }}
-          >
-            <div className="h-full w-full overflow-hidden bg-background">
-              {children}
-            </div>
-          </div>
         </button>
         {label && (
           <p className="text-xs font-medium text-muted-foreground mt-2">{label}</p>
@@ -65,10 +47,12 @@ const LaptopMockup = ({ children, className, label, flipped }: LaptopMockupProps
             >
               <X className="h-4 w-4" />
             </button>
-            <div className="p-1">
-              <div className="overflow-auto max-h-[80vh] rounded-xl bg-background">
-                {children}
-              </div>
+            <div className="p-4">
+              <img
+                src={imageSrc}
+                alt={imageAlt}
+                className="w-full h-auto object-contain rounded-xl"
+              />
             </div>
             {label && (
               <p className="text-center text-sm font-bold text-muted-foreground py-3 border-t border-foreground/10">{label}</p>

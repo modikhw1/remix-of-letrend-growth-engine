@@ -61,18 +61,22 @@ const Cases = () => {
               <FadeIn key={c.slug} delay={i * 0.05}>
                 <Link to={`/kundcase/${c.slug}`} className="group block">
                   <div className="flex h-full flex-col rounded-2xl border-thicker border-foreground bg-card shadow-hard transition-all group-hover:shadow-hard-lg group-hover:-translate-y-1 overflow-hidden">
-                    {/* Case image */}
-                    <div className="relative h-40 bg-blush/50 flex items-center justify-center overflow-hidden">
-                      <img src={c.image.src} alt={c.image.alt} className="h-32 w-32 object-contain drop-shadow-md group-hover:scale-105 transition-transform" />
-                      <img src={c.sticker.src} alt={c.sticker.alt} className="absolute top-2 right-2 h-10 w-10 object-contain drop-shadow-sm rotate-12 opacity-70" />
+                    {/* Case hero image */}
+                    <div className="relative h-48 bg-gradient-to-br from-blush to-gold/30 overflow-hidden">
+                      <img
+                        src={c.image.src}
+                        alt={c.image.alt}
+                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
+                      <span className="absolute top-3 left-3 inline-block rounded-full border-2 border-background/80 bg-background/90 px-3 py-0.5 text-xs font-medium text-foreground backdrop-blur-sm">{c.type}</span>
                     </div>
-                    <div className="p-7">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="inline-block rounded-full border-2 border-foreground/20 px-3 py-0.5 text-xs font-medium text-muted-foreground">{c.type}</span>
+                    <div className="p-6 flex flex-col flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="text-lg font-bold group-hover:text-accent transition-colors">{c.name}</h3>
                         <span className="text-xs text-muted-foreground">{c.location}</span>
                       </div>
-                      <h3 className="text-lg font-bold group-hover:text-accent transition-colors">{c.name}</h3>
-                      <p className="mt-2 text-sm text-muted-foreground flex-1">{c.challenge}</p>
+                      <p className="mt-1 text-sm text-muted-foreground flex-1">{c.challenge}</p>
                       <div className="mt-4 flex flex-wrap gap-2">
                         {c.stats.map((s) => (
                           <span key={s} className="rounded-lg bg-sage/15 border border-sage/30 px-2.5 py-1 text-xs font-semibold text-sage">{s}</span>

@@ -1,10 +1,6 @@
 /**
  * Centraliserad bildkatalog.
  * Ändra sökvägar och alt-texter här → uppdateras i alla komponenter.
- *
- * Importera så här:
- *   import { images } from "@/data/images";
- *   <img src={images.illustFilming.src} alt={images.illustFilming.alt} />
  */
 
 import illustAi from "@/assets/illust-ai.png";
@@ -29,6 +25,18 @@ import logoSvg from "@/assets/letrend-logo.svg";
 import logoPng from "@/assets/letrend-logo.png";
 import logoMark from "@/assets/logo-mark.svg";
 import laptopFrame from "@/assets/laptop-frame.svg";
+
+// Laptop mockup images (complete with frame)
+import laptopKoncept from "@/assets/laptop-koncept.png";
+import laptopGameplan from "@/assets/laptop-gameplan.png";
+import laptopFeedplanner from "@/assets/laptop-feedplanner.png";
+import laptopInsights from "@/assets/laptop-insights.png";
+import laptopSmartsok from "@/assets/laptop-smartsok.png";
+
+// Content manager photos
+import teamManager1 from "@/assets/team-manager-1.png";
+import teamManager2 from "@/assets/team-manager-2.png";
+import teamManager3 from "@/assets/team-manager-3.png";
 
 export const images = {
   // Illustrationer
@@ -56,4 +64,16 @@ export const images = {
   logoPng: { src: logoPng, alt: "LeTrend" },
   logoMark: { src: logoMark, alt: "LeTrend-ikon" },
   laptopFrame: { src: laptopFrame, alt: "Laptop-ram" },
+
+  // Laptop mockups (komplett med ram)
+  laptopKoncept: { src: laptopKoncept, alt: "Koncept-modulen i LeTrend-plattformen" },
+  laptopGameplan: { src: laptopGameplan, alt: "Game Plan-modulen i LeTrend-plattformen" },
+  laptopFeedplanner: { src: laptopFeedplanner, alt: "Feed Planner-modulen i LeTrend-plattformen" },
+  laptopInsights: { src: laptopInsights, alt: "Insights-modulen i LeTrend-plattformen" },
+  laptopSmartsok: { src: laptopSmartsok, alt: "Smart Sök-modulen i LeTrend-plattformen" },
+
+  // Content managers
+  teamManager1: { src: teamManager1, alt: "Content manager" },
+  teamManager2: { src: teamManager2, alt: "Content manager" },
+  teamManager3: { src: teamManager3, alt: "Content manager" },
 } as const;

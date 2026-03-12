@@ -161,7 +161,12 @@ const Index = () => {
               <h2 className="text-3xl font-black md:text-4xl">{content.tiktokPreview.heading}</h2>
               <p className="mt-4 text-foreground/70">{content.tiktokPreview.body}</p>
               <div className="mt-6 flex items-center gap-4">
-                <img src={images.illustCreator.src} alt={images.illustCreator.alt} className="h-20 w-20 object-contain drop-shadow-md" />
+                {/* Manager photos */}
+                <div className="flex -space-x-3">
+                  <img src={images.teamManager1.src} alt="" className="h-12 w-12 rounded-full object-cover border-2 border-background" />
+                  <img src={images.teamManager2.src} alt="" className="h-12 w-12 rounded-full object-cover border-2 border-background" />
+                  <img src={images.teamManager3.src} alt="" className="h-12 w-12 rounded-full object-cover border-2 border-background" />
+                </div>
                 <div className="inline-flex items-center gap-3 rounded-full border-thicker border-foreground bg-card px-5 py-2.5 shadow-hard-sm">
                   <Users className="h-5 w-5 text-accent" />
                   <span className="text-sm font-semibold">{content.tiktokPreview.badge}</span>
@@ -341,7 +346,7 @@ const Index = () => {
         <GumballDecorations layout="cta-section" light />
         <div className="container relative z-10">
           <FadeIn className="mx-auto max-w-2xl text-center">
-            <img src={images.logoSvg.src} alt="" className="mx-auto mb-8 h-14 w-auto brightness-0 invert opacity-40" />
+            <img src={images.logoMark.src} alt="" className="mx-auto mb-8 h-16 w-auto opacity-30" />
             <h2 className="text-4xl font-black md:text-5xl">{content.finalCta.heading}</h2>
             <p className="mt-4 opacity-80">{content.finalCta.body}</p>
             <Button asChild size="lg" className="mt-8 rounded-full border-2 border-accent-foreground bg-accent-foreground text-accent shadow-hard px-10 transition-all active:shadow-none active:translate-x-[4px] active:translate-y-[4px]">

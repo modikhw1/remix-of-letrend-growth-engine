@@ -5,26 +5,25 @@ import LaptopMockup from "@/components/LaptopMockup";
 import FadeIn from "@/components/FadeIn";
 import GumballDecorations from "@/components/GumballDecorations";
 import { platform as content, global } from "@/data/content";
-import KonceptScreen from "@/components/platform/KonceptScreen";
-import GamePlanScreen from "@/components/platform/GamePlanScreen";
-import FeedPlannerScreen from "@/components/platform/FeedPlannerScreen";
-import InstruktionerScreen from "@/components/platform/InstruktionerScreen";
-import InsightsScreen from "@/components/platform/InsightsScreen";
-import SmartSokScreen from "@/components/platform/SmartSokScreen";
-import { ReactNode } from "react";
+import { images } from "@/data/images";
 import {
   Lightbulb, Target, CalendarDays, Video, TrendingUp,
   Search, Cpu, Users, Eye, Sparkles
 } from "lucide-react";
 
-const moduleScreens: ReactNode[] = [
-  <KonceptScreen />, <GamePlanScreen />, <FeedPlannerScreen />,
-  <InstruktionerScreen />, <InsightsScreen />, <SmartSokScreen />,
-];
 const moduleIcons = [Lightbulb, Target, CalendarDays, Video, TrendingUp, Search];
 const techIcons = [Sparkles, Eye, Users, Cpu];
-
 const moduleColors = ["bg-gold/30", "bg-blush", "bg-sage/10", "bg-gold/20", "bg-blush/60", "bg-card"];
+
+// Map modules to their laptop mockup images (Videoinstruktioner uses Koncept as fallback)
+const moduleLaptopImages = [
+  images.laptopKoncept,
+  images.laptopGameplan,
+  images.laptopFeedplanner,
+  images.laptopKoncept,    // Videoinstruktioner — no dedicated image yet
+  images.laptopInsights,
+  images.laptopSmartsok,
+];
 
 const Platform = () => (
   <Layout>
@@ -43,6 +42,7 @@ const Platform = () => (
     {/* Module deep dive */}
     {content.modules.map((m, i) => {
       const Icon = moduleIcons[i];
+      const laptopImg = moduleLaptopImages[i];
       return (
         <section key={m.title} className={`border-b-2 border-foreground py-16 md:py-24 ${moduleColors[i]}`}>
           <div className="container">
@@ -58,9 +58,11 @@ const Platform = () => (
                 <p className="mt-3 text-sm text-foreground/50">{m.detail}</p>
               </FadeIn>
               <FadeIn delay={0.15} direction={i % 2 === 0 ? "right" : "left"} className={`flex justify-center ${i % 2 !== 0 ? "md:[direction:ltr]" : ""}`}>
-                <LaptopMockup label={m.title} flipped={i % 2 !== 0}>
-                  {moduleScreens[i]}
-                </LaptopMockup>
+                <LaptopMockup
+                  imageSrc={laptopImg.src}
+                  imageAlt={laptopImg.alt}
+                  label={m.title}
+                />
               </FadeIn>
             </div>
           </div>
