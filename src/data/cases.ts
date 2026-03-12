@@ -46,7 +46,8 @@ export const allCases: CaseData[] = [
     result: "+140% räckvidd på 6 veckor. 3× fler direktbokningar via TikTok. Konsekvent publiceringsrytm etablerad.",
     stats: ["+140% räckvidd", "3× direktbokningar", "6 veckor"],
     quote: { text: "LeTrend gav oss en struktur vi inte visste att vi behövde. Nu vet vi exakt vad vi ska filma varje vecka.", author: "Maria L.", role: "Ägare, Urban Slice" },
-    timeline: "6 veckor",
+    image: { src: illustChefPerson, alt: "Kock i kök" },
+    sticker: { src: stickerChef, alt: "Kock-sticker" },
   },
   {
     slug: "vesper-social-bar",
