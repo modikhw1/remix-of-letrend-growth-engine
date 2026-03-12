@@ -42,7 +42,7 @@ const L = logoMark;
 
 const layouts: Record<string, DecoItem[]> = {
   "hero-home": [
-    { src: foodCooking, className: "absolute -left-8 top-16 h-28 w-28 md:h-40 md:w-40", rotate: -12 },
+    { src: photography, className: "absolute -left-8 top-16 h-28 w-28 md:h-40 md:w-40", rotate: -12 },
     { src: L, className: "absolute right-[5%] bottom-8 h-16 w-16 md:h-24 md:w-24", rotate: 10, delay: "1.5s", isLogo: true },
     { src: newMono, className: "absolute right-[12%] top-12 h-16 w-16 md:h-24 md:w-24", rotate: 15, delay: "3s" },
     { src: launch, className: "absolute left-[15%] bottom-12 h-14 w-14 md:h-20 md:w-20", rotate: -8, delay: "2s" },

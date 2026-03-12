@@ -310,10 +310,12 @@ const Index = () => {
                       })()}
                     </div>
                     <h3 className="mt-4 text-xl font-bold group-hover:text-accent transition-colors">{c.name}</h3>
-                    <p className="mt-3 inline-block rounded-lg bg-sage/15 border border-sage/30 px-3 py-1.5 text-sm font-semibold text-sage">{c.stat}</p>
-                    <p className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-accent">
-                      Läs case <ArrowRight className="h-3 w-3" />
-                    </p>
+                    <div className="mt-3 flex flex-col items-start gap-3">
+                      <p className="inline-block rounded-lg border border-sage/30 bg-sage/15 px-3 py-1.5 text-sm font-semibold text-sage">{c.stat}</p>
+                      <p className="inline-flex items-center gap-1 rounded-full border-2 border-foreground bg-card px-3 py-1.5 text-xs font-bold text-accent shadow-hard-sm transition-all group-hover:shadow-hard">
+                        Läs case <ArrowRight className="h-3 w-3" />
+                      </p>
+                    </div>
                   </div>
                 </Link>
               </FadeIn>
@@ -379,7 +381,11 @@ const Index = () => {
         <GumballDecorations layout="cta-section" light />
         <div className="container relative z-10">
           <FadeIn className="mx-auto max-w-2xl text-center">
-            <img src={images.logoMark.src} alt="" className="mx-auto mb-6 h-14 w-auto invert opacity-35" />
+            <img
+              src={images.logoMark.src}
+              alt=""
+              className="mx-auto mb-6 h-20 w-auto brightness-0 invert opacity-100 drop-shadow-[0_4px_12px_rgba(255,255,255,0.35)] md:h-24"
+            />
             <h2 className="text-3xl font-black md:text-4xl">{content.finalCta.heading}</h2>
             <p className="mt-3 opacity-80">{content.finalCta.body}</p>
             <Button asChild size="lg" className="mt-7 rounded-full border-2 border-accent-foreground bg-accent-foreground px-10 text-accent shadow-hard transition-all active:translate-x-[4px] active:translate-y-[4px] active:shadow-none">
