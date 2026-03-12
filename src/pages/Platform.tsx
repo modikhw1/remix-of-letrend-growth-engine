@@ -22,7 +22,6 @@ import {
 const moduleIcons = [Lightbulb, Target, CalendarDays, Video, TrendingUp, Search];
 const techIcons = [Sparkles, Eye, Users, Cpu];
 const moduleColors = ["bg-gold/30", "bg-blush", "bg-sage/10", "bg-gold/20", "bg-blush/60", "bg-card"];
-const moduleImageTweaks = ["", "", "", "", "", "md:translate-x-3"];
 
 // NOTE:
 // Koncept and Smart sok were previously cross-mapped.
@@ -54,25 +53,33 @@ const Platform = () => (
       {content.modules.map((m, i) => {
         const Icon = moduleIcons[i];
         const laptopImg = moduleLaptopImages[i];
+        const textOrderClass = i % 2 === 0 ? "md:order-1" : "md:order-2";
+        const imageOrderClass = i % 2 === 0 ? "md:order-2" : "md:order-1";
+
         return (
           <section key={m.title} className={`border-b-2 border-foreground py-14 md:py-20 ${moduleColors[i]}`}>
             <div className="container">
-              <div className={`grid items-center gap-8 md:grid-cols-2 ${i % 2 !== 0 ? "md:[direction:rtl]" : ""}`}>
-                <FadeIn className={i % 2 !== 0 ? "md:[direction:ltr]" : ""}>
-                  <div className="mb-4 flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl border-thicker border-foreground bg-card shadow-hard-sm">
-                      <Icon className="h-6 w-6 text-accent" />
+              <div className="grid items-center gap-8 md:grid-cols-2 md:gap-10 lg:gap-14">
+                <FadeIn className={`flex justify-center ${textOrderClass}`}>
+                  <div className="w-full max-w-[30rem]">
+                    <div className="mb-4 flex items-center gap-3">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl border-thicker border-foreground bg-card shadow-hard-sm">
+                        <Icon className="h-6 w-6 text-accent" />
+                      </div>
+                      <h2 className="text-2xl font-black md:text-3xl">{m.title}</h2>
                     </div>
-                    <h2 className="text-2xl font-black md:text-3xl">{m.title}</h2>
+                    <p className="text-foreground/70">{m.desc}</p>
+                    <p className="mt-3 text-sm text-foreground/50">{m.detail}</p>
                   </div>
-                  <p className="text-foreground/70">{m.desc}</p>
-                  <p className="mt-3 text-sm text-foreground/50">{m.detail}</p>
                 </FadeIn>
-                <FadeIn delay={0.15} direction={i % 2 === 0 ? "right" : "left"} className={`flex justify-center ${moduleImageTweaks[i]} ${i % 2 !== 0 ? "md:[direction:ltr]" : ""}`}>
-                  <LaptopMockup
-                    imageSrc={laptopImg.src}
-                    imageAlt={laptopImg.alt}
-                  />
+                <FadeIn delay={0.15} direction={i % 2 === 0 ? "right" : "left"} className={`flex justify-center ${imageOrderClass}`}>
+                  <div className="w-full max-w-[36rem]">
+                    <LaptopMockup
+                      className="w-full"
+                      imageSrc={laptopImg.src}
+                      imageAlt={laptopImg.alt}
+                    />
+                  </div>
                 </FadeIn>
               </div>
             </div>
