@@ -105,7 +105,8 @@ export const allCases: CaseData[] = [
     execution: "Tydlig tonalitetsstyrning: mörkt, sofistikerat, inga partybilder. Manager kurerade varje koncept för att stärka premium-känsla.",
     result: "3 500 följare på 10 veckor. Ökat antal bordbokningar och tydlig repositionering.",
     stats: ["3 500 följare", "Fler bordbokningar", "10 veckor"],
-    timeline: "10 veckor",
+    image: { src: illustBarista, alt: "Barista" },
+    sticker: { src: stickerCoin, alt: "Mynt-sticker" },
   },
   {
     slug: "bokcafeet",
