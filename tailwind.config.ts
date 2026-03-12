@@ -126,6 +126,7 @@ export default {
         "float-reverse": "float-reverse 7s ease-in-out infinite",
         "spin-slow": "spin-slow 20s linear infinite",
         "ticker": "ticker 25s linear infinite",
+        "scale-in": "scale-in 0.2s ease-out forwards",
       },
     },
   },
