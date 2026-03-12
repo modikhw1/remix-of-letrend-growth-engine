@@ -32,6 +32,7 @@ const App = () => (
           <Route path="/om-oss" element={<About />} />
           <Route path="/kom-igang" element={<GetStarted />} />
           <Route path="/priser" element={<Index />} />
+          <Route path="/_export" element={<ScreenExport />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
