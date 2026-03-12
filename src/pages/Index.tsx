@@ -381,17 +381,17 @@ const Index = () => {
       </section>
 
       {/* ═══ FINAL CTA ═══ */}
-      <section className="relative border-b-2 border-foreground bg-accent py-24 text-accent-foreground md:py-32 overflow-hidden">
+      <section className="relative overflow-hidden border-b-2 border-foreground bg-accent py-20 text-accent-foreground md:py-28">
         <GumballDecorations layout="cta-section" light />
         <div className="container relative z-10">
           <FadeIn className="mx-auto max-w-2xl text-center">
-            <img src={images.logoMark.src} alt="" className="mx-auto mb-8 h-16 w-auto invert opacity-30" />
-            <h2 className="text-4xl font-black md:text-5xl">{content.finalCta.heading}</h2>
-            <p className="mt-4 opacity-80">{content.finalCta.body}</p>
-            <Button asChild size="lg" className="mt-8 rounded-full border-2 border-accent-foreground bg-accent-foreground text-accent shadow-hard px-10 transition-all active:shadow-none active:translate-x-[4px] active:translate-y-[4px]">
+            <img src={images.logoMark.src} alt="" className="mx-auto mb-6 h-14 w-auto invert opacity-35" />
+            <h2 className="text-3xl font-black md:text-4xl">{content.finalCta.heading}</h2>
+            <p className="mt-3 opacity-80">{content.finalCta.body}</p>
+            <Button asChild size="lg" className="mt-7 rounded-full border-2 border-accent-foreground bg-accent-foreground px-10 text-accent shadow-hard transition-all active:translate-x-[4px] active:translate-y-[4px] active:shadow-none">
               <Link to="/kom-igang">{global.cta.primary}</Link>
             </Button>
-            <p className="mt-3 text-xs opacity-60">{content.finalCta.subtext}</p>
+            <p className="mt-2 text-xs opacity-60">{content.finalCta.subtext}</p>
           </FadeIn>
         </div>
       </section>
