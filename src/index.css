@@ -141,3 +141,27 @@
   animation: tiktok-burst 4.8s ease-in-out infinite;
   will-change: transform, opacity;
 }
+
+@keyframes tiktok-burst-once {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  22% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  68% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+}
+
+.tiktok-follower-burst-once {
+  animation: tiktok-burst-once 1.35s ease-out 1;
+  will-change: transform, opacity;
+}
