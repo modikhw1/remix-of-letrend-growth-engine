@@ -6,7 +6,7 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { images } from "@/data/images";
 import { index as content, global } from "@/data/content";
-import aiHumanIllustration from "@/assets/group-669.svg";
+import aiHumanIllustration from "@/assets/group-669-1.svg";
 import platformPreviewIllustration from "@/assets/group-749.svg";
 import TikTokMockup from "@/components/TikTokMockup";
 import GumballDecorations from "@/components/GumballDecorations";
