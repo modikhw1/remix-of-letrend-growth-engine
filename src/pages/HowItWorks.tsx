@@ -33,7 +33,7 @@ const HowItWorks = () => (
             <div className="h-full rounded-2xl border-thicker border-foreground bg-card p-8 shadow-hard">
               <div className="flex items-center gap-3 mb-6">
                 <h3 className="text-2xl font-bold">{content.roleDivision.you.title}</h3>
-                <img src={images.illustFilming.src} alt={images.illustFilming.alt} className="h-16 w-16 object-contain drop-shadow-md" />
+                <img src={images.stickerPhone.src} alt={images.stickerPhone.alt} className="h-14 w-14 object-contain drop-shadow-md md:h-16 md:w-16" />
               </div>
               <ul className="space-y-3 text-muted-foreground">
                 {content.roleDivision.you.items.map((item) => (
@@ -46,7 +46,7 @@ const HowItWorks = () => (
             <div className="h-full rounded-2xl border-thicker border-foreground bg-gold p-8 shadow-hard">
               <div className="flex items-center gap-3 mb-6">
                 <h3 className="text-2xl font-bold">{content.roleDivision.we.title}</h3>
-                <img src={images.illustBar.src} alt={images.illustBar.alt} className="h-16 w-16 object-contain drop-shadow-md" />
+                <img src={images.stickerAi.src} alt={images.stickerAi.alt} className="h-14 w-14 object-contain drop-shadow-md md:h-16 md:w-16" />
               </div>
               <ul className="space-y-3 text-foreground/70">
                 {content.roleDivision.we.items.map((item) => (
