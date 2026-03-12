@@ -10,7 +10,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import { allCases } from "@/data/cases";
-import FloatingDecorations from "@/components/FloatingDecorations";
+import GumballDecorations from "@/components/GumballDecorations";
 
 const iconMap: Record<string, typeof TrendingUp> = {
   Restaurang: Clapperboard,
@@ -37,10 +37,10 @@ const CaseDetail = () => {
   const tiktok = tiktokDataMap[caseData.slug] || tiktokDataMap["urban-slice"];
 
   const sections = [
-    { label: "Utgångsläge", title: "Utmaningen", text: caseData.challenge, icon: Target, color: "bg-blush" },
-    { label: "Mål", title: "Vad vi ville uppnå", text: caseData.goal, icon: Lightbulb, color: "bg-gold" },
-    { label: "Kreativ riktning", title: "Strategin", text: caseData.direction, icon: Clapperboard, color: "bg-blush/60" },
-    { label: "Genomförande", title: "Hur vi arbetade", text: caseData.execution, icon: BarChart3, color: "bg-gold/40" },
+    { label: "Utgångsläge", title: "Utmaningen", text: caseData.challenge, icon: Target, color: "bg-background" },
+    { label: "Mål", title: "Vad vi ville uppnå", text: caseData.goal, icon: Lightbulb, color: "bg-gold/30" },
+    { label: "Kreativ riktning", title: "Strategin", text: caseData.direction, icon: Clapperboard, color: "bg-background" },
+    { label: "Genomförande", title: "Hur vi arbetade", text: caseData.execution, icon: BarChart3, color: "bg-blush/40" },
   ];
 
   return (
@@ -58,18 +58,18 @@ const CaseDetail = () => {
       </section>
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b-2 border-foreground bg-foreground py-20 md:py-32 text-background">
-        <FloatingDecorations layout="minimal" light />
+      <section className="relative overflow-hidden border-b-2 border-foreground bg-brand py-20 md:py-32 text-brand-foreground">
+        <GumballDecorations layout="case-detail" light />
         <div className="container relative z-10">
           <FadeIn className="mx-auto max-w-3xl text-center">
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.25em] text-accent">
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.25em] text-gold">
               Kundcase
             </p>
             <h1 className="text-5xl font-black leading-tight md:text-7xl">
               {caseData.name}
             </h1>
             {caseData.quote && (
-              <p className="mx-auto mt-6 max-w-lg text-lg text-background/70 italic">
+              <p className="mx-auto mt-6 max-w-lg text-lg opacity-60 italic">
                 "{caseData.quote.text.substring(0, 80)}…"
               </p>
             )}
@@ -107,7 +107,7 @@ const CaseDetail = () => {
       {sections.map((section, i) => (
         <section
           key={section.label}
-          className={`border-b-2 border-foreground py-16 md:py-20 ${i % 2 === 0 ? "bg-background" : section.color}`}
+          className={`border-b-2 border-foreground py-16 md:py-20 ${section.color}`}
         >
           <div className="container">
             <FadeIn className="mx-auto max-w-3xl">
@@ -120,7 +120,7 @@ const CaseDetail = () => {
                 </p>
               </div>
               <h2 className="text-3xl font-black md:text-4xl">{section.title}</h2>
-              <p className="mt-5 text-lg leading-relaxed text-foreground/80">
+              <p className="mt-5 text-lg leading-relaxed text-foreground/70">
                 {section.text}
               </p>
             </FadeIn>
@@ -157,7 +157,7 @@ const CaseDetail = () => {
         </div>
       </section>
 
-      {/* Before / After */}
+      {/* Before / After — improved contrast */}
       <section className="border-b-2 border-foreground bg-foreground py-16 text-background md:py-24">
         <div className="container">
           <FadeIn className="mx-auto max-w-3xl text-center mb-12">
@@ -165,16 +165,22 @@ const CaseDetail = () => {
           </FadeIn>
           <FadeIn delay={0.1} className="mx-auto max-w-3xl">
             <div className="grid gap-4 md:grid-cols-2">
-              <div className="rounded-2xl border-2 border-background/15 bg-background/5 p-6 backdrop-blur-sm">
-                <p className="mb-3 text-xs font-bold uppercase tracking-widest text-blush">Före</p>
-                <p className="text-background/80 leading-relaxed">{caseData.challenge}</p>
+              <div className="rounded-2xl border-2 border-background/20 bg-background/8 p-6 backdrop-blur-sm">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-background/10 px-3 py-1">
+                  <div className="h-2 w-2 rounded-full bg-background/40" />
+                  <p className="text-xs font-bold uppercase tracking-widest text-background/60">Före</p>
+                </div>
+                <p className="text-background/70 leading-relaxed">{caseData.challenge}</p>
               </div>
-              <div className="rounded-2xl border-2 border-accent/40 bg-accent/10 p-6 backdrop-blur-sm">
-                <p className="mb-3 text-xs font-bold uppercase tracking-widest text-accent">Efter</p>
+              <div className="rounded-2xl border-2 border-gold/40 bg-gold/10 p-6 backdrop-blur-sm">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-gold/20 px-3 py-1">
+                  <div className="h-2 w-2 rounded-full bg-gold" />
+                  <p className="text-xs font-bold uppercase tracking-widest text-gold">Efter</p>
+                </div>
                 <p className="text-background/80 leading-relaxed">{caseData.result}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {caseData.stats.map((s) => (
-                    <span key={s} className="inline-flex items-center gap-1.5 rounded-full bg-accent/20 px-3 py-1 text-xs font-bold text-accent">
+                    <span key={s} className="inline-flex items-center gap-1.5 rounded-full bg-sage/20 px-3 py-1 text-xs font-bold text-sage">
                       <CheckCircle2 className="h-3 w-3" /> {s}
                     </span>
                   ))}
@@ -189,7 +195,7 @@ const CaseDetail = () => {
       <section className="border-b-2 border-foreground bg-gold py-16 md:py-20">
         <div className="container">
           <FadeIn className="mx-auto max-w-3xl">
-            <p className="text-center text-xs font-bold uppercase tracking-[0.25em] text-foreground/60 mb-8">
+            <p className="text-center text-xs font-bold uppercase tracking-[0.25em] text-foreground/50 mb-8">
               Resultat i siffror
             </p>
             <div className="grid gap-4 md:grid-cols-3">
@@ -206,7 +212,7 @@ const CaseDetail = () => {
       {/* Quote */}
       {caseData.quote && (
         <section className="relative overflow-hidden border-b-2 border-foreground bg-sage py-20 text-sage-foreground md:py-28">
-          <FloatingDecorations layout="section-b" light />
+          <GumballDecorations layout="minimal" light />
           <div className="container relative z-10">
             <FadeIn className="mx-auto max-w-2xl text-center">
               <Quote className="mx-auto mb-6 h-10 w-10 opacity-40" />
@@ -226,7 +232,7 @@ const CaseDetail = () => {
       )}
 
       {/* CTA */}
-      <section className="py-20 text-center md:py-28">
+      <section className="bg-background py-20 text-center md:py-28">
         <div className="container mx-auto max-w-xl">
           <FadeIn>
             <h2 className="text-3xl font-black md:text-4xl">Vill ni se liknande resultat?</h2>
