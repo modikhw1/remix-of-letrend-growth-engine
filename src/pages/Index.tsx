@@ -20,11 +20,6 @@ import {
 
 const moduleIcons = [Lightbulb, Target, CalendarDays, Video, TrendingUp];
 const aiIcons = [Cpu, TrendingUp, Users, Lightbulb];
-const caseCardThemes = [
-  "bg-gradient-to-br from-card via-blush/25 to-gold/15",
-  "bg-gradient-to-br from-card via-gold/30 to-sage/15",
-  "bg-gradient-to-br from-card via-sage/20 to-blush/20",
-];
 
 const Index = () => {
   return (
@@ -297,27 +292,27 @@ const Index = () => {
             {content.cases.items.map((c, i) => (
               <FadeIn key={c.slug} delay={i * 0.1}>
                 <Link to={`/kundcase/${c.slug}`} className="group block">
-                  <div className={`h-full rounded-2xl border-thicker border-foreground p-7 shadow-hard transition-all group-hover:shadow-hard-lg group-hover:-translate-y-1 ${caseCardThemes[i % caseCardThemes.length]}`}>
+                  <div className="h-full rounded-2xl border-thicker border-foreground bg-card p-7 shadow-hard transition-all group-hover:shadow-hard-lg group-hover:-translate-y-1">
                     <div className="flex items-center justify-between gap-3">
-                      <span className="inline-block rounded-full border-2 border-foreground/20 bg-background/70 px-3 py-0.5 text-xs font-medium text-foreground/80">{c.type}</span>
+                      <span className="inline-block rounded-full border-2 border-foreground/20 px-3 py-0.5 text-xs font-medium text-muted-foreground">{c.type}</span>
                       {(() => {
                         const caseData = allCases.find((x) => x.slug === c.slug);
                         if (!caseData) return null;
                         return (
-                          <div className="inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-background/80 px-2.5 py-1">
+                          <div className="inline-flex items-center gap-2">
                             <img
                               src={caseData.cardImage.src}
                               alt={caseData.cardImage.alt}
                               className="h-6 w-6 rounded-full object-cover"
                             />
-                            <span className="text-[11px] font-semibold text-foreground/80">{c.name}</span>
+                            <span className="text-[11px] font-semibold text-foreground/70">{c.name}</span>
                           </div>
                         );
                       })()}
                     </div>
                     <h3 className="mt-4 text-xl font-bold group-hover:text-accent transition-colors">{c.name}</h3>
                     <p className="mt-3 inline-block rounded-lg bg-sage/15 border border-sage/30 px-3 py-1.5 text-sm font-semibold text-sage">{c.stat}</p>
-                    <p className="mt-5 inline-flex items-center gap-1 rounded-full border-2 border-foreground bg-foreground px-3 py-1 text-xs font-bold text-background shadow-hard-sm">
+                    <p className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-accent">
                       Läs case <ArrowRight className="h-3 w-3" />
                     </p>
                   </div>
