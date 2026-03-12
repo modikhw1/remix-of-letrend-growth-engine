@@ -1,17 +1,9 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
 import LaptopMockup from "@/components/LaptopMockup";
 import FadeIn from "@/components/FadeIn";
 import GumballDecorations from "@/components/GumballDecorations";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import KonceptScreen from "@/components/platform/KonceptScreen";
-import GamePlanScreen from "@/components/platform/GamePlanScreen";
-import FeedPlannerScreen from "@/components/platform/FeedPlannerScreen";
-import InstruktionerScreen from "@/components/platform/InstruktionerScreen";
-import InsightsScreen from "@/components/platform/InsightsScreen";
-import SmartSokScreen from "@/components/platform/SmartSokScreen";
 import { platform as content, global } from "@/data/content";
 import { images } from "@/data/images";
 import {
@@ -31,33 +23,20 @@ const moduleIcons = [Lightbulb, Target, CalendarDays, Video, TrendingUp, Search]
 const techIcons = [Sparkles, Eye, Users, Cpu];
 const moduleColors = ["bg-gold/30", "bg-blush", "bg-sage/10", "bg-gold/20", "bg-blush/60", "bg-card"];
 
-// Existing laptop exports are partly mislabeled; this mapping aligns them with the module they visually match.
+// NOTE:
+// There are currently 5 unique laptop images for 6 modules.
+// "Videoinstruktioner" has no dedicated asset yet and therefore reuses the closest matching thumbnail.
 const moduleLaptopImages = [
   images.laptopSmartsok, // Koncept
   images.laptopGameplan,
   images.laptopFeedplanner,
-  images.laptopSmartsok, // Videoinstruktioner (closest available static thumbnail)
+  images.laptopSmartsok, // Videoinstruktioner (missing dedicated image)
   images.laptopInsights,
   images.laptopKoncept, // Smart sok
 ];
 
-const modulePreviewScreens = [
-  KonceptScreen,
-  GamePlanScreen,
-  FeedPlannerScreen,
-  InstruktionerScreen,
-  InsightsScreen,
-  SmartSokScreen,
-];
-
-const Platform = () => {
-  const [activeModuleIndex, setActiveModuleIndex] = useState<number | null>(null);
-
-  const activeModule = activeModuleIndex !== null ? content.modules[activeModuleIndex] : null;
-  const ActivePreview = activeModuleIndex !== null ? modulePreviewScreens[activeModuleIndex] : null;
-
-  return (
-    <Layout>
+const Platform = () => (
+  <Layout>
       {/* Hero */}
       <section className="relative overflow-hidden border-b-2 border-foreground bg-brand py-24 text-brand-foreground md:py-36">
         <GumballDecorations layout="hero-platform" light />
@@ -93,7 +72,6 @@ const Platform = () => {
                     imageSrc={laptopImg.src}
                     imageAlt={laptopImg.alt}
                     label={m.title}
-                    onClick={() => setActiveModuleIndex(i)}
                   />
                 </FadeIn>
               </div>
@@ -140,37 +118,7 @@ const Platform = () => {
           </FadeIn>
         </div>
       </section>
-
-      <Dialog
-        open={activeModuleIndex !== null}
-        onOpenChange={(open) => {
-          if (!open) setActiveModuleIndex(null);
-        }}
-      >
-        <DialogContent className="max-w-5xl overflow-hidden border-thicker border-foreground bg-background p-0">
-          {activeModule && ActivePreview && (
-            <div>
-              <div className="border-b border-foreground/10 bg-card px-6 py-4">
-                <DialogTitle className="text-xl font-black">{activeModule.title}</DialogTitle>
-                <DialogDescription className="mt-1 text-sm text-muted-foreground">{activeModule.detail}</DialogDescription>
-              </div>
-
-              <div className="p-4 md:p-6">
-                <div className="mx-auto max-w-[900px] rounded-2xl border-thicker border-foreground bg-background shadow-hard">
-                  <div className="border-b border-foreground/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                    Plattform Preview
-                  </div>
-                  <div className="p-2 md:p-3">
-                    <ActivePreview />
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
     </Layout>
-  );
-};
+);
 
 export default Platform;
