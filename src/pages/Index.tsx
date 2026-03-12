@@ -162,12 +162,17 @@ const Index = () => {
               <p className="mb-2 text-sm font-bold uppercase tracking-widest text-accent">{content.tiktokPreview.kicker}</p>
               <h2 className="text-3xl font-black md:text-4xl">{content.tiktokPreview.heading}</h2>
               <p className="mt-4 text-foreground/70">{content.tiktokPreview.body}</p>
-              <div className="mt-6 flex items-center gap-4">
-                {/* Manager photos */}
-                <div className="flex -space-x-3">
-                  <img src={images.teamManager1.src} alt="" className="h-12 w-12 rounded-full object-cover border-2 border-background" />
-                  <img src={images.teamManager2.src} alt="" className="h-12 w-12 rounded-full object-cover border-2 border-background" />
-                  <img src={images.teamManager3.src} alt="" className="h-12 w-12 rounded-full object-cover border-2 border-background" />
+              <div className="mt-6 flex flex-wrap items-center gap-4">
+                <div className="inline-flex items-center gap-3 rounded-2xl border-thicker border-foreground/20 bg-background/70 px-3 py-2 shadow-hard-sm">
+                  <img
+                    src={images.teamManager2.src}
+                    alt="LeTrend content manager"
+                    className="h-16 w-16 shrink-0 object-contain md:h-20 md:w-20"
+                  />
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">Content manager</p>
+                    <p className="text-sm font-semibold">Mänsklig kurering i varje idé</p>
+                  </div>
                 </div>
                 <div className="inline-flex items-center gap-3 rounded-full border-thicker border-foreground bg-card px-5 py-2.5 shadow-hard-sm">
                   <Users className="h-5 w-5 text-accent" />
