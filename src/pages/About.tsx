@@ -57,9 +57,17 @@ const About = () => (
           <p className="mt-4 opacity-60">{content.team.subheading}</p>
         </FadeIn>
         <div className="grid gap-5 md:grid-cols-3">
+          {/* Managers showcase with photos */}
           <FadeIn>
-            <div className="rounded-2xl border-2 border-background/15 bg-background/5 p-6 flex items-center justify-center backdrop-blur-sm">
-              <img src={images.illustTeam.src} alt={images.illustTeam.alt} className="h-44 w-auto object-contain drop-shadow-lg" />
+            <div className="rounded-2xl border-2 border-background/15 bg-background/5 p-6 backdrop-blur-sm">
+              <div className="flex -space-x-4 justify-center mb-5">
+                <img src={images.teamManager1.src} alt={images.teamManager1.alt} className="h-20 w-20 rounded-full object-cover border-2 border-background/20" />
+                <img src={images.teamManager2.src} alt={images.teamManager2.alt} className="h-20 w-20 rounded-full object-cover border-2 border-background/20" />
+                <img src={images.teamManager3.src} alt={images.teamManager3.alt} className="h-20 w-20 rounded-full object-cover border-2 border-background/20" />
+              </div>
+              <Users className="mx-auto mb-2 h-5 w-5 text-gold" />
+              <h3 className="text-lg font-bold text-center">{content.team.managers.title}</h3>
+              <p className="mt-2 text-sm opacity-60 text-center">{content.team.managers.body}</p>
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
@@ -70,10 +78,8 @@ const About = () => (
             </div>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <div className="h-full rounded-2xl border-2 border-background/15 bg-background/5 p-7 backdrop-blur-sm">
-              <Users className="mb-4 h-6 w-6 text-gold" />
-              <h3 className="text-xl font-bold">{content.team.managers.title}</h3>
-              <p className="mt-3 text-sm opacity-60">{content.team.managers.body}</p>
+            <div className="h-full rounded-2xl border-2 border-background/15 bg-background/5 p-6 flex items-center justify-center backdrop-blur-sm">
+              <img src={images.illustTeam.src} alt={images.illustTeam.alt} className="h-44 w-auto object-contain drop-shadow-lg" />
             </div>
           </FadeIn>
         </div>
