@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
 import FadeIn from "@/components/FadeIn";
 import GumballDecorations from "@/components/GumballDecorations";
-import { images } from "@/data/images";
 import { howItWorks as content, global } from "@/data/content";
+import roleYouIcon from "@/assets/gumball-1/Film & Video (A).svg";
+import roleWeIcon from "@/assets/gumball-2/Data Chart.svg";
 
 const stepAccents = ["bg-gold", "bg-blush", "bg-sage/15", "bg-gold/40", "bg-blush/60"];
 
@@ -33,7 +34,7 @@ const HowItWorks = () => (
             <div className="h-full rounded-2xl border-thicker border-foreground bg-card p-8 shadow-hard">
               <div className="flex items-center gap-3 mb-6">
                 <h3 className="text-2xl font-bold">{content.roleDivision.you.title}</h3>
-                <img src={images.stickerPhone.src} alt={images.stickerPhone.alt} className="h-14 w-14 object-contain drop-shadow-md md:h-16 md:w-16" />
+                <img src={roleYouIcon} alt="Film och video-ikon" className="h-14 w-14 object-contain drop-shadow-md md:h-16 md:w-16" />
               </div>
               <ul className="space-y-3 text-muted-foreground">
                 {content.roleDivision.you.items.map((item) => (
@@ -46,7 +47,7 @@ const HowItWorks = () => (
             <div className="h-full rounded-2xl border-thicker border-foreground bg-gold p-8 shadow-hard">
               <div className="flex items-center gap-3 mb-6">
                 <h3 className="text-2xl font-bold">{content.roleDivision.we.title}</h3>
-                <img src={images.stickerAi.src} alt={images.stickerAi.alt} className="h-14 w-14 object-contain drop-shadow-md md:h-16 md:w-16" />
+                <img src={roleWeIcon} alt="Dataanalys-ikon" className="h-14 w-14 object-contain drop-shadow-md md:h-16 md:w-16" />
               </div>
               <ul className="space-y-3 text-foreground/70">
                 {content.roleDivision.we.items.map((item) => (
