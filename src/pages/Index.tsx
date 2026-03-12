@@ -130,18 +130,25 @@ const Index = () => {
             {content.positioning.columns.map((col, i) => (
               <FadeIn key={col.title} delay={i * 0.1}>
                 <div className={`h-full rounded-2xl border-thicker border-foreground p-7 shadow-hard ${col.highlight ? "bg-gold ring-2 ring-foreground ring-offset-2 ring-offset-background" : "bg-card"}`}>
-                  <h3 className={`text-xl font-bold mb-5 ${col.highlight ? "text-foreground" : "text-muted-foreground"}`}>{col.title}</h3>
+                  <h3 className="mb-5 text-xl font-bold text-foreground">{col.title}</h3>
                   <ul className="space-y-3 text-sm">
-                    {col.items.map((item) => (
-                      <li key={item} className={`flex items-start gap-2.5 ${col.highlight ? "" : "text-muted-foreground"}`}>
-                        {col.highlight ? (
-                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-sage" />
-                        ) : (
-                          <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-foreground/20" />
-                        )}
-                        {item}
-                      </li>
-                    ))}
+                    {col.items.map((item, itemIdx) => {
+                      const showGreenCheck =
+                        col.highlight ||
+                        (i === 0 && itemIdx === 0) ||
+                        (i === 2 && itemIdx === 0);
+
+                      return (
+                        <li key={item} className="flex items-start gap-2.5">
+                          {showGreenCheck ? (
+                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-sage" />
+                          ) : (
+                            <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-foreground/20" />
+                          )}
+                          {item}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               </FadeIn>
