@@ -61,14 +61,14 @@ const Cases = () => {
               <FadeIn key={c.slug} delay={i * 0.05}>
                 <Link to={`/kundcase/${c.slug}`} className="group block">
                   <div className="flex h-full flex-col rounded-2xl border-thicker border-foreground bg-card shadow-hard transition-all group-hover:shadow-hard-lg group-hover:-translate-y-1 overflow-hidden">
-                    {/* Case hero image */}
-                    <div className="relative h-48 bg-gradient-to-br from-blush to-gold/30 overflow-hidden">
+                    {/* Realistic hero photo */}
+                    <div className="relative h-48 overflow-hidden">
                       <img
-                        src={c.image.src}
-                        alt={c.image.alt}
+                        src={c.cardImage.src}
+                        alt={c.cardImage.alt}
                         className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 to-transparent" />
                       <span className="absolute top-3 left-3 inline-block rounded-full border-2 border-background/80 bg-background/90 px-3 py-0.5 text-xs font-medium text-foreground backdrop-blur-sm">{c.type}</span>
                     </div>
                     <div className="p-6 flex flex-col flex-1">
@@ -95,12 +95,12 @@ const Cases = () => {
       </section>
 
       {/* CTA */}
-      <section className="bg-foreground py-20 text-center text-background">
+      <section className="bg-brand py-20 text-center text-brand-foreground">
         <div className="container mx-auto max-w-xl">
           <FadeIn>
             <h2 className="text-3xl font-black md:text-4xl">{content.cta.heading}</h2>
             <p className="mt-4 opacity-60">{content.cta.body}</p>
-            <Button asChild size="lg" className="mt-8 rounded-full border-2 border-background bg-background text-foreground shadow-hard px-8 transition-all active:shadow-none active:translate-x-[4px] active:translate-y-[4px]">
+            <Button asChild size="lg" className="mt-8 rounded-full border-2 border-brand-foreground bg-brand-foreground text-brand shadow-hard px-8 transition-all active:shadow-none active:translate-x-[4px] active:translate-y-[4px]">
               <Link to="/kom-igang">{global.cta.primary}</Link>
             </Button>
           </FadeIn>

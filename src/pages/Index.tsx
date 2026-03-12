@@ -88,7 +88,7 @@ const Index = () => {
               </div>
             </FadeIn>
             <FadeIn delay={0.2} className="md:col-span-2">
-              <div className="flex items-center justify-between rounded-2xl border-thicker border-foreground bg-foreground p-8 text-background shadow-hard-accent">
+              <div className="flex items-center justify-between rounded-2xl border-thicker border-foreground bg-brand p-8 text-brand-foreground shadow-hard-accent">
                 <div>
                   <h3 className="text-2xl font-bold md:text-3xl">{content.featureBento.problemHeading}</h3>
                   <p className="mt-2 text-sm opacity-60">{content.featureBento.problemBody}</p>
@@ -178,7 +178,7 @@ const Index = () => {
       </section>
 
       {/* ═══ AI + HUMAN ═══ */}
-      <section className="relative border-b-2 border-foreground bg-foreground py-20 text-background md:py-28 overflow-hidden">
+      <section className="relative border-b-2 border-foreground bg-brand py-20 text-brand-foreground md:py-28 overflow-hidden">
         <GumballDecorations layout="ai-section" light />
         <div className="container relative z-10">
           <div className="grid items-center gap-12 md:grid-cols-2">
@@ -190,7 +190,7 @@ const Index = () => {
                 {content.aiHuman.features.map((item, idx) => {
                   const Icon = aiIcons[idx];
                   return (
-                    <div key={item.label} className="rounded-xl border-2 border-background/15 bg-background/5 p-4 backdrop-blur-sm">
+                    <div key={item.label} className="rounded-xl border-2 border-brand-foreground/15 bg-brand-foreground/5 p-4 backdrop-blur-sm">
                       <Icon className="mb-2 h-5 w-5 text-gold" />
                       <p className="text-sm font-semibold">{item.label}</p>
                       <p className="mt-1 text-xs opacity-50">{item.desc}</p>
@@ -346,7 +346,7 @@ const Index = () => {
         <GumballDecorations layout="cta-section" light />
         <div className="container relative z-10">
           <FadeIn className="mx-auto max-w-2xl text-center">
-            <img src={images.logoMark.src} alt="" className="mx-auto mb-8 h-16 w-auto opacity-30" />
+            <img src={images.logoMark.src} alt="" className="mx-auto mb-8 h-16 w-auto invert opacity-30" />
             <h2 className="text-4xl font-black md:text-5xl">{content.finalCta.heading}</h2>
             <p className="mt-4 opacity-80">{content.finalCta.body}</p>
             <Button asChild size="lg" className="mt-8 rounded-full border-2 border-accent-foreground bg-accent-foreground text-accent shadow-hard px-10 transition-all active:shadow-none active:translate-x-[4px] active:translate-y-[4px]">

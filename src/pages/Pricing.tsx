@@ -64,13 +64,13 @@ const Pricing = () => (
       </div>
     </section>
 
-    {/* CTA */}
-    <section className="bg-foreground py-20 text-center text-background">
+    {/* CTA — warm cocoa instead of full black */}
+    <section className="bg-brand py-20 text-center text-brand-foreground">
       <div className="container mx-auto max-w-xl">
         <FadeIn>
           <h2 className="text-3xl font-black">{content.cta.heading}</h2>
           <p className="mt-4 opacity-60">{content.cta.body}</p>
-          <Button asChild size="lg" className="mt-8 rounded-full border-2 border-background bg-background text-foreground shadow-hard px-8 transition-all active:shadow-none active:translate-x-[4px] active:translate-y-[4px]">
+          <Button asChild size="lg" className="mt-8 rounded-full border-2 border-brand-foreground bg-brand-foreground text-brand shadow-hard px-8 transition-all active:shadow-none active:translate-x-[4px] active:translate-y-[4px]">
             <Link to="/kom-igang">{global.cta.primary}</Link>
           </Button>
         </FadeIn>
