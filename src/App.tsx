@@ -12,7 +12,7 @@ import About from "./pages/About";
 import GetStarted from "./pages/GetStarted";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
-import ScreenExport from "./pages/ScreenExport";
+
 
 const queryClient = new QueryClient();
 
