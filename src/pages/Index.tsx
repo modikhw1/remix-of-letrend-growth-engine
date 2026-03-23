@@ -43,7 +43,7 @@ const Index = () => {
                 <Link to="/hur-det-fungerar">{global.cta.secondary}</Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="rounded-full border-thicker border-brand-foreground/50 bg-transparent text-brand-foreground px-8 hover:bg-brand-foreground/10 transition-all">
-                <Link to="/kom-igang">{global.cta.primary}</Link>
+                <Link to="/kom-igang">Prata med oss</Link>
               </Button>
             </div>
           </FadeIn>
