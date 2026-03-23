@@ -134,10 +134,12 @@ const Index = () => {
                   <h3 className="mb-5 text-xl font-bold text-foreground">{col.title}</h3>
                   <ul className="space-y-3 text-sm">
                     {col.items.map((item, itemIdx) => {
-                      const showGreenCheck =
-                        col.highlight ||
-                        (i === 0 && itemIdx === 0) ||
-                        (i === 2 && itemIdx === 0);
+                     const showGreenCheck =
+                        col.highlight
+                          ? true
+                          : (col as any).checks
+                            ? (col as any).checks[itemIdx]
+                            : (i === 0 && itemIdx <= 1) || (i === 2 && itemIdx <= 1);
 
                       return (
                         <li key={item} className="flex items-start gap-2.5">
