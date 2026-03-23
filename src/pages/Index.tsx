@@ -97,7 +97,7 @@ const Index = () => {
                   <h3 className="text-2xl font-bold md:text-3xl">{content.featureBento.problemHeading}</h3>
                   <p className="mt-2 text-sm opacity-60">{content.featureBento.problemBody}</p>
                   <Link to="/hur-det-fungerar" className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-gold hover:underline">
-                    Se hur <ArrowRight className="h-4 w-4" />
+                    Se hur →
                   </Link>
                 </div>
               </div>
