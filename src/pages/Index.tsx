@@ -389,7 +389,7 @@ const Index = () => {
             <h2 className="text-3xl font-black md:text-4xl">{content.finalCta.heading}</h2>
             <p className="mt-3 opacity-80">{content.finalCta.body}</p>
             <Button asChild size="lg" className="mt-7 rounded-full border-2 border-accent-foreground bg-accent-foreground px-10 text-accent shadow-hard transition-all active:translate-x-[4px] active:translate-y-[4px] active:shadow-none">
-              <Link to="/kom-igang">{global.cta.primary}</Link>
+              <Link to="/kom-igang">{content.finalCta.buttonLabel || global.cta.primary}</Link>
             </Button>
             <p className="mt-2 text-xs opacity-60">{content.finalCta.subtext}</p>
           </FadeIn>
