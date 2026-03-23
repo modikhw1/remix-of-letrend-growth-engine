@@ -88,7 +88,7 @@ const GetStarted = () => {
         <div className="container">
           <FadeIn className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-black">Flexibla nivåer</h2>
-            <p className="mt-4 text-foreground/60">Priserna börjar från ca 2 000 kr/mån.</p>
+            <p className="mt-4 text-foreground/60">Priserna börjar från 2 000 kr/mån.</p>
           </FadeIn>
           <FadeIn delay={0.1}>
             <div className="mx-auto mt-10 grid max-w-3xl gap-5 md:grid-cols-3">

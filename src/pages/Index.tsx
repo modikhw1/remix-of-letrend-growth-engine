@@ -43,7 +43,7 @@ const Index = () => {
                 <Link to="/hur-det-fungerar">{global.cta.secondary}</Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="rounded-full border-thicker border-brand-foreground/50 bg-transparent text-brand-foreground px-8 hover:bg-brand-foreground/10 transition-all">
-                <Link to="/kom-igang">{global.cta.primary}</Link>
+                <Link to="/kom-igang">Prata med oss</Link>
               </Button>
             </div>
           </FadeIn>
@@ -97,7 +97,7 @@ const Index = () => {
                   <h3 className="text-2xl font-bold md:text-3xl">{content.featureBento.problemHeading}</h3>
                   <p className="mt-2 text-sm opacity-60">{content.featureBento.problemBody}</p>
                   <Link to="/hur-det-fungerar" className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-gold hover:underline">
-                    Se hur <ArrowRight className="h-4 w-4" />
+                    Se hur →
                   </Link>
                 </div>
               </div>
@@ -134,10 +134,12 @@ const Index = () => {
                   <h3 className="mb-5 text-xl font-bold text-foreground">{col.title}</h3>
                   <ul className="space-y-3 text-sm">
                     {col.items.map((item, itemIdx) => {
-                      const showGreenCheck =
-                        col.highlight ||
-                        (i === 0 && itemIdx === 0) ||
-                        (i === 2 && itemIdx === 0);
+                     const showGreenCheck =
+                        col.highlight
+                          ? true
+                          : (col as any).checks
+                            ? (col as any).checks[itemIdx]
+                            : (i === 0 && itemIdx <= 1) || (i === 2 && itemIdx <= 1);
 
                       return (
                         <li key={item} className="flex items-start gap-2.5">
@@ -389,7 +391,7 @@ const Index = () => {
             <h2 className="text-3xl font-black md:text-4xl">{content.finalCta.heading}</h2>
             <p className="mt-3 opacity-80">{content.finalCta.body}</p>
             <Button asChild size="lg" className="mt-7 rounded-full border-2 border-accent-foreground bg-accent-foreground px-10 text-accent shadow-hard transition-all active:translate-x-[4px] active:translate-y-[4px] active:shadow-none">
-              <Link to="/kom-igang">{global.cta.primary}</Link>
+              <Link to="/kom-igang">{content.finalCta.buttonLabel || global.cta.primary}</Link>
             </Button>
             <p className="mt-2 text-xs opacity-60">{content.finalCta.subtext}</p>
           </FadeIn>
