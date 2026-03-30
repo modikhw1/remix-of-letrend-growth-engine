@@ -128,9 +128,9 @@ export const index = {
     heading: "Vad vi gjort innan",
     linkText: "Se alla kundcase",
     items: [
-      { type: "Restaurang", name: "Restaurang Elviras", stat: "+80% räckvidd", slug: "restaurang-elviras" },
-      { type: "Foodtruck", name: "Fraseriet", stat: "Fler följare", slug: "fraseriet" },
-      { type: "Kiosk", name: "Innerstad Kios", stat: "4 200 följare", slug: "innerstad-kios" },
+      { type: "Foodtruck", name: "Fraseriet", stat: "Varumärke under uppbyggnad", slug: "fraseriet" },
+      { type: "Restaurang", name: "Restaurang Elviras", stat: "Ökad synlighet utanför event", slug: "restaurang-elviras" },
+      { type: "Eventhall", name: "Cornament", stat: "Ny publik via organisk räckvidd", slug: "cornament" },
     ],
   },
   pricingTeaser: {
