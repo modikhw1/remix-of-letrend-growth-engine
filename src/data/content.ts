@@ -59,7 +59,7 @@ export const index = {
       { end: 6, suffix: "st", label: "Branscher representerade" },
       { end: 3, suffix: "mån", label: "Genomsnittlig samarbetstid" },
     ],
-    disclaimer: "Vi beräknar ökning i räckvidd som visningar per video jämfört med kontots siffror före samarbetet.",
+    disclaimer: "",
   },
   positioning: {
     heading: "Inte byrå. Inte AI-skapat innehåll.",
