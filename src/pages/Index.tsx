@@ -180,7 +180,7 @@ const Index = () => {
                 />
                 <div className="flex min-w-[220px] flex-col gap-2">
                   <p className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">Content manager</p>
-                  <p className="text-sm font-semibold">Mansklig kurering i varje ide</p>
+                  <p className="text-sm font-semibold">Mänsklig kurering i varje idé</p>
                   <div className="inline-flex items-center gap-3 self-start rounded-full border-thicker border-foreground bg-card px-5 py-2.5 shadow-hard-sm">
                     <Users className="h-5 w-5 text-accent" />
                     <span className="text-sm font-semibold">{content.tiktokPreview.badge}</span>
