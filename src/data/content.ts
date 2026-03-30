@@ -55,11 +55,11 @@ export const index = {
   },
   stats: {
     items: [
-      { end: 6, suffix: "+", label: "Verksamheter hjälpta" },
-      { end: 80, suffix: "%", label: "Ökning i räckvidd*" },
-      { end: 2, suffix: "v", label: "Till första resultat" },
+      { end: 6, suffix: "+", label: "Verksamheter i Uppsala" },
+      { end: 6, suffix: "st", label: "Branscher representerade" },
+      { end: 3, suffix: "mån", label: "Genomsnittlig samarbetstid" },
     ],
-    disclaimer: "Vi beräknar ökning i räckvidd som visningar per video jämfört med kontots siffror före samarbetet.",
+    disclaimer: "",
   },
   positioning: {
     heading: "Inte byrå. Inte AI-skapat innehåll.",
@@ -128,9 +128,9 @@ export const index = {
     heading: "Vad vi gjort innan",
     linkText: "Se alla kundcase",
     items: [
-      { type: "Restaurang", name: "Restaurang Elviras", stat: "+80% räckvidd", slug: "restaurang-elviras" },
-      { type: "Foodtruck", name: "Fraseriet", stat: "Fler följare", slug: "fraseriet" },
-      { type: "Kiosk", name: "Innerstad Kios", stat: "4 200 följare", slug: "innerstad-kios" },
+      { type: "Foodtruck", name: "Fraseriet", stat: "Varumärke under uppbyggnad", slug: "fraseriet" },
+      { type: "Restaurang", name: "Restaurang Elviras", stat: "Ökad synlighet utanför event", slug: "restaurang-elviras" },
+      { type: "Eventhall", name: "Cornament", stat: "Ny publik via organisk räckvidd", slug: "cornament" },
     ],
   },
   pricingTeaser: {
@@ -280,10 +280,10 @@ export const cases = {
     body: "Stories som tydliggör effekten LeTrend bidrar med. Med blicken mot mål, riktning och resultat.",
   },
   quote: {
-    text: "--------",
-    author: "Demitris · Ägare, Crêperie Avli, Uppsala",
+    text: "Vi har alltid känt att vi hade något bra — det har bara saknats ett sätt att visa det.",
+    author: "Demitris · Delägare, Crêperie Avli, Uppsala",
   },
-  categories: ["Alla", "Restaurang", "Bar", "Café"],
+  categories: ["Alla", "Restaurang", "Foodtruck", "Snabbmat", "Eventhall", "Kiosk"],
   cta: {
     heading: "Vill ni bli nästa case?",
     body: "Berätta om er verksamhet så undersöker vi möjligheterna till samarbete.",
