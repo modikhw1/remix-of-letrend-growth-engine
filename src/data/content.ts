@@ -55,9 +55,9 @@ export const index = {
   },
   stats: {
     items: [
-      { end: 6, suffix: "+", label: "Verksamheter hjälpta" },
-      { end: 80, suffix: "%", label: "Ökning i räckvidd*" },
-      { end: 2, suffix: "v", label: "Till första resultat" },
+      { end: 6, suffix: "+", label: "Verksamheter i Uppsala" },
+      { end: 6, suffix: "st", label: "Branscher representerade" },
+      { end: 3, suffix: "mån", label: "Genomsnittlig samarbetstid" },
     ],
     disclaimer: "Vi beräknar ökning i räckvidd som visningar per video jämfört med kontots siffror före samarbetet.",
   },
