@@ -1,17 +1,26 @@
 import { cn } from "@/lib/utils";
 import { global } from "@/data/content";
 
-// Import logo placeholders — swap these for real logos
-import logo1 from "@/assets/logos/placeholder-1.svg";
-import logo2 from "@/assets/logos/placeholder-2.svg";
-import logo3 from "@/assets/logos/placeholder-3.svg";
-import logo4 from "@/assets/logos/placeholder-4.svg";
-import logo5 from "@/assets/logos/placeholder-5.svg";
-import logo6 from "@/assets/logos/placeholder-6.svg";
-import logo7 from "@/assets/logos/placeholder-7.svg";
-import logo8 from "@/assets/logos/placeholder-8.svg";
+// Real logos
+import logoFraseriet from "@/assets/logos/fraseriet.svg";
+import logoElviras from "@/assets/logos/elviras.svg";
+import logoAvli from "@/assets/logos/creperie-avli.svg";
+import logoPlock from "@/assets/logos/restaurang-plock.svg";
+import logoCornament from "@/assets/logos/cornament.svg";
+import logoJohannesgrillen from "@/assets/logos/johannesgrillen.svg";
+import logoCafePlaza from "@/assets/logos/cafe-plaza.svg";
+import logoHornan from "@/assets/logos/hornan-snabblivs.svg";
 
-const logos = [logo1, logo2, logo3, logo4, logo5, logo6, logo7, logo8];
+const logos = [
+  logoFraseriet,
+  logoElviras,
+  logoAvli,
+  logoPlock,
+  logoCornament,
+  logoJohannesgrillen,
+  logoCafePlaza,
+  logoHornan,
+];
 
 interface LogoTickerProps {
   className?: string;

@@ -280,10 +280,10 @@ export const cases = {
     body: "Stories som tydliggör effekten LeTrend bidrar med. Med blicken mot mål, riktning och resultat.",
   },
   quote: {
-    text: "--------",
-    author: "Demitris · Ägare, Crêperie Avli, Uppsala",
+    text: "Vi har alltid känt att vi hade något bra — det har bara saknats ett sätt att visa det.",
+    author: "Demitris · Delägare, Crêperie Avli, Uppsala",
   },
-  categories: ["Alla", "Restaurang", "Bar", "Café"],
+  categories: ["Alla", "Restaurang", "Foodtruck", "Snabbmat", "Eventhall", "Kiosk"],
   cta: {
     heading: "Vill ni bli nästa case?",
     body: "Berätta om er verksamhet så undersöker vi möjligheterna till samarbete.",
