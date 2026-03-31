@@ -35,6 +35,8 @@ export interface CaseData {
   result: string;
   stats: string[];
   quote?: { text: string; author: string; role: string };
+  /** Profile photo of quote author */
+  profileImage?: string;
   timeline: string;
   /** Main illustration image */
   image: { src: string; alt: string };
