@@ -15,12 +15,13 @@ import stickerPhone from "@/assets/sticker-phone.png";
 import stickerAi from "@/assets/sticker-ai.png";
 
 // Realistic case card hero images
-import caseUrbanSlice from "@/assets/case-urban-slice.jpg";
-import caseVesperBar from "@/assets/case-vesper-bar.jpg";
-import caseKvarterskafe from "@/assets/case-kvarterskafe.jpg";
-import caseTrattoria from "@/assets/case-trattoria.jpg";
-import caseNeonNights from "@/assets/case-neon-nights.jpg";
-import caseBokcafeet from "@/assets/case-bokcafeet.jpg";
+import caseJohannesgrillen from "@/assets/case-johannesgrillen.png";
+import caseFraseriet from "@/assets/case-fraseriet.png";
+import caseElviras from "@/assets/case-elviras.png";
+import caseAvli from "@/assets/case-creperie-avli.png";
+import caseCornament from "@/assets/case-cornament.png";
+import caseHornan from "@/assets/case-hornan.png";
+import caseCafePlaza from "@/assets/case-cafe-plaza.png";
 
 export interface CaseData {
   slug: string;
