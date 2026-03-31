@@ -4,7 +4,7 @@ import { global } from "@/data/content";
 // Real logos
 import logoFraseriet from "@/assets/logos/fraseriet.svg";
 import logoElviras from "@/assets/logos/elviras.svg";
-import logoAvli from "@/assets/logos/creperie-avli.svg";
+import logoAvli from "@/assets/logos/creperie-avli.png";
 import logoPlock from "@/assets/logos/restaurang-plock.svg";
 import logoCornament from "@/assets/logos/cornament.svg";
 import logoJohannesgrillen from "@/assets/logos/johannesgrillen.svg";
