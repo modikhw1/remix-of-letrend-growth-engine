@@ -14,6 +14,13 @@ import stickerCoin from "@/assets/sticker-coin.png";
 import stickerPhone from "@/assets/sticker-phone.png";
 import stickerAi from "@/assets/sticker-ai.png";
 
+// Profile photos
+import profileJohannesgrillen from "@/assets/profile-johannesgrillen.png";
+import profileFraseriet from "@/assets/profile-fraseriet.png";
+import profileElviras from "@/assets/profile-elviras.png";
+import profileCornament from "@/assets/profile-cornament.png";
+import profileCafePlaza from "@/assets/profile-cafe-plaza.png";
+
 // Realistic case card hero images
 import caseJohannesgrillen from "@/assets/case-johannesgrillen.png";
 import caseFraseriet from "@/assets/case-fraseriet.png";
