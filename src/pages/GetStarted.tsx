@@ -12,10 +12,38 @@ import { getStarted as content, pricing, global } from "@/data/content";
 
 const GetStarted = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setError(false);
+
+    const form = e.currentTarget;
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      company: (form.elements.namedItem("business") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const res = await fetch("https://app.letrend.se/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setError(true);
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -72,9 +100,14 @@ const GetStarted = () => {
                     <Label htmlFor="message" className="font-semibold">{content.form.messageLabel}</Label>
                     <Textarea id="message" placeholder={content.form.messagePlaceholder} rows={4} className="rounded-lg border-thicker" />
                   </div>
-                  <Button type="submit" size="lg" className="w-full rounded-full border-2 border-foreground bg-foreground text-background shadow-hard-sm transition-all active:shadow-none active:translate-x-[2px] active:translate-y-[2px]">
-                    {content.form.submitLabel}
+                  <Button type="submit" size="lg" disabled={isSubmitting} className="w-full rounded-full border-2 border-foreground bg-foreground text-background shadow-hard-sm transition-all active:shadow-none active:translate-x-[2px] active:translate-y-[2px] disabled:opacity-60">
+                    {isSubmitting ? "Skickar..." : content.form.submitLabel}
                   </Button>
+                  {error && (
+                    <p className="text-center text-xs text-red-500">
+                      Något gick fel. Försök igen eller maila oss på hej@letrend.se
+                    </p>
+                  )}
                   <p className="text-center text-xs text-muted-foreground">{content.form.submitSubtext}</p>
                 </form>
               )}

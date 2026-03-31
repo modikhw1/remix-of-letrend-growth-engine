@@ -37,7 +37,13 @@ const Navbar = () => {
               {l.label}
             </Link>
           ))}
-          <Button asChild size="sm" className="ml-4 rounded-full border-2 border-foreground bg-foreground text-background hover:bg-foreground/90 transition-all">
+          <a
+            href="https://app.letrend.se"
+            className="ml-4 rounded-full px-4 py-1.5 text-sm font-semibold border-2 border-foreground/30 text-foreground/70 hover:border-foreground hover:text-foreground transition-colors"
+          >
+            Logga in
+          </a>
+          <Button asChild size="sm" className="ml-2 rounded-full border-2 border-foreground bg-foreground text-background hover:bg-foreground/90 transition-all">
             <Link to="/kom-igang">Kom igång</Link>
           </Button>
         </div>
@@ -62,6 +68,13 @@ const Navbar = () => {
                 {l.label}
               </Link>
             ))}
+            <a
+              href="https://app.letrend.se"
+              onClick={() => setOpen(false)}
+              className="rounded-lg px-3 py-2 text-sm font-semibold text-foreground/70 border-2 border-foreground/20 hover:border-foreground/60 transition-colors"
+            >
+              Logga in
+            </a>
             <Button asChild size="sm" className="mt-2 rounded-full border-2 border-foreground bg-foreground text-background">
               <Link to="/kom-igang" onClick={() => setOpen(false)}>Kom igång</Link>
             </Button>
