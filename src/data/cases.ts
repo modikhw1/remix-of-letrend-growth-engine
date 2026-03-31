@@ -141,6 +141,7 @@ export const allCases: CaseData[] = [
     image: { src: illustBarista, alt: "Cornhole" },
     sticker: { src: stickerCoin, alt: "Mynt-sticker" },
     cardImage: { src: caseCornament, alt: "Cornament eventhall" },
+    profileImage: profileCornament,
   },
   {
     slug: "hornan-snabblivs",
