@@ -60,7 +60,7 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 3 månader",
     image: { src: illustChefPerson, alt: "Kock i kök" },
     sticker: { src: stickerChef, alt: "Kock-sticker" },
-    cardImage: { src: caseUrbanSlice, alt: "Johannesgrillen kök" },
+    cardImage: { src: caseJohannesgrillen, alt: "Johannesgrillen kök" },
   },
   {
     slug: "fraseriet",
