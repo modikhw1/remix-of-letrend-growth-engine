@@ -87,7 +87,7 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 2 månader",
     image: { src: illustBartender, alt: "Foodtruck" },
     sticker: { src: stickerCocktail, alt: "Cocktail-sticker" },
-    cardImage: { src: caseFraseriet, alt: "Fraseriet foodtruck" },
+    cardImage: { src: "/lovable-uploads/20e560a9-9c85-4391-80af-dc48f0a124df.png", alt: "Fraseriet foodtruck" },
     profileImage: profileFraseriet,
   },
   {
