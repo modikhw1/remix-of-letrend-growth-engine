@@ -220,7 +220,11 @@ const CaseDetail = () => {
                 &quot;{caseData.quote.text}&quot;
               </p>
               <div className="mt-8 flex items-center justify-center gap-3">
-                <div className="h-10 w-10 rounded-full border-thicker border-foreground bg-gold" />
+                {caseData.profileImage ? (
+                  <img src={caseData.profileImage} alt={caseData.quote.author} className="h-12 w-12 rounded-full border-thicker border-foreground object-cover" />
+                ) : (
+                  <div className="h-12 w-12 rounded-full border-thicker border-foreground bg-gold" />
+                )}
                 <div className="text-left">
                   <p className="font-bold">{caseData.quote.author}</p>
                   <p className="text-sm opacity-70">{caseData.quote.role}</p>
