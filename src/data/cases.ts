@@ -140,7 +140,7 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 2 månader",
     image: { src: illustBarista, alt: "Cornhole" },
     sticker: { src: stickerCoin, alt: "Mynt-sticker" },
-    cardImage: { src: caseCornament, alt: "Cornament eventhall" },
+    cardImage: { src: "/lovable-uploads/e2922a58-660c-4cea-9e15-67f704892e6e.png", alt: "Cornament eventhall" },
     profileImage: profileCornament,
   },
   {
