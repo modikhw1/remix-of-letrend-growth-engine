@@ -69,8 +69,8 @@ const CaseDetail = () => {
               {caseData.name}
             </h1>
             {caseData.quote && (
-              <p className="mx-auto mt-6 max-w-lg text-lg opacity-60 italic">
-                "{caseData.quote.text.substring(0, 80)}…"
+              <p className="mx-auto mt-6 max-w-xl text-lg opacity-60 italic">
+                &quot;{caseData.quote.text}&quot;
               </p>
             )}
           </FadeIn>
