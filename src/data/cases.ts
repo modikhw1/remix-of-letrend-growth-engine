@@ -28,6 +28,10 @@ import caseAvli from "@/assets/case-creperie-avli.png";
 import caseHornan from "@/assets/case-hornan.png";
 import caseCafePlaza from "@/assets/case-cafe-plaza.png";
 
+import caseCornament from "@/assets/case-cornament.png";
+import caseFraseriet from "@/assets/case-fraseriet.png";
+import caseElviras from "@/assets/case-elviras.png";
+
 export interface CaseData {
   slug: string;
   type: string;
@@ -57,13 +61,21 @@ export const allCases: CaseData[] = [
     type: "Snabbmat",
     name: "Johannesgrillen",
     location: "Uppsala",
-    challenge: "Johannesgrillen är ett av Uppsalas mest älskade studenthak — men den kärleken lever mest offline. Zidane och hans team har alltid fyllt kön på valborg och storhelger, men vardagarna mellan 11 och 18 är en annan historia.",
+    challenge:
+      "Johannesgrillen är ett av Uppsalas mest älskade studenthak — men den kärleken lever mest offline. Zidane och hans team har alltid fyllt kön på valborg och storhelger, men vardagarna mellan 11 och 18 är en annan historia.",
     goal: "Att göra Johannesgrillen synlig för den generation studenter som väljer middagshak baserat på vad de sett på sin telefon — inte bara vad de hört från en kompis.",
-    direction: "Kameran ska in i det trånga köket. Zidane och personalen är berättelsen — inte bara maten. Vi bygger en närvaro som känns som en insider-titt snarare än reklam.",
-    execution: "Vi arbetar med Johannesgrillen för att hitta deras naturliga rytm på TikTok. Fokus ligger på kortformat som visar personalen, köksprocessen och den genuina energin som redan finns på plats.",
-    result: "Johannesgrillen börjar bygga en digital närvaro som speglar deras verkliga status i Uppsala. Studenterna som redan känner till dem börjar se dem online.",
+    direction:
+      "Kameran ska in i det trånga köket. Zidane och personalen är berättelsen — inte bara maten. Vi bygger en närvaro som känns som en insider-titt snarare än reklam.",
+    execution:
+      "Vi arbetar med Johannesgrillen för att hitta deras naturliga rytm på TikTok. Fokus ligger på kortformat som visar personalen, köksprocessen och den genuina energin som redan finns på plats.",
+    result:
+      "Johannesgrillen börjar bygga en digital närvaro som speglar deras verkliga status i Uppsala. Studenterna som redan känner till dem börjar se dem online.",
     stats: ["Ökad synlighet vardagar", "Ny publik utanför campus", "Pågående · 3 mån"],
-    quote: { text: "Vi har alltid haft kunder som älskar oss — nu börjar folk hitta oss innan de ens kommit förbi.", author: "Zidane", role: "Ägare, Johannesgrillen" },
+    quote: {
+      text: "Vi har alltid haft kunder som älskar oss — nu börjar folk hitta oss innan de ens kommit förbi.",
+      author: "Zidane",
+      role: "Ägare, Johannesgrillen",
+    },
     timeline: "Pågående · 3 månader",
     image: { src: illustChefPerson, alt: "Kock i kök" },
     sticker: { src: stickerChef, alt: "Kock-sticker" },
@@ -75,13 +87,21 @@ export const allCases: CaseData[] = [
     type: "Foodtruck",
     name: "Fraseriet",
     location: "Uppsala",
-    challenge: "Kristofer lämnade mäklarjobbet för att göra något han brinner för — mat. Problemet var att varumärket levde mest i konceptet, inte ute i världen.",
+    challenge:
+      "Kristofer lämnade mäklarjobbet för att göra något han brinner för — mat. Problemet var att varumärket levde mest i konceptet, inte ute i världen.",
     goal: "Att ge Fraseriet en digital röst som matchar den faktiska upplevelsen — något som känns lite lyxigt, lite oväntat, men framförallt genuint.",
-    direction: "Kristoffers bakgrund är berättelsen. Ingen förväntar sig att en f.d. mäklare ska stå i en foodtruck och servera bangkok-inspirerade mackor — och det är exakt det som gör det intressant.",
-    execution: "Vi hjälper Kristoffer hitta ett format som är hållbart för en soloentreprenör: korta, autentiska klipp som visar processen, råvarorna och menniskorna bakom luckan.",
-    result: "Fraseriet börjar synas för en publik som letar efter något annorlunda att äta i Uppsala. Berättelsen om mäklaren som bytte kostym mot förkläde engagerar.",
+    direction:
+      "Kristoffers bakgrund är berättelsen. Ingen förväntar sig att en f.d. mäklare ska stå i en foodtruck och servera bangkok-inspirerade mackor — och det är exakt det som gör det intressant.",
+    execution:
+      "Vi hjälper Kristoffer hitta ett format som är hållbart för en soloentreprenör: korta, autentiska klipp som visar processen, råvarorna och menniskorna bakom luckan.",
+    result:
+      "Fraseriet börjar synas för en publik som letar efter något annorlunda att äta i Uppsala. Berättelsen om mäklaren som bytte kostym mot förkläde engagerar.",
     stats: ["Varumärke under uppbyggnad", "Organisk räckvidd via storytelling", "Pågående · 2 mån"],
-    quote: { text: "Marknadsföring har alltid känts som den tuffaste biten. Nu känns det som att det faktiskt går åt rätt håll.", author: "Kristofer", role: "Grundare, Fraseriet" },
+    quote: {
+      text: "Marknadsföring har alltid känts som den tuffaste biten. Nu känns det som att det faktiskt går åt rätt håll.",
+      author: "Kristofer",
+      role: "Grundare, Fraseriet",
+    },
     timeline: "Pågående · 2 månader",
     image: { src: illustBartender, alt: "Foodtruck" },
     sticker: { src: stickerCocktail, alt: "Cocktail-sticker" },
@@ -93,13 +113,21 @@ export const allCases: CaseData[] = [
     type: "Restaurang",
     name: "Restaurang Elviras",
     location: "Uppsala",
-    challenge: "Elviras är redan ett välkänt namn i Uppsala — en central bistro med ett ungt, engagerat team. Men utanför de stora tillfällena är det svårare att fylla stolarna.",
+    challenge:
+      "Elviras är redan ett välkänt namn i Uppsala — en central bistro med ett ungt, engagerat team. Men utanför de stora tillfällena är det svårare att fylla stolarna.",
     goal: "Att bygga en kontinuerlig närvaro som gör Elviras till det självklara valet även en vanlig tisdag — inte bara på högtidsdagar.",
-    direction: "Elviras har redan det som TikTok belönar: ett karismatiskt team, en fin lokal och en ägare med personlighet. Vi bygger innehåll som bjuder in tittaren till Elviras värld.",
-    execution: "Vi arbetar tätt med George och teamet för att hitta ett format som inte stör driften men som konsekvent producerar innehåll.",
-    result: "Elviras börjar synas i flöden hos den målgrupp som redan är redo att komma — men som inte fick den sista nudgen.",
+    direction:
+      "Elviras har redan det som TikTok belönar: ett karismatiskt team, en fin lokal och en ägare med personlighet. Vi bygger innehåll som bjuder in tittaren till Elviras värld.",
+    execution:
+      "Vi arbetar tätt med George och teamet för att hitta ett format som inte stör driften men som konsekvent producerar innehåll.",
+    result:
+      "Elviras börjar synas i flöden hos den målgrupp som redan är redo att komma — men som inte fick den sista nudgen.",
     stats: ["Ökad synlighet utanför event", "Ny relation till digital publik", "Pågående · 3 mån"],
-    quote: { text: "Vi ville inte göra TikTok för sakens skull. Men när det känns genomtänkt och passar oss — då är det annorlunda.", author: "George", role: "Ägare, Restaurang Elviras" },
+    quote: {
+      text: "Vi ville inte göra TikTok för sakens skull. Men när det känns genomtänkt och passar oss — då är det annorlunda.",
+      author: "George",
+      role: "Ägare, Restaurang Elviras",
+    },
     timeline: "Pågående · 3 månader",
     image: { src: illustBar, alt: "Restaurangägare" },
     sticker: { src: stickerPhone, alt: "Telefon-sticker" },
@@ -111,13 +139,20 @@ export const allCases: CaseData[] = [
     type: "Restaurang",
     name: "Crêperie Avli",
     location: "Uppsala",
-    challenge: "Avli har ett genuint koncept och en fin atmosfär. Men i en stad som Uppsala, där restauranger konkurrerar om en begränsad publik, räcker det inte att vara bra — man måste vara igenkänd.",
+    challenge:
+      "Avli har ett genuint koncept och en fin atmosfär. Men i en stad som Uppsala, där restauranger konkurrerar om en begränsad publik, räcker det inte att vara bra — man måste vara igenkänd.",
     goal: "Att hjälpa Avli hitta sin röst. Inte bara visa maten — utan bygga en känsla kring stället som gör att rätt publik känner igen sig.",
-    direction: "Demitris och Marta är Avlis starkaste tillgång. Deras värme, gästfrihet och bakgrund är en berättelse som förtjänar att berättas.",
-    execution: "Vi arbetar med Avli för att identifiera vad som gör dem unika och hur det berättas på TikTok. Innehållet är enkelt, varmt och konsekvent.",
+    direction:
+      "Demitris och Marta är Avlis starkaste tillgång. Deras värme, gästfrihet och bakgrund är en berättelse som förtjänar att berättas.",
+    execution:
+      "Vi arbetar med Avli för att identifiera vad som gör dem unika och hur det berättas på TikTok. Innehållet är enkelt, varmt och konsekvent.",
     result: "Avli börjar attrahera en publik som faktiskt letar efter det de erbjuder. Igenkänningen ökar.",
     stats: ["Tydligare varumärkesidentitet", "Bredare publik", "Pågående · 2 mån"],
-    quote: { text: "Vi har alltid känt att vi hade något bra — det har bara saknats ett sätt att visa det.", author: "Demitris", role: "Delägare, Crêperie Avli" },
+    quote: {
+      text: "Vi har alltid känt att vi hade något bra — det har bara saknats ett sätt att visa det.",
+      author: "Demitris",
+      role: "Delägare, Crêperie Avli",
+    },
     timeline: "Pågående · 2 månader",
     image: { src: illustCafe, alt: "Café-interiör" },
     sticker: { src: stickerCoffee, alt: "Kaffe-sticker" },
@@ -128,13 +163,20 @@ export const allCases: CaseData[] = [
     type: "Eventhall",
     name: "Cornament",
     location: "Uppsala",
-    challenge: "Cornament är ett unikt koncept i Uppsala — en social hall byggd kring cornhole. TikTok har aldrig riktigt blivit av — inte för att viljan saknas, utan för att det kräver struktur.",
+    challenge:
+      "Cornament är ett unikt koncept i Uppsala — en social hall byggd kring cornhole. TikTok har aldrig riktigt blivit av — inte för att viljan saknas, utan för att det kräver struktur.",
     goal: "Att göra fler i Uppsala medvetna om att Cornament existerar och förstår vad det är. Awareness är det primära.",
-    direction: "Cornaments atmosfär är innehållet. Det sociala, det lite nördiga, det genuint roliga i att spela cornhole med kollegorna på en fredag.",
-    execution: "Vi hjälper Marcus och teamet hitta ett format som är hållbart och konsekvent. Autentiska klipp från turneringar, spontana AW-stunder och den unika kulturen.",
+    direction:
+      "Cornaments atmosfär är innehållet. Det sociala, det lite nördiga, det genuint roliga i att spela cornhole med kollegorna på en fredag.",
+    execution:
+      "Vi hjälper Marcus och teamet hitta ett format som är hållbart och konsekvent. Autentiska klipp från turneringar, spontana AW-stunder och den unika kulturen.",
     result: "Fler i Uppsala, framförallt unga yrkesverksamma och studenter, börjar känna till Cornament.",
     stats: ["Ökad kännedom i Uppsala", "Ny publik via organisk räckvidd", "Pågående · 2 mån"],
-    quote: { text: "Vi visste att vi borde vara bättre på det här. Nu känns det som att vi äntligen har ett upplägg som faktiskt funkar för oss.", author: "Marcus", role: "Grundare, Cornament" },
+    quote: {
+      text: "Vi visste att vi borde vara bättre på det här. Nu känns det som att vi äntligen har ett upplägg som faktiskt funkar för oss.",
+      author: "Marcus",
+      role: "Grundare, Cornament",
+    },
     timeline: "Pågående · 2 månader",
     image: { src: illustBarista, alt: "Cornhole" },
     sticker: { src: stickerCoin, alt: "Mynt-sticker" },
@@ -146,13 +188,21 @@ export const allCases: CaseData[] = [
     type: "Kiosk",
     name: "Hörnan Snabblivs",
     location: "Uppsala",
-    challenge: "Amir och hans kompanjon öppnade Hörnan i Rickomberga — ett studenttätt område. Som nyöppnad verksamhet handlar allt om att bli det ställe folk faktiskt känner till.",
+    challenge:
+      "Amir och hans kompanjon öppnade Hörnan i Rickomberga — ett studenttätt område. Som nyöppnad verksamhet handlar allt om att bli det ställe folk faktiskt känner till.",
     goal: "Att göra Hörnan till ett bekant namn i Rickomberga. Att studenter i närheten ska veta att de finns.",
-    direction: "Hörnan är en ny verksamhet på väg att hitta sin plats. Det är en berättelse i realtid — humor, enkelhet och äkthet.",
-    execution: "Vi arbetar med Amir och teamet för att hitta ett format som passar deras vardag. Innehållet ska konsekvent synas i flödet hos den publik som bor ett stenkast bort.",
-    result: "Hörnan börjar bygga lokal igenkänning. Studenter i Rickomberga börjar associera kiosken med ett vänligt, prisvärt alternativ.",
+    direction:
+      "Hörnan är en ny verksamhet på väg att hitta sin plats. Det är en berättelse i realtid — humor, enkelhet och äkthet.",
+    execution:
+      "Vi arbetar med Amir och teamet för att hitta ett format som passar deras vardag. Innehållet ska konsekvent synas i flödet hos den publik som bor ett stenkast bort.",
+    result:
+      "Hörnan börjar bygga lokal igenkänning. Studenter i Rickomberga börjar associera kiosken med ett vänligt, prisvärt alternativ.",
     stats: ["Lokal igenkänning under uppbyggnad", "Relation till studentpublik", "Pågående · 1 mån"],
-    quote: { text: "Det är mycket att hålla koll på i uppstarten. Att vi ändå syns och når folk i området — det känns som rätt steg.", author: "Amir", role: "Grundare, Hörnan Snabblivs" },
+    quote: {
+      text: "Det är mycket att hålla koll på i uppstarten. Att vi ändå syns och når folk i området — det känns som rätt steg.",
+      author: "Amir",
+      role: "Grundare, Hörnan Snabblivs",
+    },
     timeline: "Pågående · 1 månad",
     image: { src: illustCreator, alt: "Kiosk" },
     sticker: { src: stickerAi, alt: "AI-sticker" },
