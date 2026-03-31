@@ -200,8 +200,8 @@ const CaseDetail = () => {
             </p>
             <div className="grid gap-4 md:grid-cols-3">
               {caseData.stats.map((s) => (
-                <div key={s} className="rounded-2xl border-thicker border-foreground bg-card p-6 text-center shadow-hard">
-                  <p className="text-3xl font-black text-sage md:text-4xl">{s}</p>
+                <div key={s} className="rounded-2xl border-thicker border-foreground bg-card p-6 shadow-hard flex items-center justify-center min-h-[100px]">
+                  <p className="text-xl font-black text-sage md:text-2xl text-center leading-snug">{s}</p>
                 </div>
               ))}
             </div>
