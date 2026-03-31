@@ -38,7 +38,7 @@ const LogoTicker = ({ className }: LogoTickerProps) => (
             key={i}
             src={logo}
             alt={global.logoTicker.names[i % logos.length]}
-            className="mx-8 h-8 w-auto shrink-0 opacity-40 grayscale select-none"
+            className="mx-8 h-7 w-auto max-w-[120px] shrink-0 opacity-30 grayscale brightness-0 select-none object-contain"
           />
         ))}
       </div>

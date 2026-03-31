@@ -15,12 +15,13 @@ import stickerPhone from "@/assets/sticker-phone.png";
 import stickerAi from "@/assets/sticker-ai.png";
 
 // Realistic case card hero images
-import caseUrbanSlice from "@/assets/case-urban-slice.jpg";
-import caseVesperBar from "@/assets/case-vesper-bar.jpg";
-import caseKvarterskafe from "@/assets/case-kvarterskafe.jpg";
-import caseTrattoria from "@/assets/case-trattoria.jpg";
-import caseNeonNights from "@/assets/case-neon-nights.jpg";
-import caseBokcafeet from "@/assets/case-bokcafeet.jpg";
+import caseJohannesgrillen from "@/assets/case-johannesgrillen.png";
+import caseFraseriet from "@/assets/case-fraseriet.png";
+import caseElviras from "@/assets/case-elviras.png";
+import caseAvli from "@/assets/case-creperie-avli.png";
+import caseCornament from "@/assets/case-cornament.png";
+import caseHornan from "@/assets/case-hornan.png";
+import caseCafePlaza from "@/assets/case-cafe-plaza.png";
 
 export interface CaseData {
   slug: string;
@@ -59,7 +60,7 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 3 månader",
     image: { src: illustChefPerson, alt: "Kock i kök" },
     sticker: { src: stickerChef, alt: "Kock-sticker" },
-    cardImage: { src: caseUrbanSlice, alt: "Johannesgrillen kök" },
+    cardImage: { src: caseJohannesgrillen, alt: "Johannesgrillen kök" },
   },
   {
     slug: "fraseriet",
@@ -76,7 +77,7 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 2 månader",
     image: { src: illustBartender, alt: "Foodtruck" },
     sticker: { src: stickerCocktail, alt: "Cocktail-sticker" },
-    cardImage: { src: caseVesperBar, alt: "Fraseriet foodtruck" },
+    cardImage: { src: caseFraseriet, alt: "Fraseriet foodtruck" },
   },
   {
     slug: "restaurang-elviras",
@@ -93,7 +94,7 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 3 månader",
     image: { src: illustBar, alt: "Restaurangägare" },
     sticker: { src: stickerPhone, alt: "Telefon-sticker" },
-    cardImage: { src: caseTrattoria, alt: "Restaurang Elviras" },
+    cardImage: { src: caseElviras, alt: "Restaurang Elviras" },
   },
   {
     slug: "creperie-avli",
@@ -110,7 +111,7 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 2 månader",
     image: { src: illustCafe, alt: "Café-interiör" },
     sticker: { src: stickerCoffee, alt: "Kaffe-sticker" },
-    cardImage: { src: caseKvarterskafe, alt: "Crêperie Avli" },
+    cardImage: { src: caseAvli, alt: "Crêperie Avli" },
   },
   {
     slug: "cornament",
@@ -127,7 +128,7 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 2 månader",
     image: { src: illustBarista, alt: "Cornhole" },
     sticker: { src: stickerCoin, alt: "Mynt-sticker" },
-    cardImage: { src: caseNeonNights, alt: "Cornament eventhall" },
+    cardImage: { src: caseCornament, alt: "Cornament eventhall" },
   },
   {
     slug: "hornan-snabblivs",
@@ -144,6 +145,6 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 1 månad",
     image: { src: illustCreator, alt: "Kiosk" },
     sticker: { src: stickerAi, alt: "AI-sticker" },
-    cardImage: { src: caseBokcafeet, alt: "Hörnan Snabblivs" },
+    cardImage: { src: caseHornan, alt: "Hörnan Snabblivs" },
   },
 ];
