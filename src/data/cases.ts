@@ -105,7 +105,7 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 2 månader",
     image: { src: illustBartender, alt: "Foodtruck" },
     sticker: { src: stickerCocktail, alt: "Cocktail-sticker" },
-    cardImage: { src: "/lovable-uploads/20e560a9-9c85-4391-80af-dc48f0a124df.png", alt: "Fraseriet foodtruck" },
+    cardImage: { src: caseFraseriet, alt: "Fraseriet foodtruck" },
     profileImage: profileFraseriet,
   },
   {
@@ -131,7 +131,7 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 3 månader",
     image: { src: illustBar, alt: "Restaurangägare" },
     sticker: { src: stickerPhone, alt: "Telefon-sticker" },
-    cardImage: { src: "/lovable-uploads/61909e09-7916-4530-907a-93215d509439.png", alt: "Restaurang Elviras" },
+    cardImage: { src: caseElviras, alt: "Restaurang Elviras" },
     profileImage: profileElviras,
   },
   {
@@ -180,7 +180,7 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 2 månader",
     image: { src: illustBarista, alt: "Cornhole" },
     sticker: { src: stickerCoin, alt: "Mynt-sticker" },
-    cardImage: { src: "/lovable-uploads/e2922a58-660c-4cea-9e15-67f704892e6e.png", alt: "Cornament eventhall" },
+    cardImage: { src: caseCornament, alt: "Cornament eventhall" },
     profileImage: profileCornament,
   },
   {
