@@ -88,13 +88,13 @@ const CaseDetail = () => {
                 { icon: Clock, label: "Tidsperiod", value: caseData.timeline },
                 { icon: TrendingUp, label: "Effekt", value: caseData.stats[0], valueClass: "text-sage" },
               ].map((item) => (
-                <div key={item.label} className="flex items-start gap-3">
+                <div key={item.label} className="flex flex-col items-center text-center gap-2">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border-thicker border-foreground bg-card shadow-hard-sm">
                     <item.icon className="h-5 w-5 text-accent" />
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{item.label}</p>
-                    <p className={`font-bold ${item.valueClass || ""}`}>{item.value}</p>
+                    <p className={`font-bold text-sm leading-snug ${item.valueClass || ""}`}>{item.value}</p>
                   </div>
                 </div>
               ))}
