@@ -145,6 +145,6 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 1 månad",
     image: { src: illustCreator, alt: "Kiosk" },
     sticker: { src: stickerAi, alt: "AI-sticker" },
-    cardImage: { src: caseBokcafeet, alt: "Hörnan Snabblivs" },
+    cardImage: { src: caseHornan, alt: "Hörnan Snabblivs" },
   },
 ];
