@@ -23,8 +23,6 @@ import profileCafePlaza from "@/assets/profile-cafe-plaza.png";
 
 // Realistic case card hero images
 import caseJohannesgrillen from "@/assets/case-johannesgrillen.png";
-import caseFraseriet from "@/assets/case-fraseriet.png";
-import caseElviras from "@/assets/case-elviras.png";
 import caseAvli from "@/assets/case-creperie-avli.png";
 import caseCornament from "@/assets/case-cornament.png";
 import caseHornan from "@/assets/case-hornan.png";
