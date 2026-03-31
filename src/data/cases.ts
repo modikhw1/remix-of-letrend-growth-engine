@@ -111,7 +111,7 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 2 månader",
     image: { src: illustCafe, alt: "Café-interiör" },
     sticker: { src: stickerCoffee, alt: "Kaffe-sticker" },
-    cardImage: { src: caseKvarterskafe, alt: "Crêperie Avli" },
+    cardImage: { src: caseAvli, alt: "Crêperie Avli" },
   },
   {
     slug: "cornament",
