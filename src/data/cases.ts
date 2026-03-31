@@ -106,6 +106,7 @@ export const allCases: CaseData[] = [
     image: { src: illustBar, alt: "Restaurangägare" },
     sticker: { src: stickerPhone, alt: "Telefon-sticker" },
     cardImage: { src: caseElviras, alt: "Restaurang Elviras" },
+    profileImage: profileElviras,
   },
   {
     slug: "creperie-avli",
