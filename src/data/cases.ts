@@ -70,6 +70,7 @@ export const allCases: CaseData[] = [
     image: { src: illustChefPerson, alt: "Kock i kök" },
     sticker: { src: stickerChef, alt: "Kock-sticker" },
     cardImage: { src: caseJohannesgrillen, alt: "Johannesgrillen kök" },
+    profileImage: profileJohannesgrillen,
   },
   {
     slug: "fraseriet",
