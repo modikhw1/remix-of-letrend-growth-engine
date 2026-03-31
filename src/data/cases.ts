@@ -88,6 +88,7 @@ export const allCases: CaseData[] = [
     image: { src: illustBartender, alt: "Foodtruck" },
     sticker: { src: stickerCocktail, alt: "Cocktail-sticker" },
     cardImage: { src: caseFraseriet, alt: "Fraseriet foodtruck" },
+    profileImage: profileFraseriet,
   },
   {
     slug: "restaurang-elviras",
