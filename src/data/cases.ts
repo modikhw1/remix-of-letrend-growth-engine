@@ -94,7 +94,7 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 3 månader",
     image: { src: illustBar, alt: "Restaurangägare" },
     sticker: { src: stickerPhone, alt: "Telefon-sticker" },
-    cardImage: { src: caseTrattoria, alt: "Restaurang Elviras" },
+    cardImage: { src: caseElviras, alt: "Restaurang Elviras" },
   },
   {
     slug: "creperie-avli",
