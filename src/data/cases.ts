@@ -14,6 +14,13 @@ import stickerCoin from "@/assets/sticker-coin.png";
 import stickerPhone from "@/assets/sticker-phone.png";
 import stickerAi from "@/assets/sticker-ai.png";
 
+// Profile photos
+import profileJohannesgrillen from "@/assets/profile-johannesgrillen.png";
+import profileFraseriet from "@/assets/profile-fraseriet.png";
+import profileElviras from "@/assets/profile-elviras.png";
+import profileCornament from "@/assets/profile-cornament.png";
+import profileCafePlaza from "@/assets/profile-cafe-plaza.png";
+
 // Realistic case card hero images
 import caseJohannesgrillen from "@/assets/case-johannesgrillen.png";
 import caseFraseriet from "@/assets/case-fraseriet.png";
@@ -35,6 +42,8 @@ export interface CaseData {
   result: string;
   stats: string[];
   quote?: { text: string; author: string; role: string };
+  /** Profile photo of quote author */
+  profileImage?: string;
   timeline: string;
   /** Main illustration image */
   image: { src: string; alt: string };
@@ -61,6 +70,7 @@ export const allCases: CaseData[] = [
     image: { src: illustChefPerson, alt: "Kock i kök" },
     sticker: { src: stickerChef, alt: "Kock-sticker" },
     cardImage: { src: caseJohannesgrillen, alt: "Johannesgrillen kök" },
+    profileImage: profileJohannesgrillen,
   },
   {
     slug: "fraseriet",
@@ -78,6 +88,7 @@ export const allCases: CaseData[] = [
     image: { src: illustBartender, alt: "Foodtruck" },
     sticker: { src: stickerCocktail, alt: "Cocktail-sticker" },
     cardImage: { src: caseFraseriet, alt: "Fraseriet foodtruck" },
+    profileImage: profileFraseriet,
   },
   {
     slug: "restaurang-elviras",
@@ -95,6 +106,7 @@ export const allCases: CaseData[] = [
     image: { src: illustBar, alt: "Restaurangägare" },
     sticker: { src: stickerPhone, alt: "Telefon-sticker" },
     cardImage: { src: caseElviras, alt: "Restaurang Elviras" },
+    profileImage: profileElviras,
   },
   {
     slug: "creperie-avli",
@@ -129,6 +141,7 @@ export const allCases: CaseData[] = [
     image: { src: illustBarista, alt: "Cornhole" },
     sticker: { src: stickerCoin, alt: "Mynt-sticker" },
     cardImage: { src: caseCornament, alt: "Cornament eventhall" },
+    profileImage: profileCornament,
   },
   {
     slug: "hornan-snabblivs",

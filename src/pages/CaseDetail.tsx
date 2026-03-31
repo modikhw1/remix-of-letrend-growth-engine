@@ -69,8 +69,8 @@ const CaseDetail = () => {
               {caseData.name}
             </h1>
             {caseData.quote && (
-              <p className="mx-auto mt-6 max-w-lg text-lg opacity-60 italic">
-                "{caseData.quote.text.substring(0, 80)}…"
+              <p className="mx-auto mt-6 max-w-xl text-lg opacity-60 italic">
+                &quot;{caseData.quote.text}&quot;
               </p>
             )}
           </FadeIn>
@@ -88,13 +88,13 @@ const CaseDetail = () => {
                 { icon: Clock, label: "Tidsperiod", value: caseData.timeline },
                 { icon: TrendingUp, label: "Effekt", value: caseData.stats[0], valueClass: "text-sage" },
               ].map((item) => (
-                <div key={item.label} className="flex items-start gap-3">
+                <div key={item.label} className="flex flex-col items-center text-center gap-2">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border-thicker border-foreground bg-card shadow-hard-sm">
                     <item.icon className="h-5 w-5 text-accent" />
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{item.label}</p>
-                    <p className={`font-bold ${item.valueClass || ""}`}>{item.value}</p>
+                    <p className={`font-bold text-sm leading-snug ${item.valueClass || ""}`}>{item.value}</p>
                   </div>
                 </div>
               ))}
@@ -200,8 +200,8 @@ const CaseDetail = () => {
             </p>
             <div className="grid gap-4 md:grid-cols-3">
               {caseData.stats.map((s) => (
-                <div key={s} className="rounded-2xl border-thicker border-foreground bg-card p-6 text-center shadow-hard">
-                  <p className="text-3xl font-black text-sage md:text-4xl">{s}</p>
+                <div key={s} className="rounded-2xl border-thicker border-foreground bg-card p-6 shadow-hard flex items-center justify-center min-h-[100px]">
+                  <p className="text-xl font-black text-sage md:text-2xl text-center leading-snug">{s}</p>
                 </div>
               ))}
             </div>
@@ -220,7 +220,11 @@ const CaseDetail = () => {
                 &quot;{caseData.quote.text}&quot;
               </p>
               <div className="mt-8 flex items-center justify-center gap-3">
-                <div className="h-10 w-10 rounded-full border-thicker border-foreground bg-gold" />
+                {caseData.profileImage ? (
+                  <img src={caseData.profileImage} alt={caseData.quote.author} className="h-12 w-12 rounded-full border-thicker border-foreground object-cover" />
+                ) : (
+                  <div className="h-12 w-12 rounded-full border-thicker border-foreground bg-gold" />
+                )}
                 <div className="text-left">
                   <p className="font-bold">{caseData.quote.author}</p>
                   <p className="text-sm opacity-70">{caseData.quote.role}</p>
