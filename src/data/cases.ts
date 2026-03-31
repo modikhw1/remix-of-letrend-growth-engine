@@ -23,10 +23,8 @@ import profileCafePlaza from "@/assets/profile-cafe-plaza.png";
 
 // Realistic case card hero images
 import caseJohannesgrillen from "@/assets/case-johannesgrillen.png";
-import caseFraseriet from "@/assets/case-fraseriet.png";
-import caseElviras from "@/assets/case-elviras.png";
 import caseAvli from "@/assets/case-creperie-avli.png";
-import caseCornament from "@/assets/case-cornament.png";
+
 import caseHornan from "@/assets/case-hornan.png";
 import caseCafePlaza from "@/assets/case-cafe-plaza.png";
 
@@ -87,7 +85,7 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 2 månader",
     image: { src: illustBartender, alt: "Foodtruck" },
     sticker: { src: stickerCocktail, alt: "Cocktail-sticker" },
-    cardImage: { src: caseFraseriet, alt: "Fraseriet foodtruck" },
+    cardImage: { src: "/lovable-uploads/20e560a9-9c85-4391-80af-dc48f0a124df.png", alt: "Fraseriet foodtruck" },
     profileImage: profileFraseriet,
   },
   {
@@ -105,7 +103,7 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 3 månader",
     image: { src: illustBar, alt: "Restaurangägare" },
     sticker: { src: stickerPhone, alt: "Telefon-sticker" },
-    cardImage: { src: caseElviras, alt: "Restaurang Elviras" },
+    cardImage: { src: "/lovable-uploads/61909e09-7916-4530-907a-93215d509439.png", alt: "Restaurang Elviras" },
     profileImage: profileElviras,
   },
   {
@@ -140,7 +138,7 @@ export const allCases: CaseData[] = [
     timeline: "Pågående · 2 månader",
     image: { src: illustBarista, alt: "Cornhole" },
     sticker: { src: stickerCoin, alt: "Mynt-sticker" },
-    cardImage: { src: caseCornament, alt: "Cornament eventhall" },
+    cardImage: { src: "/lovable-uploads/e2922a58-660c-4cea-9e15-67f704892e6e.png", alt: "Cornament eventhall" },
     profileImage: profileCornament,
   },
   {
