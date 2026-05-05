@@ -7,19 +7,14 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: {
-        DEFAULT: "1.5rem",
-        sm: "2rem",
-        lg: "3rem",
-        xl: "4rem",
-      },
+      padding: "2rem",
       screens: {
-        "2xl": "1280px",
+        "2xl": "1400px",
       },
     },
     extend: {
       fontFamily: {
-        sans: ["'Outfit'", "sans-serif"],
+        sans: ["'Outfit'", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
