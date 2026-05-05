@@ -50,7 +50,6 @@ export function GamePlanDisplay({
             background: '#F5F2EE',
             border: '1px dashed rgba(74, 47, 24, 0.08)',
             color: '#7D6E5D',
-            fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
             fontSize: 14,
             lineHeight: 1.6,
             textAlign: 'center',
