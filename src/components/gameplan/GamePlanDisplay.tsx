@@ -33,27 +33,12 @@ export function GamePlanDisplay({
 
       {safeHtml.trim() ? (
         <div
-          className="gp-rich-text game-plan-content"
-          style={{
-            background: '#FFFFFF',
-            borderRadius: 12,
-            border: '1px solid rgba(74, 47, 24, 0.06)',
-            padding: '18px 20px',
-          }}
+          className="prose prose-sm max-w-none prose-headings:font-bold prose-headings:text-foreground prose-p:text-foreground/80 prose-p:leading-relaxed prose-strong:font-bold prose-strong:text-foreground prose-li:text-foreground/80 prose-a:text-accent"
           dangerouslySetInnerHTML={{ __html: safeHtml }}
         />
       ) : (
         <div
-          style={{
-            padding: '20px 18px',
-            borderRadius: 12,
-            background: '#F5F2EE',
-            border: '1px dashed rgba(74, 47, 24, 0.08)',
-            color: '#7D6E5D',
-            fontSize: 14,
-            lineHeight: 1.6,
-            textAlign: 'center',
-          }}
+          className="rounded-xl border border-dashed border-foreground/10 bg-muted/50 px-5 py-4 text-center text-sm text-muted-foreground"
         >
           {emptyLabel}
         </div>
