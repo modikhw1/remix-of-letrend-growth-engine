@@ -76,19 +76,17 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
           </h1>
           <div className="mt-6 max-w-2xl space-y-4 text-base opacity-85 md:text-lg">
             <p>
-              Hej {greetingName}. LeTrend är i grund och botten en marknadsföringstjänst för TikTok som hjälper
-              restauranger, barer och caféer synas bättre. Med en egen plattform, AI-funktioner och mänsklig hjälp
-              guidar vi er strategi för att nå fler ögon och kunder.
+              Hej {greetingName}. LeTrend är i grund och botten en marknadsföringstjänst för TikTok. Med en egen
+              plattform, AI-funktioner och mänsklig hjälp guidar vi er strategi för att nå fler ögon och kunder.
             </p>
             <p>
-              De flesta byråer säljer in paket som inkluderar produktion, kurering och strategi. Vi gör samma — men
-              tar bort produktionen. En smartphone, vår app och lite anpassning räcker långt för att lyckas på
+              De flesta byråer säljer in paket som inkluderar produktion, kurering och strategi. Vi gör nästan samma,
+              men exkluderar produktionen. Med en smartphone, vår app och lite guidning tror vi de flesta kan lyckas på
               TikTok. Det driver ner kostnader samtidigt som virala trender kan fångas snabbare till er fördel.
             </p>
             <p>
-              Nedan har ni ett interaktivt demo som visar vart ni är och vart ni kan landa. Vi rekommenderar{" "}
-              <strong>{conceptsPerWeek} koncept i veckan</strong>, anpassade till er bransch, ton och era egna
-              styrkor.
+              Nedan har vi förberett ett demo som visar vart ni är och vart ni kan landa. Vi rekommenderar{" "}
+              <strong>{conceptsPerWeek} koncept i veckan</strong>, anpassade till er bransch, ton och era egna styrkor.
             </p>
           </div>
         </div>
@@ -105,20 +103,20 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
               </h2>
               <div className="mt-5 space-y-4 text-sm leading-relaxed text-foreground/85 md:text-base">
                 <p>
-                  LeTrend arbetar med kreativt bricolage — samma typ av pyssel som när man var liten och klippte
-                  ihop delar från olika tidningar till något nytt.
+                  LeTrend arbetar med kreativt bricolage — samma typ av pyssel som när man var liten och klippte ihop
+                  delar från olika tidningar till något nytt.
                 </p>
                 <p>
-                  Det finns ingen brist på kreativitet på TikTok. Det handlar om vem som är snabbast på bollen. En
-                  rolig idé kan generera hundratusentals visningar om den utförs rätt och känns fräsch för publiken.
+                  Det finns ingen brist på kreativitet på TikTok. Det handlar om vem som är snabbast på bollen. En rolig
+                  idé kan generera hundratusentals visningar om den utförs rätt och känns fräsch för publiken.
                 </p>
                 <p>
-                  Vi fångar virala trender tidigt och använder vår plattform för att rekommendera och visa er exakt
-                  vad ni behöver göra för att återskapa idéerna i er egen ton.
+                  Vi fångar virala trender tidigt och använder vår plattform för att rekommendera och visa er exakt vad
+                  ni behöver göra för att återskapa idéerna i er egen ton.
                 </p>
                 <p>
-                  Resultatet? Visningar, igenkännedom och en marknadsföringsstrategi som fångar många ögon med
-                  enkla medel.
+                  Resultatet? Visningar, igenkännedom och en marknadsföringsstrategi som fångar många ögon med enkla
+                  medel.
                 </p>
               </div>
 
@@ -154,17 +152,14 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
               <h2 className="font-serif-display text-3xl font-bold leading-tight md:text-4xl">Våra spaningar</h2>
               <div className="mt-4 space-y-4 text-sm leading-relaxed text-foreground/85 md:text-base">
                 <p>
-                  Game Plan är arbetsdokumentet där er content manager samlar allt som rör er strategi — vad ni
-                  redan gör bra, vad som kan skärpas, referenser värda att titta på och vilka format vi tror på
-                  framåt.
+                  Game Plan är arbetsdokumentet där er content manager samlar allt som rör er strategi — vad ni redan
+                  gör bra, vad som kan skärpas, referenser värda att titta på och vilka format vi tror på framåt.
                 </p>
                 <p>
-                  Dokumentet är levande. Det börjar redan innan vi pratats vid och fylls på vecka för vecka i takt
-                  med att vi lär känna er och era kunder bättre.
+                  Dokumentet är levande. Det börjar redan innan vi pratats vid och fylls på vecka för vecka i takt med
+                  att vi lär känna er och era kunder bättre.
                 </p>
-                <p className="text-xs text-muted-foreground">
-                  Nedan: ett tidigt utdrag för {demo.companyName}.
-                </p>
+                <p className="text-xs text-muted-foreground">Nedan: ett tidigt utdrag för {demo.companyName}.</p>
               </div>
 
               <div className="mt-6 flex items-center gap-3">
@@ -208,18 +203,18 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
                 ) : (
                   <>
                     <p className="mb-4">
-                      Det första som slår mig är att ni faktiskt redan har en ton. Det syns i närbilderna och i hur
-                      ni pratar i kameran — det känns som er, inte som en mall. Bra utgångspunkt: vi behöver inte
-                      bygga ett uttryck från noll, utan snarare hjälpa er leverera det oftare och tydligare.
+                      Det första som slår mig är att ni faktiskt redan har en ton. Det syns i närbilderna och i hur ni
+                      pratar i kameran — det känns som er, inte som en mall. Bra utgångspunkt: vi behöver inte bygga ett
+                      uttryck från noll, utan snarare hjälpa er leverera det oftare och tydligare.
                     </p>
                     <p className="mb-4">
                       Det jag vill jobba med först är <em>tempot</em>. Ni publicerar ojämnt, och de bästa klippen
-                      drunknar i veckor utan aktivitet. {conceptsPerWeek} koncept i veckan, varje vecka, gör mer än
-                      fem klipp en månad och tystnad nästa.
+                      drunknar i veckor utan aktivitet. {conceptsPerWeek} koncept i veckan, varje vecka, gör mer än fem
+                      klipp en månad och tystnad nästa.
                     </p>
                     <p className="text-foreground/80">
-                      Mer kommer när vi pratats vid — särskilt kring vad ni själva tycker fungerat, och vad som
-                      känts segt att göra.
+                      Mer kommer när vi pratats vid — särskilt kring vad ni själva tycker fungerat, och vad som känts
+                      segt att göra.
                     </p>
                   </>
                 )}
@@ -272,17 +267,17 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
               <div className="mt-4 space-y-3 text-sm leading-relaxed text-foreground/85">
                 <p>
                   Bra snitt-visningar är trevligt, men berättar inte hela historien. Det viktiga är vilka{" "}
-                  <em>signaler</em> ni skickar ut — att verksamheten känns genomtänkt, schysst och värd ett besök.
-                  Det syns i klippning, tajming och i hur en feed hänger ihop.
+                  <em>signaler</em> ni skickar ut — att verksamheten känns genomtänkt, schysst och värd ett besök. Det
+                  syns i klippning, tajming och i hur en feed hänger ihop.
                 </p>
                 <p>
-                  <strong>Genombrott</strong> mäter hur ofta ni når långt utanför era följare. Med 200 följare kan
-                  ett klipp ändå landa på 100k+. Sker det regelbundet börjar nya människor bygga en känsla för er —
-                  och med tiden en relation.
+                  <strong>Genombrott</strong> mäter hur ofta ni når långt utanför era följare. Med 200 följare kan ett
+                  klipp ändå landa på 100k+. Sker det regelbundet börjar nya människor bygga en känsla för er — och med
+                  tiden en relation.
                 </p>
                 <p>
-                  <strong>Like rate</strong> är ingen dålig metric. Får ni sällan likes slutar algoritmen pusha er.
-                  Det säger något om hur engagerande, välproducerat och rätt-i-tiden innehållet är.
+                  <strong>Like rate</strong> är ingen dålig metric. Får ni sällan likes slutar algoritmen pusha er. Det
+                  säger något om hur engagerande, välproducerat och rätt-i-tiden innehållet är.
                 </p>
                 <p className="text-xs text-muted-foreground">
                   Siffrorna ovan hämtas från ert konto och uppdateras löpande när ni är kund.
@@ -348,12 +343,12 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
             </h2>
             <div className="mt-4 space-y-3 text-sm leading-relaxed text-foreground/85 md:text-base">
               <p>
-                Vi arbetar på en mobilapp som guidar er genom processen att spela in. Ni spelar in med mobilen —
-                vilket tar bort kostnaden för produktion — och appen gör resten.
+                Vi arbetar på en mobilapp som guidar er genom processen att spela in. Ni spelar in med mobilen — vilket
+                tar bort kostnaden för produktion — och appen gör resten.
               </p>
               <p className="text-sm text-muted-foreground">
-                Har ni en bra mick och en mobil med bra inspelning är det ett plus. Annars riskerar innehållet
-                upplevas mindre proffsigt.
+                Har ni en bra mick och en mobil med bra inspelning är det ett plus. Annars riskerar innehållet upplevas
+                mindre proffsigt.
               </p>
             </div>
 
@@ -365,8 +360,8 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
               <li className="flex gap-3">
                 <Scissors className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                 <span>
-                  Automatisk klippning enligt format som fungerar på TikTok just nu — med stöd för trendljud,
-                  skärmtext och annat.
+                  Automatisk klippning enligt format som fungerar på TikTok just nu — med stöd för trendljud, skärmtext
+                  och annat.
                 </span>
               </li>
               <li className="flex gap-3">
@@ -391,12 +386,12 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
               </h2>
               <div className="mt-4 space-y-3 text-sm leading-relaxed text-foreground/85 md:text-base">
                 <p>
-                  Ibland räcker inte er egen feed. När ni vill nå nya målgrupper matchar vi er med UGC-kreatörer
-                  som passar tonen, branschen och budgeten.
+                  Ibland räcker inte er egen feed. När ni vill nå nya målgrupper matchar vi er med UGC-kreatörer som
+                  passar tonen, branschen och budgeten.
                 </p>
                 <p>
-                  LeTrend hanterar hela dialogen — från första kontakt till brief, leverans och betalning. Ni
-                  godkänner samarbetet, vi sköter resten.
+                  LeTrend hanterar hela dialogen — från första kontakt till brief, leverans och betalning. Ni godkänner
+                  samarbetet, vi sköter resten.
                 </p>
                 <p>
                   Tjänsten är ett tillägg till abonnemanget och faktureras per samarbete. Behöver ni en kreatör i
@@ -515,8 +510,8 @@ function StatCard({ label, value, hint }: { label: string; value: string; hint: 
 
 function ViralityChart() {
   const bars = [
-    900, 1400, 2200, 1800, 3400, 1100, 2600, 1900, 1500, 4200, 2100, 980, 3100, 1700, 5800, 2400, 1300, 22000,
-    1900, 2800, 1500, 4400, 1100, 2300, 1700, 3500, 2100, 980, 1900, 2600, 4470, 1800, 3200, 1500, 2400, 5100,
+    900, 1400, 2200, 1800, 3400, 1100, 2600, 1900, 1500, 4200, 2100, 980, 3100, 1700, 5800, 2400, 1300, 22000, 1900,
+    2800, 1500, 4400, 1100, 2300, 1700, 3500, 2100, 980, 1900, 2600, 4470, 1800, 3200, 1500, 2400, 5100,
   ];
   const max = 30000;
   return (
@@ -525,12 +520,7 @@ function ViralityChart() {
         const h = Math.min(100, (v / max) * 100);
         const tier = v >= 100000 ? "bg-brand" : v >= 20000 ? "bg-gold" : "bg-accent";
         return (
-          <div
-            key={i}
-            className={`flex-1 rounded-t-sm ${tier}`}
-            style={{ height: `${Math.max(4, h)}%` }}
-            aria-hidden
-          />
+          <div key={i} className={`flex-1 rounded-t-sm ${tier}`} style={{ height: `${Math.max(4, h)}%` }} aria-hidden />
         );
       })}
       <div
