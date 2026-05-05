@@ -11,6 +11,7 @@ import CaseDetail from "./pages/CaseDetail";
 import About from "./pages/About";
 import GetStarted from "./pages/GetStarted";
 import NotFound from "./pages/NotFound";
+import DemoLanding from "./pages/DemoLanding";
 import ScrollToTop from "./components/ScrollToTop";
 
 
@@ -32,7 +33,8 @@ const App = () => (
           <Route path="/om-oss" element={<About />} />
           <Route path="/kom-igang" element={<GetStarted />} />
           <Route path="/priser" element={<Index />} />
-          
+          <Route path="/d/:token" element={<DemoLanding />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
