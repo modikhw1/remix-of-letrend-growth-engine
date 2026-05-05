@@ -604,7 +604,7 @@ function PhoneMock() {
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <img
-        src="/demo-auto-clip-phone.svg"
+        src="/demo-auto-clip-phone.png"
         alt="LeTrend Auto-clip mobilflöde"
         style={{ width: 'min(100%, 360px)', height: 'auto', display: 'block', filter: 'drop-shadow(0 30px 55px rgba(31,26,20,0.24))' }}
       />
