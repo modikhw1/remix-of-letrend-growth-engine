@@ -49,6 +49,19 @@ export type DemoPreviewPayload = {
   concepts: CustomerPlannerSlot[];
 };
 
+function readNum(v: unknown): number | null {
+  if (typeof v === "number" && Number.isFinite(v)) return v;
+  if (typeof v === "string") { const n = parseFloat(v); return Number.isFinite(n) ? n : null; }
+  return null;
+}
+
+function readNumArr(v: unknown): number[] | null {
+  if (!Array.isArray(v)) return null;
+  const arr = v.map(readNum);
+  if (arr.some((x) => x === null)) return null;
+  return arr as number[];
+}
+
 export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
   const { demo, concepts } = payload;
   const slots = useMemo(() => concepts ?? [], [concepts]);
@@ -62,6 +75,31 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
   );
   const hasGamePlan = Boolean(demo.gamePlanHtml || demo.gamePlanText);
   const tiktokHandleClean = demo.tiktokHandle ? `@${demo.tiktokHandle.replace(/^@/, "")}` : demo.companyName;
+
+  const m = demo.previewMetrics ?? {};
+  const avgViews30d = readNum(m.avg_views_30d) ?? readNum(m.avg_views) ?? readNum(m.averageViews);
+  const likeRate30d = readNum(m.like_rate_30d) ?? readNum(m.like_rate);
+  const genombrott_viral = readNum(m.genombrott_viral) ?? 0;
+  const genombrott_hit = readNum(m.genombrott_hit) ?? 0;
+  const genombrott_klipp = readNum(m.genombrott_klipp) ?? readNum(m.video_count_30d) ?? 0;
+
+  const hasLiveStats = avgViews30d !== null || likeRate30d !== null;
+
+  const avgViewsDisplay = avgViews30d != null
+    ? Math.round(avgViews30d).toLocaleString("sv-SE")
+    : "—";
+  const genombrott_display = hasLiveStats
+    ? `${genombrott_viral} / ${genombrott_hit} / ${genombrott_klipp}`
+    : "—";
+  const likeRateDisplay = likeRate30d != null
+    ? `${likeRate30d.toFixed(1).replace(".", ",")}%`
+    : "—";
+
+  const likeRateHint = likeRate30d != null
+    ? (likeRate30d >= 5 ? "Starkt" : likeRate30d >= 2 ? "Ok" : "Lågt")
+    : "30d";
+
+  const chartValues = readNumArr(m.chart_values);
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -235,15 +273,15 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
           <div className="grid items-stretch gap-10 md:grid-cols-[7fr_5fr] md:gap-14">
             <div className="flex flex-col gap-4">
               <div className="grid grid-cols-3 gap-3">
-                <StatCard label="Snitt visningar" value="4 470" hint="90d · per klipp" />
-                <StatCard label="Genombrott" value="0 / 1 / 18" hint="viral / hit / klipp" />
-                <StatCard label="Like rate" value="3,3%" hint="Ok" />
+                <StatCard label="Snitt visningar" value={avgViewsDisplay} hint="30d · per klipp" />
+                <StatCard label="Genombrott" value={genombrott_display} hint="viral / hit / klipp" />
+                <StatCard label="Like rate" value={likeRateDisplay} hint={likeRateHint} />
               </div>
 
               <div className="flex flex-1 flex-col rounded-2xl border-2 border-foreground bg-card p-5 shadow-hard-sm">
                 <div className="mb-3 flex items-center justify-between">
                   <p className="text-[11px] font-bold uppercase tracking-widest text-foreground/70">
-                    Visningar per klipp · senaste 6 mån
+                    Visningar per klipp · senaste 30 dagar
                   </p>
                   <div className="flex flex-wrap gap-2 text-[10px] text-muted-foreground">
                     <Legend swatchClass="bg-accent" label="Klipp" />
@@ -251,9 +289,9 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
                     <Legend swatchClass="bg-brand" label="Viral" />
                   </div>
                 </div>
-                <ViralityChart />
+                <ViralityChart values={chartValues} avgViews={avgViews30d} />
                 <div className="mt-2 flex justify-between text-[10px] text-muted-foreground">
-                  <span>6 mån sedan</span>
+                  <span>30 dagar sedan</span>
                   <span>Idag</span>
                 </div>
               </div>
@@ -508,25 +546,46 @@ function StatCard({ label, value, hint }: { label: string; value: string; hint: 
   );
 }
 
-function ViralityChart() {
-  const bars = [
-    900, 1400, 2200, 1800, 3400, 1100, 2600, 1900, 1500, 4200, 2100, 980, 3100, 1700, 5800, 2400, 1300, 22000, 1900,
-    2800, 1500, 4400, 1100, 2300, 1700, 3500, 2100, 980, 1900, 2600, 4470, 1800, 3200, 1500, 2400, 5100,
-  ];
-  const max = 30000;
+const FALLBACK_BARS = [
+  900, 1400, 2200, 1800, 3400, 1100, 2600, 1900, 1500, 4200,
+  2100, 980, 3100, 1700, 5800, 2400, 1300, 22000, 1900, 2800,
+  1500, 4400, 1100, 2300, 1700, 3500, 2100, 980, 1900, 2600,
+];
+
+function ViralityChart({ values, avgViews }: { values: number[] | null; avgViews: number | null }) {
+  const bars = values && values.length === 30 ? values : FALLBACK_BARS;
+  const max = Math.max(...bars, 1000);
+  const hitLine = avgViews != null ? avgViews * 10 : null;
+  const viralLine = avgViews != null ? avgViews * 20 : null;
+
   return (
     <div className="relative flex h-32 items-end gap-[3px]">
       {bars.map((v, i) => {
         const h = Math.min(100, (v / max) * 100);
-        const tier = v >= 100000 ? "bg-brand" : v >= 20000 ? "bg-gold" : "bg-accent";
+        const tier =
+          viralLine != null && v >= viralLine
+            ? "bg-brand"
+            : hitLine != null && v >= hitLine
+              ? "bg-gold"
+              : "bg-accent";
         return (
           <div key={i} className={`flex-1 rounded-t-sm ${tier}`} style={{ height: `${Math.max(4, h)}%` }} aria-hidden />
         );
       })}
-      <div
-        className="pointer-events-none absolute inset-x-0 border-t border-dashed border-foreground/25"
-        style={{ bottom: `${(20000 / 30000) * 100}%` }}
-      />
+      {hitLine != null && hitLine < max && (
+        <div
+          className="pointer-events-none absolute inset-x-0 border-t border-dashed border-gold/60"
+          style={{ bottom: `${Math.min(98, (hitLine / max) * 100)}%` }}
+          title={`Hit-gräns: ${hitLine.toLocaleString("sv-SE")}`}
+        />
+      )}
+      {viralLine != null && viralLine < max && (
+        <div
+          className="pointer-events-none absolute inset-x-0 border-t border-dashed border-brand/60"
+          style={{ bottom: `${Math.min(98, (viralLine / max) * 100)}%` }}
+          title={`Viral-gräns: ${viralLine.toLocaleString("sv-SE")}`}
+        />
+      )}
     </div>
   );
 }
