@@ -20,6 +20,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["'Outfit'", "sans-serif"],
+        "serif-display": ["'Outfit'", "Georgia", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",

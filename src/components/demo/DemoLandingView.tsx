@@ -1,5 +1,5 @@
+import { useMemo } from "react";
 import {
-  ArrowRight,
   Calendar,
   CheckCircle2,
   Handshake,
@@ -7,13 +7,16 @@ import {
   Scissors,
   Smartphone,
   Sparkles,
+  Star,
   TrendingUp,
   Users,
   Wand2,
 } from "lucide-react";
-import type { ReactNode } from "react";
 import { GamePlanDisplay } from "../gameplan/GamePlanDisplay";
 import { CustomerPlannerGrid, type CustomerPlannerSlot } from "./CustomerPlannerGrid";
+import mahmoudImg from "@/assets/demo-cm-mahmoud.jpg";
+import appMockImg from "@/assets/demo-app-mock.png";
+import creatorEmmaImg from "@/assets/demo-creator-emma.png";
 
 export type DemoPreviewPayload = {
   demo: {
@@ -48,126 +51,182 @@ export type DemoPreviewPayload = {
 
 export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
   const { demo, concepts } = payload;
+  const slots = useMemo(() => concepts ?? [], [concepts]);
   const greetingName = demo.contactName?.trim() || "friend";
   const conceptsPerWeek = demo.proposedConceptsPerWeek ?? 2;
-  const cmName = demo.contentManager?.name?.trim() || "LeTrend";
+  const cmName = demo.contentManager?.name?.trim() || "Mahmoud";
+  const cmAvatar = demo.contentManager?.avatarUrl || mahmoudImg;
   const mailSubject = encodeURIComponent(`Demo för ${demo.companyName}`);
   const mailBody = encodeURIComponent(
     `Hej LeTrend,\n\nVi tittade på demoförslaget för ${demo.companyName} och vill höra mer.\n\n`,
   );
-  const priceLabel =
-    typeof demo.proposedPriceOre === "number"
-      ? `${Math.round(demo.proposedPriceOre / 100).toLocaleString("sv-SE")} kr/mån`
-      : "Pris sätts efter scope";
-
-  const metrics = demo.previewMetrics ?? {};
-  const avgViews = readMetric(metrics["avg_views"]) ?? readMetric(metrics["averageViews"]);
-  const followers = readMetric(metrics["followers"]) ?? readMetric(metrics["current_followers"]);
-  const likeRate = readMetric(metrics["like_rate"]) ?? readMetric(metrics["likeRate"]);
-  const engagement = readMetric(metrics["engagement_rate"]) ?? readMetric(metrics["avg_engagement"]);
   const hasGamePlan = Boolean(demo.gamePlanHtml || demo.gamePlanText);
+  const tiktokHandleClean = demo.tiktokHandle ? `@${demo.tiktokHandle.replace(/^@/, "")}` : demo.companyName;
 
   return (
-    <div className="flex min-h-screen flex-col bg-background font-sans">
+    <main className="min-h-screen bg-background text-foreground">
       {/* ═══ HERO ═══ */}
-      <section className="relative overflow-hidden border-b-2 border-foreground bg-brand py-24 text-brand-foreground md:py-36">
-        <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-10">
-          <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-gold" />
-          <div className="absolute bottom-[-8rem] left-[8%] h-60 w-60 rounded-full bg-blush" />
-        </div>
-        <div className="container relative z-10">
-          <p className="mb-5 text-sm font-bold uppercase tracking-[0.2em] text-gold">
+      <section className="relative overflow-hidden border-b-2 border-foreground bg-brand py-20 text-brand-foreground md:py-28">
+        <div className="container relative z-10 mx-auto max-w-4xl px-6">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-gold">
             LeTrend · Demo för {demo.companyName}
           </p>
-          <h1 className="max-w-3xl text-5xl font-black leading-[1.02] md:text-7xl">En kort interaktiv demo.</h1>
-          <div className="mt-6 max-w-2xl space-y-3 text-lg leading-relaxed opacity-80">
+          <h1 className="font-serif-display text-4xl font-black leading-[1.05] md:text-6xl">
+            En kort interaktiv demo.
+          </h1>
+          <div className="mt-6 max-w-2xl space-y-4 text-base opacity-85 md:text-lg">
             <p>
-              Hej {greetingName}. LeTrend är en marknadsföringstjänst för TikTok som kombinerar mänsklig kurering, ett
-              tydligt veckoflöde och en plattform där ni ser vad som ska spelas in.
+              Hej {greetingName}. LeTrend är i grund och botten en marknadsföringstjänst för TikTok som hjälper
+              restauranger, barer och caféer synas bättre. Med en egen plattform, AI-funktioner och mänsklig hjälp
+              guidar vi er strategi för att nå fler ögon och kunder.
             </p>
             <p>
-              Nedan visar vi hur er feed kan byggas: befintliga TikTok-signaler, kommande LeTrend-koncept och
-              rekommenderad takt. För {demo.companyName} föreslår vi{" "}
-              <strong className="text-gold">{conceptsPerWeek} koncept i veckan</strong>.
+              De flesta byråer säljer in paket som inkluderar produktion, kurering och strategi. Vi gör samma — men
+              tar bort produktionen. En smartphone, vår app och lite anpassning räcker långt för att lyckas på
+              TikTok. Det driver ner kostnader samtidigt som virala trender kan fångas snabbare till er fördel.
             </p>
-          </div>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <StatChip label="Koncept / vecka" value={String(conceptsPerWeek)} />
-            <StatChip label="Förslag" value={priceLabel} />
-            <StatChip label="CM" value={cmName} />
+            <p>
+              Nedan har ni ett interaktivt demo som visar vart ni är och vart ni kan landa. Vi rekommenderar{" "}
+              <strong>{conceptsPerWeek} koncept i veckan</strong>, anpassade till er bransch, ton och era egna
+              styrkor.
+            </p>
           </div>
         </div>
       </section>
 
       {/* ═══ FEEDPLAN ═══ */}
-      <section className="border-b-2 border-foreground bg-blush py-20 md:py-28">
-        <div className="container">
-          <div className="grid items-center gap-12 md:grid-cols-2">
-            <div>
-              <p className="mb-2 text-sm font-bold uppercase tracking-widest text-accent">Feedplan</p>
-              <h2 className="text-3xl font-black md:text-4xl">Så här skulle er feed kunna se ut</h2>
-              <div className="mt-4 space-y-3 leading-relaxed text-foreground/70">
+      <section className="border-b-2 border-foreground bg-blush/40 py-16 md:py-20">
+        <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
+          <div className="grid items-stretch gap-10 md:grid-cols-[5fr_7fr] md:gap-16">
+            <div className="flex flex-col">
+              <p className="mb-2 text-xs font-bold uppercase tracking-widest text-accent">Feedplan</p>
+              <h2 className="font-serif-display text-3xl font-bold leading-tight md:text-4xl">
+                Så här skulle er feed kunna se ut
+              </h2>
+              <div className="mt-5 space-y-4 text-sm leading-relaxed text-foreground/85 md:text-base">
                 <p>
-                  LeTrend arbetar med kreativt bricolage: vi tar format, trender och bevis från verkliga klipp och gör
-                  dem användbara för ert varumärke.
+                  LeTrend arbetar med kreativt bricolage — samma typ av pyssel som när man var liten och klippte
+                  ihop delar från olika tidningar till något nytt.
                 </p>
                 <p>
-                  Feeden nedan hämtar innehåll från er Studio-plan. Historik och reconcilade TikTok-klipp används som
-                  bevis, medan kommande LeTrend-koncept visar vad som bör produceras härnäst.
+                  Det finns ingen brist på kreativitet på TikTok. Det handlar om vem som är snabbast på bollen. En
+                  rolig idé kan generera hundratusentals visningar om den utförs rätt och känns fräsch för publiken.
                 </p>
-                <p>Hovra över rutorna för rubrik, varför konceptet fungerar och TikTok-länken när den finns kopplad.</p>
+                <p>
+                  Vi fångar virala trender tidigt och använder vår plattform för att rekommendera och visa er exakt
+                  vad ni behöver göra för att återskapa idéerna i er egen ton.
+                </p>
+                <p>
+                  Resultatet? Visningar, igenkännedom och en marknadsföringsstrategi som fångar många ögon med
+                  enkla medel.
+                </p>
               </div>
-              <ContentManagerCard demo={demo} />
+
+              <div className="mt-6 flex items-center gap-3">
+                <img
+                  src={cmAvatar}
+                  alt={`${cmName}, content manager på LeTrend`}
+                  loading="lazy"
+                  width={56}
+                  height={56}
+                  className="h-12 w-12 rounded-full border-2 border-foreground object-cover"
+                />
+                <div className="text-sm leading-snug text-foreground/85">
+                  <strong className="text-foreground">{cmName}</strong> är er content manager — kurerar koncepten i
+                  feeden och guidar er vecka för vecka.
+                </div>
+              </div>
             </div>
-            <div className="flex justify-center">
-              <div className="w-full max-w-sm rounded-2xl border-thicker border-foreground bg-card/60 p-4 shadow-hard backdrop-blur-sm">
-                <CustomerPlannerGrid slots={concepts} companyName={demo.companyName} />
-              </div>
+
+            <div className="mx-auto flex w-full max-w-[400px] items-center justify-center md:max-w-[440px]">
+              <CustomerPlannerGrid slots={slots} companyName={demo.companyName} />
             </div>
           </div>
         </div>
       </section>
 
       {/* ═══ GAME PLAN ═══ */}
-      <section className="border-b-2 border-foreground bg-mint/40 py-20 md:py-28">
-        <div className="container">
-          <div className="grid items-start gap-12 md:grid-cols-2">
-            <div>
-              <p className="mb-2 text-sm font-bold uppercase tracking-widest text-accent">Game Plan</p>
-              <h2 className="text-3xl font-black md:text-4xl">Våra första spaningar</h2>
-              <div className="mt-4 space-y-3 leading-relaxed text-foreground/70">
+      <section className="border-b-2 border-foreground bg-mint/30 py-16 md:py-20">
+        <div className="container mx-auto max-w-5xl px-6">
+          <div className="grid items-stretch gap-10 md:grid-cols-[5fr_7fr] md:gap-14">
+            <div className="flex flex-col">
+              <p className="mb-2 text-xs font-bold uppercase tracking-widest text-accent">Game Plan</p>
+              <h2 className="font-serif-display text-3xl font-bold leading-tight md:text-4xl">Våra spaningar</h2>
+              <div className="mt-4 space-y-4 text-sm leading-relaxed text-foreground/85 md:text-base">
                 <p>
-                  Game Plan är arbetsdokumentet där er content manager samlar strategi, referenser, möjliga format och
-                  vad vi vill testa först.
+                  Game Plan är arbetsdokumentet där er content manager samlar allt som rör er strategi — vad ni
+                  redan gör bra, vad som kan skärpas, referenser värda att titta på och vilka format vi tror på
+                  framåt.
                 </p>
                 <p>
-                  Previewn visar antingen ett demoanpassat AI-utkast, manuellt inskrivet material eller det
-                  game-plan-dokument som redan finns på kundprofilen.
+                  Dokumentet är levande. Det börjar redan innan vi pratats vid och fylls på vecka för vecka i takt
+                  med att vi lär känna er och era kunder bättre.
                 </p>
+                <p className="text-xs text-muted-foreground">
+                  Nedan: ett tidigt utdrag för {demo.companyName}.
+                </p>
+              </div>
+
+              <div className="mt-6 flex items-center gap-3">
+                <img
+                  src={cmAvatar}
+                  alt={`${cmName}, content manager på LeTrend`}
+                  loading="lazy"
+                  width={48}
+                  height={48}
+                  className="h-10 w-10 rounded-full border-2 border-foreground object-cover"
+                />
+                <div className="text-xs text-muted-foreground">
+                  Skrivet av <strong className="text-foreground">{cmName}</strong>
+                  {" · senast uppdaterat idag"}
+                </div>
               </div>
             </div>
-            <div className="overflow-hidden rounded-2xl border-thicker border-foreground bg-card shadow-hard">
-              <div className="flex items-center justify-between border-b-2 border-foreground/10 bg-muted/50 px-5 py-3">
-                <span className="font-mono text-xs text-muted-foreground">
+
+            {/* Notepad */}
+            <div className="flex flex-col rounded-md border-2 border-foreground bg-[#fdfcf7] shadow-hard">
+              <div className="flex items-center justify-between gap-3 border-b-2 border-foreground/15 px-5 py-2.5">
+                <div className="flex items-center gap-2 font-mono text-[11px] text-foreground/60">
+                  <span className="h-2 w-2 rounded-full bg-foreground/30" />
                   game-plan / {demo.companyName.toLowerCase().replace(/\s+/g, "-")}.md
-                </span>
-                <span className="font-mono text-xs text-muted-foreground">utkast</span>
+                </div>
+                <div className="font-mono text-[10px] uppercase tracking-widest text-foreground/40">utkast</div>
               </div>
-              <div className="min-h-[280px] p-6">
+
+              <div className="flex-1 px-6 py-6 font-serif-display text-[15px] leading-[1.75] text-foreground md:px-8 md:py-7">
+                <h3 className="mb-1 text-xl font-bold">Första intryck — {tiktokHandleClean}</h3>
+                <p className="mb-5 font-sans text-xs text-muted-foreground">
+                  Anteckningar efter en första genomgång av kontot.
+                </p>
+
                 {hasGamePlan ? (
                   demo.gamePlanHtml ? (
                     <GamePlanDisplay html={demo.gamePlanHtml} />
                   ) : (
-                    <pre className="whitespace-pre-wrap text-sm leading-relaxed">{demo.gamePlanText}</pre>
+                    <div className="whitespace-pre-wrap">{demo.gamePlanText}</div>
                   )
                 ) : (
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    Game Plan fylls på av er content manager innan länken skickas vidare.
-                  </p>
+                  <>
+                    <p className="mb-4">
+                      Det första som slår mig är att ni faktiskt redan har en ton. Det syns i närbilderna och i hur
+                      ni pratar i kameran — det känns som er, inte som en mall. Bra utgångspunkt: vi behöver inte
+                      bygga ett uttryck från noll, utan snarare hjälpa er leverera det oftare och tydligare.
+                    </p>
+                    <p className="mb-4">
+                      Det jag vill jobba med först är <em>tempot</em>. Ni publicerar ojämnt, och de bästa klippen
+                      drunknar i veckor utan aktivitet. {conceptsPerWeek} koncept i veckan, varje vecka, gör mer än
+                      fem klipp en månad och tystnad nästa.
+                    </p>
+                    <p className="text-foreground/80">
+                      Mer kommer när vi pratats vid — särskilt kring vad ni själva tycker fungerat, och vad som
+                      känts segt att göra.
+                    </p>
+                  </>
                 )}
-                <div className="mt-5 flex items-center gap-2 border-t border-dashed border-foreground/20 pt-3">
-                  <span className="inline-block h-3.5 w-0.5 bg-foreground" />
-                  <span className="font-mono text-xs text-muted-foreground">fortsätter skriva...</span>
+
+                <div className="mt-6 flex items-center gap-2 border-t-2 border-dashed border-foreground/15 pt-3 font-mono text-[11px] text-muted-foreground">
+                  <span className="inline-block h-3 w-[1.5px] animate-pulse bg-foreground/60" />
+                  fortsätter skriva…
                 </div>
               </div>
             </div>
@@ -175,27 +234,58 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
         </div>
       </section>
 
-      {/* ═══ METRICS ═══ */}
-      <section className="border-b-2 border-foreground bg-gold/30 py-20 md:py-28">
-        <div className="container">
-          <div className="grid items-center gap-12 md:grid-cols-2">
-            <div className="grid grid-cols-2 gap-4">
-              <MetricCard label="Snittvisningar" value={avgViews ?? "Live-data"} hint="TikTok / Studio" />
-              <MetricCard label="Följare" value={followers ?? "Synkas"} hint="senaste snapshot" />
-              <MetricCard label="Koncept i plan" value={String(concepts.length)} hint="från feed planner" />
-              <MetricCard label="Engagemang" value={likeRate ?? engagement ?? "Signal"} hint="kvalitet före räckvidd" />
+      {/* ═══ TIKTOK-STATISTIK ═══ */}
+      <section className="border-b-2 border-foreground bg-lavender/30 py-16 md:py-20">
+        <div className="container mx-auto max-w-5xl px-6">
+          <div className="grid items-stretch gap-10 md:grid-cols-[7fr_5fr] md:gap-14">
+            <div className="flex flex-col gap-4">
+              <div className="grid grid-cols-3 gap-3">
+                <StatCard label="Snitt visningar" value="4 470" hint="90d · per klipp" />
+                <StatCard label="Genombrott" value="0 / 1 / 18" hint="viral / hit / klipp" />
+                <StatCard label="Like rate" value="3,3%" hint="Ok" />
+              </div>
+
+              <div className="flex flex-1 flex-col rounded-2xl border-2 border-foreground bg-card p-5 shadow-hard-sm">
+                <div className="mb-3 flex items-center justify-between">
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-foreground/70">
+                    Visningar per klipp · senaste 6 mån
+                  </p>
+                  <div className="flex flex-wrap gap-2 text-[10px] text-muted-foreground">
+                    <Legend swatchClass="bg-accent" label="Klipp" />
+                    <Legend swatchClass="bg-gold" label="Hit" />
+                    <Legend swatchClass="bg-brand" label="Viral" />
+                  </div>
+                </div>
+                <ViralityChart />
+                <div className="mt-2 flex justify-between text-[10px] text-muted-foreground">
+                  <span>6 mån sedan</span>
+                  <span>Idag</span>
+                </div>
+              </div>
             </div>
-            <div>
-              <p className="mb-2 text-sm font-bold uppercase tracking-widest text-accent">Datadrivet</p>
-              <h2 className="text-3xl font-black md:text-4xl">Vi räknar på det som betyder något</h2>
-              <div className="mt-4 space-y-3 leading-relaxed text-foreground/70">
+
+            <div className="flex flex-col">
+              <p className="mb-2 text-xs font-bold uppercase tracking-widest text-accent">Datadrivet</p>
+              <h2 className="font-serif-display text-3xl font-bold leading-tight md:text-4xl">
+                Vi räknar på det som faktiskt betyder något
+              </h2>
+              <div className="mt-4 space-y-3 text-sm leading-relaxed text-foreground/85">
                 <p>
-                  Bra snittvisningar är trevligt, men säger inte allt. Vi tittar på återkommande publicering, engagemang
-                  och vilka format som går att upprepa utan att tappa kvalitet.
+                  Bra snitt-visningar är trevligt, men berättar inte hela historien. Det viktiga är vilka{" "}
+                  <em>signaler</em> ni skickar ut — att verksamheten känns genomtänkt, schysst och värd ett besök.
+                  Det syns i klippning, tajming och i hur en feed hänger ihop.
                 </p>
                 <p>
-                  När {demo.companyName} går från demo till kund uppdateras de här signalerna löpande från
-                  Studio-flödet.
+                  <strong>Genombrott</strong> mäter hur ofta ni når långt utanför era följare. Med 200 följare kan
+                  ett klipp ändå landa på 100k+. Sker det regelbundet börjar nya människor bygga en känsla för er —
+                  och med tiden en relation.
+                </p>
+                <p>
+                  <strong>Like rate</strong> är ingen dålig metric. Får ni sällan likes slutar algoritmen pusha er.
+                  Det säger något om hur engagerande, välproducerat och rätt-i-tiden innehållet är.
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Siffrorna ovan hämtas från ert konto och uppdateras löpande när ni är kund.
                 </p>
               </div>
             </div>
@@ -203,240 +293,250 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
         </div>
       </section>
 
-      {/* ═══ PROOF CARDS ═══ */}
-      <section className="border-b-2 border-foreground bg-background py-20 md:py-28">
-        <div className="container">
-          <div className="grid gap-5 md:grid-cols-3">
-            <ProofCard
-              icon={<Sparkles className="h-5 w-5" />}
-              title="Kurerat, inte slumpat"
-              body="Koncepten väljs efter er ton, era resurser och vilka signaler som redan finns i er feed."
-            />
-            <ProofCard
-              icon={<TrendingUp className="h-5 w-5" />}
-              title="Snabbare än byråtempo"
-              body="När en idé börjar röra sig kan den omsättas till ett kundanpassat koncept utan produktionstung startsträcka."
-            />
-            <ProofCard
-              icon={<Calendar className="h-5 w-5" />}
-              title="Planen styr veckan"
-              body="Feed plannern gör det tydligt vad som är nu, vad som kommer sen och vad som redan har publicerats."
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ MOBILE / AUTO-CLIP ═══ */}
-      <section className="border-b-2 border-foreground bg-sage py-20 text-sage-foreground md:py-28">
-        <div className="container">
-          <div className="grid items-center gap-12 md:grid-cols-2">
-            <div className="flex justify-center">
-              <img
-                src="/demo-auto-clip-phone.png"
-                alt="LeTrend Auto-clip mobilflöde"
-                className="w-full max-w-xs object-contain drop-shadow-2xl"
-              />
-            </div>
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-full border-2 border-sage-foreground/30 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-wider">
-                <Wand2 className="h-3 w-3" /> Kommer i abonnemanget
-              </span>
-              <h2 className="mt-5 text-3xl font-black md:text-4xl">Spela in scenerna, vi klipper resten</h2>
-              <div className="mt-4 space-y-3 leading-relaxed opacity-80">
-                <p>
-                  Mobilflödet är tänkt att guida er genom varje scen i ett koncept. Ni spelar in det som behövs, LeTrend
-                  hjälper med struktur, klippning och nästa steg.
-                </p>
+      {/* ═══ PITCH ═══ */}
+      <section className="border-b-2 border-foreground py-16">
+        <div className="container mx-auto grid max-w-5xl gap-6 px-6 md:grid-cols-3">
+          {[
+            {
+              icon: <Sparkles className="h-5 w-5" />,
+              title: "Kurerat, inte slumpat",
+              body: "Vi väljer koncept som passar er ton, era kunder och vad som faktiskt fungerar i ert format just nu.",
+              bg: "bg-gold/40",
+            },
+            {
+              icon: <TrendingUp className="h-5 w-5" />,
+              title: "Likes per visning",
+              body: "Vi mäter engagemang i djup, inte bara räckvidd. Bra signaler bygger relation över tid.",
+              bg: "bg-mint",
+            },
+            {
+              icon: <Calendar className="h-5 w-5" />,
+              title: "Plattform + guidning",
+              body: "Ni får en plan att jobba mot, inte bara tips. Mobilen räcker — vi hjälper er hela vägen.",
+              bg: "bg-lavender",
+            },
+          ].map((b) => (
+            <div key={b.title} className={`rounded-2xl border-2 border-foreground ${b.bg} p-6 shadow-hard-sm`}>
+              <div className="flex items-center gap-2 text-foreground">
+                {b.icon}
+                <h3 className="text-sm font-bold uppercase tracking-wider">{b.title}</h3>
               </div>
-              <ul className="mt-6 space-y-3">
-                {[
-                  { icon: <Smartphone className="h-4 w-4" />, text: "Scenbaserad inspelning kopplad till feedplanen." },
-                  {
-                    icon: <Scissors className="h-4 w-4" />,
-                    text: "Tydligare produktion utan att köpa ett stort byråpaket.",
-                  },
-                  {
-                    icon: <Users className="h-4 w-4" />,
-                    text: "Extra hjälp, UGC och samarbeten kan läggas till vid behov.",
-                  },
-                ].map((item) => (
-                  <li key={item.text} className="flex items-start gap-3 text-sm opacity-90">
-                    <span className="mt-0.5 shrink-0">{item.icon}</span>
-                    <span>{item.text}</span>
-                  </li>
-                ))}
-              </ul>
+              <p className="mt-2 text-sm leading-relaxed text-foreground/80">{b.body}</p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══ EDITING APP ═══ */}
+      <section className="border-b-2 border-foreground bg-secondary/40 py-16 md:py-20">
+        <div className="container mx-auto grid max-w-5xl items-center gap-10 px-6 md:grid-cols-[5fr_6fr] md:gap-14">
+          <div className="flex justify-center">
+            <img
+              src={appMockImg}
+              alt="Förhandsvisning av LeTrend Auto-clip-appen"
+              loading="lazy"
+              className="w-full max-w-[360px] drop-shadow-xl"
+            />
+          </div>
+
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full bg-accent/15 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-accent">
+              <Wand2 className="h-3 w-3" /> Kommer i abonnemanget
+            </div>
+            <h2 className="mt-3 font-serif-display text-3xl font-bold md:text-4xl">
+              Spela in scenerna — appen gör resten
+            </h2>
+            <div className="mt-4 space-y-3 text-sm leading-relaxed text-foreground/85 md:text-base">
+              <p>
+                Vi arbetar på en mobilapp som guidar er genom processen att spela in. Ni spelar in med mobilen —
+                vilket tar bort kostnaden för produktion — och appen gör resten.
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Har ni en bra mick och en mobil med bra inspelning är det ett plus. Annars riskerar innehållet
+                upplevas mindre proffsigt.
+              </p>
+            </div>
+
+            <ul className="mt-5 space-y-3 text-sm text-foreground">
+              <li className="flex gap-3">
+                <Smartphone className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                <span>Scen-baserad inspelning kopplad till varje koncept i feedplanen.</span>
+              </li>
+              <li className="flex gap-3">
+                <Scissors className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                <span>
+                  Automatisk klippning enligt format som fungerar på TikTok just nu — med stöd för trendljud,
+                  skärmtext och annat.
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <Users className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                <span>Behöver ni mer hjälp? Klippning, samarbeten och produktion finns som byrå-tillägg.</span>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
 
-      {/* ═══ UGC / AGENCY ═══ */}
-      <section className="border-b-2 border-foreground bg-gold/20 py-20 md:py-28">
-        <div className="container">
-          <div className="grid items-center gap-12 md:grid-cols-2">
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-full border-thicker border-foreground bg-card px-4 py-2 text-xs font-bold shadow-hard-sm">
+      {/* ═══ UGC / BYRÅSAMARBETEN ═══ */}
+      <section className="border-b-2 border-foreground bg-gold/20 py-16 md:py-20">
+        <div className="container mx-auto max-w-5xl px-6">
+          <div className="grid items-stretch gap-10 md:grid-cols-[5fr_6fr] md:gap-14">
+            <div className="flex flex-col">
+              <div className="inline-flex w-fit items-center gap-2 rounded-full bg-foreground/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-foreground">
                 <Handshake className="h-3 w-3" /> Byrå-tillägg
-              </span>
-              <h2 className="mt-5 text-3xl font-black md:text-4xl">Samarbeten med UGC-kreatörer</h2>
-              <div className="mt-4 space-y-3 leading-relaxed text-foreground/70">
+              </div>
+              <h2 className="mt-3 font-serif-display text-3xl font-bold leading-tight md:text-4xl">
+                Samarbeten med UGC-kreatörer
+              </h2>
+              <div className="mt-4 space-y-3 text-sm leading-relaxed text-foreground/85 md:text-base">
                 <p>
-                  När er egen feed inte räcker kan LeTrend matcha er med kreatörer som passar tonen, branschen och
-                  budgeten.
+                  Ibland räcker inte er egen feed. När ni vill nå nya målgrupper matchar vi er med UGC-kreatörer
+                  som passar tonen, branschen och budgeten.
                 </p>
-                <p>Ni godkänner samarbetet, vi hanterar brief, dialog, leverans och betalning.</p>
+                <p>
+                  LeTrend hanterar hela dialogen — från första kontakt till brief, leverans och betalning. Ni
+                  godkänner samarbetet, vi sköter resten.
+                </p>
+                <p>
+                  Tjänsten är ett tillägg till abonnemanget och faktureras per samarbete. Behöver ni en kreatör i
+                  månaden eller en kampanj per kvartal — ni bestämmer takten.
+                </p>
               </div>
             </div>
-            <AgencyCard />
+
+            <div className="rounded-2xl border-2 border-foreground bg-card p-5 shadow-hard">
+              <div className="mb-3 flex items-center justify-between">
+                <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-accent">
+                  <Sparkles className="h-3 w-3" /> Nytt samarbete
+                </div>
+                <span className="rounded-full bg-mint px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-foreground">
+                  Förslag
+                </span>
+              </div>
+
+              <div className="flex items-center gap-4 border-b-2 border-dashed border-foreground/15 pb-4">
+                <img
+                  src={creatorEmmaImg}
+                  alt="Emma, UGC-kreatör"
+                  loading="lazy"
+                  className="h-16 w-16 rounded-full border-2 border-foreground object-cover"
+                />
+                <div>
+                  <div className="font-serif-display text-lg font-bold leading-tight">Emma Lindqvist</div>
+                  <div className="text-xs text-muted-foreground">@emmilq · 28k följare · Mat & livsstil</div>
+                  <div className="mt-1 inline-flex items-center gap-1 text-[11px] text-foreground/70">
+                    <Star className="h-3 w-3 fill-gold text-gold" /> 4,9 · snitt 18k visningar
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 space-y-2 text-sm text-foreground/85">
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                  <span>Medverka i video</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                  <span>Skriva sketch / manus</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                  <span>Producera & regissera</span>
+                </div>
+              </div>
+
+              <div className="mt-4 grid grid-cols-2 gap-3 border-t-2 border-dashed border-foreground/15 pt-4 text-xs">
+                <div>
+                  <p className="font-bold uppercase tracking-widest text-muted-foreground">Datum</p>
+                  <p className="mt-1 text-sm text-foreground">28 feb</p>
+                </div>
+                <div>
+                  <p className="font-bold uppercase tracking-widest text-muted-foreground">Pris</p>
+                  <p className="mt-1 text-sm font-bold text-foreground">3 500 kr</p>
+                </div>
+              </div>
+
+              <div className="mt-4 text-[11px] text-muted-foreground">
+                LeTrend sköter dialogen. Ni klickar bekräfta när ni är nöjda.
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ═══ CTA ═══ */}
-      <section className="relative overflow-hidden bg-brand py-20 text-brand-foreground md:py-28">
-        <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-10">
-          <div className="absolute -left-16 -top-16 h-72 w-72 rounded-full bg-gold" />
-          <div className="absolute bottom-[-6rem] right-[10%] h-56 w-56 rounded-full bg-blush" />
-        </div>
-        <div className="container relative z-10 text-center">
-          <h2 className="mx-auto max-w-2xl text-3xl font-black md:text-4xl">
-            Vill ni se hur det här fungerar i praktiken?
+      <section className="border-b-2 border-foreground py-16 text-center">
+        <div className="container mx-auto max-w-3xl px-6">
+          <h2 className="font-serif-display text-3xl font-bold md:text-4xl">
+            Vill ni veta mer om hur LeTrend fungerar?
           </h2>
-          <p className="mx-auto mt-4 max-w-lg leading-relaxed opacity-70">
-            Boka ett kort samtal så går vi igenom planen för {demo.companyName} och visar hur Studio-flödet blir en
-            konkret veckorutin.
+          <p className="mt-4 text-muted-foreground">
+            Boka ett kort samtal så går vi igenom planen för {demo.companyName} och svarar på era frågor.
           </p>
           <a
             href={`mailto:hej@letrend.se?subject=${mailSubject}&body=${mailBody}`}
-            className="mt-8 inline-flex items-center gap-3 rounded-full border-2 border-brand-foreground bg-brand-foreground px-8 py-4 text-sm font-black uppercase tracking-widest text-brand shadow-hard transition-all hover:opacity-90 active:translate-x-1 active:translate-y-1 active:shadow-none"
+            className="mt-8 inline-flex items-center gap-2 rounded-full border-2 border-foreground bg-foreground px-8 py-3 text-sm font-bold uppercase tracking-wider text-background shadow-hard transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-hard-sm active:translate-x-[4px] active:translate-y-[4px] active:shadow-none"
           >
-            <MessageCircle className="h-4 w-4" /> Boka samtal <ArrowRight className="h-4 w-4" />
+            <MessageCircle className="h-4 w-4" />
+            Boka samtal
           </a>
-          <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm opacity-60">
-            <InlineCheck>30 minuter räcker</InlineCheck>
-            <InlineCheck>Vi visar plattformen live</InlineCheck>
-            <InlineCheck>Ingen bindning i samtalet</InlineCheck>
+          <div className="mt-3 text-[11px] text-muted-foreground">
+            Eller svara direkt på mailet ni fick — vi återkopplar inom 1 arbetsdag.
           </div>
         </div>
       </section>
 
-      <footer className="border-t-2 border-foreground py-6 text-center text-xs text-muted-foreground">
+      <footer className="py-8 text-center text-xs text-muted-foreground">
         © LeTrend · Demo förberedd för {demo.companyName}
       </footer>
-    </div>
+    </main>
   );
 }
 
-function ContentManagerCard({ demo }: { demo: DemoPreviewPayload["demo"] }) {
-  const cm = demo.contentManager;
-  const initial = cm.name?.[0]?.toUpperCase() ?? "L";
+function Legend({ swatchClass, label }: { swatchClass: string; label: string }) {
   return (
-    <div className="mt-8 flex items-center gap-4 rounded-2xl border-thicker border-foreground bg-card p-4 shadow-hard-sm">
-      {cm.avatarUrl ? (
-        <img
-          src={cm.avatarUrl}
-          alt={`${cm.name}, content manager på LeTrend`}
-          className="h-14 w-14 shrink-0 rounded-full border-2 border-foreground object-cover"
-        />
-      ) : (
-        <div
-          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 border-foreground text-lg font-black text-white"
-          style={{ background: cm.color || "hsl(var(--brand))" }}
-        >
-          {initial}
-        </div>
-      )}
-      <p className="text-sm leading-relaxed text-foreground/80">
-        <strong className="text-foreground">{cm.name}</strong> är er content manager och ansvarar för att kurera feeden,
-        justera koncepten och hålla planen levande.
-        {cm.city ? <span className="text-muted-foreground"> · {cm.city}</span> : null}
-      </p>
+    <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-2 py-0.5">
+      <span className={`h-2 w-2 rounded-full ${swatchClass}`} />
+      <span className="text-foreground/80">{label}</span>
     </div>
   );
 }
 
-function MetricCard({ label, value, hint }: { label: string; value: string; hint: string }) {
+function StatCard({ label, value, hint }: { label: string; value: string; hint: string }) {
   return (
-    <div className="rounded-2xl border-thicker border-foreground bg-card p-5 shadow-hard-sm">
-      <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{label}</p>
-      <p className="mt-2 text-3xl font-black text-brand">{value}</p>
-      <p className="mt-1 text-xs text-muted-foreground">{hint}</p>
+    <div className="rounded-2xl border-2 border-foreground bg-card p-4 shadow-hard-sm">
+      <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{label}</p>
+      <p className="mt-1 font-serif-display text-2xl font-bold leading-none">{value}</p>
+      <p className="mt-1.5 text-[10px] text-muted-foreground">{hint}</p>
     </div>
   );
 }
 
-function ProofCard({ icon, title, body }: { icon: ReactNode; title: string; body: string }) {
-  return (
-    <div className="rounded-2xl border-thicker border-foreground bg-card p-7 shadow-hard">
-      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand text-brand-foreground">{icon}</div>
-      <h3 className="mt-5 text-xl font-bold">{title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
-    </div>
-  );
-}
-
-function AgencyCard() {
-  const creators = [
-    { initials: "AK", color: "hsl(var(--gold))" },
-    { initials: "ML", color: "hsl(var(--accent))" },
-    { initials: "SR", color: "hsl(var(--brand))" },
+function ViralityChart() {
+  const bars = [
+    900, 1400, 2200, 1800, 3400, 1100, 2600, 1900, 1500, 4200, 2100, 980, 3100, 1700, 5800, 2400, 1300, 22000,
+    1900, 2800, 1500, 4400, 1100, 2300, 1700, 3500, 2100, 980, 1900, 2600, 4470, 1800, 3200, 1500, 2400, 5100,
   ];
+  const max = 30000;
   return (
-    <div className="rounded-2xl border-thicker border-foreground bg-card p-6 shadow-hard">
-      <div className="flex items-center justify-between">
-        <span className="inline-flex items-center gap-2 rounded-full border-2 border-foreground/20 bg-muted px-3 py-1.5 text-xs font-bold">
-          <Sparkles className="h-3 w-3" /> Nytt samarbete
-        </span>
-        <div className="flex">
-          {creators.map((c, i) => (
-            <div
-              key={c.initials}
-              className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white text-xs font-black text-white"
-              style={{ background: c.color, marginLeft: i > 0 ? "-8px" : "0" }}
-            >
-              {c.initials}
-            </div>
-          ))}
-        </div>
-      </div>
-      <h3 className="mt-5 text-xl font-bold">Kreatörer matchade till er bransch</h3>
-      <div className="mt-4 space-y-2">
-        {[
-          { label: "Kategori", value: "Lifestyle / Produkt" },
-          { label: "Format", value: "UGC · Unboxing · Testimonial" },
-          { label: "Leveranstid", value: "5–10 arbetsdagar" },
-        ].map((row) => (
-          <div key={row.label} className="flex justify-between border-b border-foreground/10 pb-2 text-sm">
-            <span className="text-muted-foreground">{row.label}</span>
-            <span className="font-bold text-foreground">{row.value}</span>
-          </div>
-        ))}
-      </div>
+    <div className="relative flex h-32 items-end gap-[3px]">
+      {bars.map((v, i) => {
+        const h = Math.min(100, (v / max) * 100);
+        const tier = v >= 100000 ? "bg-brand" : v >= 20000 ? "bg-gold" : "bg-accent";
+        return (
+          <div
+            key={i}
+            className={`flex-1 rounded-t-sm ${tier}`}
+            style={{ height: `${Math.max(4, h)}%` }}
+            aria-hidden
+          />
+        );
+      })}
+      <div
+        className="pointer-events-none absolute inset-x-0 border-t border-dashed border-foreground/25"
+        style={{ bottom: `${(20000 / 30000) * 100}%` }}
+      />
     </div>
   );
-}
-
-function StatChip({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex flex-col gap-1 rounded-xl border border-brand-foreground/25 bg-brand-foreground/10 px-4 py-2.5 backdrop-blur-sm">
-      <span className="text-[10px] font-bold uppercase tracking-widest text-brand-foreground/60">{label}</span>
-      <span className="text-base font-black text-brand-foreground">{value}</span>
-    </div>
-  );
-}
-
-function InlineCheck({ children }: { children: ReactNode }) {
-  return (
-    <span className="inline-flex items-center gap-2">
-      <CheckCircle2 className="h-3.5 w-3.5 text-gold" />
-      {children}
-    </span>
-  );
-}
-
-function readMetric(value: unknown): string | null {
-  if (typeof value === "number" && Number.isFinite(value)) return value.toLocaleString("sv-SE");
-  if (typeof value === "string" && value.trim()) return value.trim();
-  return null;
 }

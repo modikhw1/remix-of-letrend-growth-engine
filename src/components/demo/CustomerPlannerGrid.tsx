@@ -1,6 +1,5 @@
+import { useState } from "react";
 import { ArrowDown, ArrowUp, ExternalLink, RotateCcw } from "lucide-react";
-import type { ReactNode } from "react";
-import { useMemo, useState } from "react";
 
 export type CustomerPlannerSlot = {
   feedOrder: number;
@@ -16,27 +15,16 @@ export type CustomerPlannerSlot = {
   originalUrl?: string | null;
 };
 
-type GridCell = {
-  slotIndex: number;
-  feedOrder: number;
-  slot: CustomerPlannerSlot | null;
-};
-
 const CURRENT_SLOT_INDEX = 4;
 const TOTAL_SLOTS = 9;
 const WINDOW_STEP = 3;
 const MAX_WINDOW_OFFSET = 12;
 const MIN_WINDOW_OFFSET = -12;
 
-const palette = {
-  ink: "#1F1A14",
-  cream: "#FAF8F5",
-  paper: "#FFFFFF",
-  muted: "#7D6E5D",
-  brown: "#4A2F18",
-  caramel: "#C9A961",
-  blush: "#F4E4D8",
-  line: "rgba(74, 47, 24, 0.16)",
+type GridCell = {
+  slotIndex: number;
+  feedOrder: number;
+  slot: CustomerPlannerSlot | null;
 };
 
 function buildSlotMap(slots: CustomerPlannerSlot[], windowOffset: number): GridCell[] {
@@ -45,7 +33,7 @@ function buildSlotMap(slots: CustomerPlannerSlot[], windowOffset: number): GridC
     return {
       slotIndex,
       feedOrder,
-      slot: slots.find((item) => item.feedOrder === feedOrder) ?? null,
+      slot: slots.find((s) => s.feedOrder === feedOrder) ?? null,
     };
   });
 }
@@ -56,24 +44,24 @@ function formatCompactViews(n: number): string {
   return String(n);
 }
 
-export function CustomerPlannerGrid({ slots, companyName }: { slots: CustomerPlannerSlot[]; companyName?: string }) {
+export function CustomerPlannerGrid({
+  slots,
+  companyName,
+}: {
+  slots: CustomerPlannerSlot[];
+  companyName?: string;
+}) {
   const [windowOffset, setWindowOffset] = useState(0);
-  const cellMap = useMemo(() => buildSlotMap(slots, windowOffset), [slots, windowOffset]);
-  const hasNearbyUpcoming = slots.some((slot) => slot.feedOrder > 0);
+  const cellMap = buildSlotMap(slots, windowOffset);
+
+  const hasNearbyUpcoming = slots.some((s) => s.feedOrder > 0);
   const canGoForward = windowOffset < MAX_WINDOW_OFFSET;
   const canGoBack = windowOffset > MIN_WINDOW_OFFSET;
   const isOffCenter = windowOffset !== 0;
 
   return (
-    <div style={{ width: "100%" }}>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-          gap: 10,
-          userSelect: "none",
-        }}
-      >
+    <div className="relative w-full">
+      <div className="grid grid-cols-3 gap-2 select-none md:gap-2.5">
         {cellMap.map((cell) => (
           <PlannerCell
             key={cell.slotIndex}
@@ -84,97 +72,36 @@ export function CustomerPlannerGrid({ slots, companyName }: { slots: CustomerPla
         ))}
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: 10,
-          marginTop: 18,
-          flexWrap: "wrap",
-        }}
-      >
-        <PlannerButton
+      <div className="mt-5 flex items-center justify-center gap-3">
+        <button
+          type="button"
+          onClick={() => setWindowOffset((o) => Math.min(o + WINDOW_STEP, MAX_WINDOW_OFFSET))}
           disabled={!canGoForward}
-          onClick={() => setWindowOffset((current) => Math.min(current + WINDOW_STEP, MAX_WINDOW_OFFSET))}
+          className="inline-flex items-center gap-2 rounded-full border-2 border-foreground bg-card px-4 py-1.5 text-[11px] font-bold uppercase tracking-wider text-foreground shadow-hard-sm transition-all hover:translate-y-[1px] hover:shadow-none disabled:opacity-30 disabled:hover:translate-y-0 disabled:hover:shadow-hard-sm"
         >
-          <ArrowUp size={13} /> Framåt
-        </PlannerButton>
+          <ArrowUp className="h-3 w-3" /> Framåt
+        </button>
 
-        {isOffCenter ? (
+        {isOffCenter && (
           <button
             type="button"
             onClick={() => setWindowOffset(0)}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              border: `1px dashed ${palette.line}`,
-              background: "transparent",
-              color: palette.muted,
-              borderRadius: 999,
-              padding: "7px 11px",
-              fontSize: 11,
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              cursor: "pointer",
-            }}
+            className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-foreground/40 bg-transparent px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
           >
-            <RotateCcw size={12} /> Nu
+            <RotateCcw className="h-3 w-3" /> Nu
           </button>
-        ) : null}
+        )}
 
-        <PlannerButton
+        <button
+          type="button"
+          onClick={() => setWindowOffset((o) => Math.max(o - WINDOW_STEP, MIN_WINDOW_OFFSET))}
           disabled={!canGoBack}
-          onClick={() => setWindowOffset((current) => Math.max(current - WINDOW_STEP, MIN_WINDOW_OFFSET))}
+          className="inline-flex items-center gap-2 rounded-full border-2 border-foreground bg-card px-4 py-1.5 text-[11px] font-bold uppercase tracking-wider text-foreground shadow-hard-sm transition-all hover:translate-y-[1px] hover:shadow-none disabled:opacity-30 disabled:hover:translate-y-0 disabled:hover:shadow-hard-sm"
         >
-          Bakåt <ArrowDown size={13} />
-        </PlannerButton>
+          Bakåt <ArrowDown className="h-3 w-3" />
+        </button>
       </div>
-
-      <style>{`
-        .demo-planner-cell:hover .demo-planner-details { opacity: 1 !important; pointer-events: auto !important; }
-        .demo-planner-cell:hover .demo-planner-face { opacity: 0 !important; }
-      `}</style>
     </div>
-  );
-}
-
-function PlannerButton({
-  disabled,
-  onClick,
-  children,
-}: {
-  disabled: boolean;
-  onClick: () => void;
-  children: ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      disabled={disabled}
-      onClick={onClick}
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 7,
-        border: `1px solid ${palette.line}`,
-        background: palette.paper,
-        color: palette.brown,
-        borderRadius: 999,
-        padding: "8px 14px",
-        fontSize: 11,
-        fontWeight: 800,
-        textTransform: "uppercase",
-        letterSpacing: "0.06em",
-        cursor: disabled ? "not-allowed" : "pointer",
-        opacity: disabled ? 0.4 : 1,
-        boxShadow: "0 8px 18px rgba(74, 47, 24, 0.08)",
-      }}
-    >
-      {children}
-    </button>
   );
 }
 
@@ -193,37 +120,42 @@ function PlannerCell({
   const depth = isPast ? Math.abs(feedOrder) : 0;
   const thumbnailUrl = slot?.thumbnailUrl ?? null;
   const hasThumbnail = Boolean(thumbnailUrl);
-  const opacity = isPast ? Math.max(0.5, 1 - depth * 0.11) : 1;
+  const opacity = isPast ? Math.max(0.5, 1 - depth * 0.13) : 1;
+
+  const baseClasses =
+    "group relative flex aspect-[9/16] flex-col justify-between overflow-hidden rounded-xl p-3 transition-all box-border";
+
+  let stateClasses = "";
+  if (hasThumbnail) {
+    stateClasses = isNow ? "border-2 border-accent shadow-hard-sm" : "border-2 border-foreground/80";
+  } else if (isNow && slot) {
+    stateClasses = "bg-blush border-2 border-accent shadow-hard-sm";
+  } else if (isNow) {
+    stateClasses = "bg-blush/60 border-2 border-dashed border-accent/60";
+  } else if (isPast) {
+    stateClasses = "bg-muted/60 border-2 border-foreground/30";
+  } else {
+    stateClasses = "bg-card border-2 border-foreground/80";
+  }
+
   const interactive = Boolean(slot && (slot.headline || slot.whyWorks || slot.whyFits || slot.title));
 
   return (
     <div
-      className="demo-planner-cell"
+      className={`${baseClasses} ${stateClasses} ${interactive ? "cursor-pointer hover:shadow-hard-sm" : ""}`}
       style={{
-        position: "relative",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        aspectRatio: "9 / 16",
-        overflow: "hidden",
-        borderRadius: 18,
-        padding: 12,
         opacity,
-        cursor: interactive ? "pointer" : "default",
-        border: isNow ? `2px solid ${palette.caramel}` : `1px solid ${slot ? "rgba(74,47,24,0.34)" : palette.line}`,
-        background: hasThumbnail ? undefined : isNow ? palette.blush : isPast ? "rgba(74,47,24,0.04)" : palette.paper,
         backgroundImage: hasThumbnail
-          ? `linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.68)), url(${thumbnailUrl})`
+          ? `linear-gradient(to bottom, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.62) 100%), url(${thumbnailUrl})`
           : undefined,
         backgroundSize: hasThumbnail ? "cover" : undefined,
         backgroundPosition: hasThumbnail ? "center" : undefined,
-        boxShadow: isNow ? "0 14px 30px rgba(74,47,24,0.14)" : "0 8px 22px rgba(74,47,24,0.08)",
       }}
     >
       {slot ? (
         <>
           <FilledCell slot={slot} isNow={isNow} hasThumbnail={hasThumbnail} />
-          {interactive ? <ConceptHoverDetails slot={slot} companyName={companyName} /> : null}
+          {interactive && <ConceptHoverDetails slot={slot} companyName={companyName} />}
         </>
       ) : (
         <EmptyCell feedOrder={feedOrder} isNow={isNow} hasNearbyUpcoming={hasNearbyUpcoming} />
@@ -242,150 +174,89 @@ function FilledCell({
   hasThumbnail: boolean;
 }) {
   const isImported = slot.source === "tiktok" || slot.source === "imported_history";
-  const badgeText = isNow ? "Nu" : isImported ? "TT" : "LeT";
-  const titleColor = hasThumbnail ? "#fff" : palette.ink;
-  const metaColor = hasThumbnail ? "rgba(255,255,255,0.76)" : palette.muted;
+  const badgeText = isNow ? "NU" : isImported ? "TT" : "LeT";
+
+  const badgeClass = hasThumbnail
+    ? "bg-black/45 text-white border border-white/20"
+    : isNow
+      ? "bg-accent text-accent-foreground"
+      : isImported
+        ? "bg-secondary text-secondary-foreground"
+        : "bg-foreground text-background";
+
+  const titleClass = hasThumbnail
+    ? "text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.6)]"
+    : "text-foreground";
+
+  const metaClass = hasThumbnail ? "text-white/70" : "text-muted-foreground";
 
   return (
-    <div
-      className="demo-planner-face"
-      style={{
-        position: "relative",
-        zIndex: 1,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        height: "100%",
-        transition: "opacity 150ms ease",
-      }}
-    >
-      <span
-        style={{
-          alignSelf: "flex-start",
-          borderRadius: 999,
-          padding: "4px 8px",
-          background: hasThumbnail ? "rgba(0,0,0,0.44)" : isImported ? palette.blush : palette.brown,
-          color: hasThumbnail ? "#fff" : isImported ? palette.brown : palette.cream,
-          fontSize: 10,
-          fontWeight: 900,
-          textTransform: "uppercase",
-          letterSpacing: "0.08em",
-        }}
-      >
-        {badgeText}
-      </span>
+    <div className="relative z-0 flex h-full flex-col justify-between transition-opacity group-hover:opacity-0">
+      <div>
+        <span className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${badgeClass}`}>
+          {badgeText}
+        </span>
+      </div>
 
       <div
-        style={{
-          color: titleColor,
-          fontSize: 13,
-          fontWeight: 800,
-          lineHeight: 1.18,
-          textShadow: hasThumbnail ? "0 1px 3px rgba(0,0,0,0.65)" : undefined,
-          display: "-webkit-box",
-          WebkitLineClamp: 5,
-          WebkitBoxOrient: "vertical",
-          overflow: "hidden",
-        }}
+        className={`text-xs font-semibold leading-snug md:text-sm ${titleClass} overflow-hidden`}
+        style={{ display: "-webkit-box", WebkitLineClamp: 4, WebkitBoxOrient: "vertical" }}
       >
         {slot.title}
       </div>
 
-      <div style={{ color: metaColor, fontSize: 11, lineHeight: 1.2 }}>
-        {isImported && slot.publishedAt ? (
+      <div className={`text-[10px] leading-tight md:text-xs ${metaClass}`}>
+        {isImported && slot.publishedAt && (
           <div>
-            {new Date(slot.publishedAt).toLocaleDateString("sv-SE", {
-              month: "short",
-              year: "numeric",
-            })}
+            {new Date(slot.publishedAt).toLocaleDateString("sv-SE", { month: "short", year: "numeric" })}
           </div>
-        ) : null}
-        {typeof slot.views === "number" ? <div>{formatCompactViews(slot.views)} visn.</div> : null}
-        {!isImported && slot.tag && !hasThumbnail ? <div>#{slot.tag}</div> : null}
+        )}
+        {isImported && typeof slot.views === "number" && <div>{formatCompactViews(slot.views)} visn</div>}
+        {!isImported && slot.tag && !hasThumbnail && <div className="truncate">#{slot.tag}</div>}
       </div>
     </div>
   );
 }
 
-function ConceptHoverDetails({ slot, companyName }: { slot: CustomerPlannerSlot; companyName?: string }) {
+function ConceptHoverDetails({
+  slot,
+  companyName,
+}: {
+  slot: CustomerPlannerSlot;
+  companyName?: string;
+}) {
   const headline = slot.headline ?? slot.title;
   const whyFitsLabel = companyName ? `Varför det passar ${companyName}` : "Varför det passar er";
 
   return (
-    <div
-      className="demo-planner-details"
-      style={{
-        position: "absolute",
-        inset: 0,
-        zIndex: 2,
-        display: "flex",
-        flexDirection: "column",
-        gap: 10,
-        overflowY: "auto",
-        borderRadius: 16,
-        background: "rgba(255,255,255,0.97)",
-        color: palette.ink,
-        padding: 14,
-        opacity: 0,
-        pointerEvents: "none",
-        transition: "opacity 150ms ease",
-        backdropFilter: "blur(6px)",
-      }}
-    >
-      <h4 style={{ margin: 0, fontSize: 15, lineHeight: 1.15, fontFamily: "Georgia, serif", color: palette.brown }}>
-        {headline}
-      </h4>
+    <div className="absolute inset-0 z-10 flex flex-col gap-2 overflow-y-auto rounded-[10px] bg-card/[0.98] p-3 text-left text-foreground opacity-0 backdrop-blur-sm transition-opacity duration-150 group-hover:opacity-100 md:p-4">
+      <h4 className="text-sm font-bold leading-snug md:text-base">{headline}</h4>
 
-      {slot.whyWorks ? <HoverBlock label="Varför det fungerar" body={slot.whyWorks} /> : null}
-      {slot.whyFits ? <HoverBlock label={whyFitsLabel} body={slot.whyFits} /> : null}
+      {slot.whyWorks && (
+        <div>
+          <p className="text-[9px] font-bold uppercase tracking-widest text-accent">Varför det fungerar</p>
+          <p className="mt-0.5 text-[11px] leading-snug text-foreground/85 md:text-xs">{slot.whyWorks}</p>
+        </div>
+      )}
 
-      {slot.originalUrl ? (
+      {slot.whyFits && (
+        <div>
+          <p className="text-[9px] font-bold uppercase tracking-widest text-accent">{whyFitsLabel}</p>
+          <p className="mt-0.5 text-[11px] leading-snug text-foreground/85 md:text-xs">{slot.whyFits}</p>
+        </div>
+      )}
+
+      {slot.originalUrl && (
         <a
           href={slot.originalUrl}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={(event) => event.stopPropagation()}
-          style={{
-            marginTop: "auto",
-            display: "inline-flex",
-            alignItems: "center",
-            alignSelf: "flex-start",
-            gap: 6,
-            borderRadius: 999,
-            border: `1px solid ${palette.line}`,
-            background: palette.cream,
-            color: palette.brown,
-            padding: "7px 10px",
-            fontSize: 10,
-            fontWeight: 900,
-            textTransform: "uppercase",
-            letterSpacing: "0.06em",
-            textDecoration: "none",
-          }}
+          onClick={(e) => e.stopPropagation()}
+          className="mt-auto inline-flex items-center gap-1.5 self-start rounded-full border border-foreground/70 bg-background px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-foreground transition-colors hover:bg-foreground hover:text-background"
         >
-          TikTok <ExternalLink size={12} />
+          Originalklipp <ExternalLink className="h-3 w-3" />
         </a>
-      ) : null}
-    </div>
-  );
-}
-
-function HoverBlock({ label, body }: { label: string; body: string }) {
-  return (
-    <div>
-      <p
-        style={{
-          margin: 0,
-          color: palette.caramel,
-          fontSize: 9,
-          fontWeight: 900,
-          textTransform: "uppercase",
-          letterSpacing: "0.1em",
-        }}
-      >
-        {label}
-      </p>
-      <p style={{ margin: "3px 0 0", color: "rgba(31,26,20,0.82)", fontSize: 12, lineHeight: 1.35 }}>{body}</p>
+      )}
     </div>
   );
 }
@@ -401,29 +272,21 @@ function EmptyCell({
 }) {
   if (isNow) {
     return (
-      <div
-        style={{
-          display: "flex",
-          height: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          color: palette.brown,
-          fontSize: 12,
-          fontWeight: 800,
-          lineHeight: 1.25,
-        }}
-      >
-        {hasNearbyUpcoming ? "Nästa steg är klart i planen" : "Nästa steg förbereds av er CM"}
+      <div className="flex flex-1 items-center justify-center px-2 text-center">
+        <div className="text-xs font-medium leading-snug text-accent">
+          {hasNearbyUpcoming ? "Nästa steg är klart i din plan" : "Nästa steg förbereds av din CM"}
+        </div>
       </div>
     );
   }
+
   if (feedOrder < 0) {
     return (
-      <div style={{ display: "flex", flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <div style={{ width: 18, height: 1, background: palette.line }} />
+      <div className="flex flex-1 items-center justify-center">
+        <div className="h-px w-4 bg-border" />
       </div>
     );
   }
-  return <div style={{ flex: 1 }} />;
+
+  return <div className="flex-1" />;
 }
