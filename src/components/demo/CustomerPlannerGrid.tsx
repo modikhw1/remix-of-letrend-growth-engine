@@ -1,11 +1,11 @@
-import { ArrowDown, ArrowUp, ExternalLink, RotateCcw } from 'lucide-react';
-import type { ReactNode } from 'react';
-import { useMemo, useState } from 'react';
+import { ArrowDown, ArrowUp, ExternalLink, RotateCcw } from "lucide-react";
+import type { ReactNode } from "react";
+import { useMemo, useState } from "react";
 
 export type CustomerPlannerSlot = {
   feedOrder: number;
   title: string;
-  source?: 'letrend' | 'tiktok' | 'imported_history';
+  source?: "letrend" | "tiktok" | "imported_history";
   tag?: string | null;
   thumbnailUrl?: string | null;
   publishedAt?: string | null;
@@ -29,14 +29,14 @@ const MAX_WINDOW_OFFSET = 12;
 const MIN_WINDOW_OFFSET = -12;
 
 const palette = {
-  ink: '#1F1A14',
-  cream: '#FAF8F5',
-  paper: '#FFFFFF',
-  muted: '#7D6E5D',
-  brown: '#4A2F18',
-  caramel: '#C9A961',
-  blush: '#F4E4D8',
-  line: 'rgba(74, 47, 24, 0.16)',
+  ink: "#1F1A14",
+  cream: "#FAF8F5",
+  paper: "#FFFFFF",
+  muted: "#7D6E5D",
+  brown: "#4A2F18",
+  caramel: "#C9A961",
+  blush: "#F4E4D8",
+  line: "rgba(74, 47, 24, 0.16)",
 };
 
 function buildSlotMap(slots: CustomerPlannerSlot[], windowOffset: number): GridCell[] {
@@ -51,18 +51,12 @@ function buildSlotMap(slots: CustomerPlannerSlot[], windowOffset: number): GridC
 }
 
 function formatCompactViews(n: number): string {
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1).replace('.0', '')}M`;
-  if (n >= 1_000) return `${(n / 1_000).toFixed(1).replace('.0', '')}k`;
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1).replace(".0", "")}M`;
+  if (n >= 1_000) return `${(n / 1_000).toFixed(1).replace(".0", "")}k`;
   return String(n);
 }
 
-export function CustomerPlannerGrid({
-  slots,
-  companyName,
-}: {
-  slots: CustomerPlannerSlot[];
-  companyName?: string;
-}) {
+export function CustomerPlannerGrid({ slots, companyName }: { slots: CustomerPlannerSlot[]; companyName?: string }) {
   const [windowOffset, setWindowOffset] = useState(0);
   const cellMap = useMemo(() => buildSlotMap(slots, windowOffset), [slots, windowOffset]);
   const hasNearbyUpcoming = slots.some((slot) => slot.feedOrder > 0);
@@ -71,13 +65,13 @@ export function CustomerPlannerGrid({
   const isOffCenter = windowOffset !== 0;
 
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ width: "100%" }}>
       <div
         style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+          display: "grid",
+          gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
           gap: 10,
-          userSelect: 'none',
+          userSelect: "none",
         }}
       >
         {cellMap.map((cell) => (
@@ -92,12 +86,12 @@ export function CustomerPlannerGrid({
 
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
           gap: 10,
           marginTop: 18,
-          flexWrap: 'wrap',
+          flexWrap: "wrap",
         }}
       >
         <PlannerButton
@@ -112,19 +106,19 @@ export function CustomerPlannerGrid({
             type="button"
             onClick={() => setWindowOffset(0)}
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
+              display: "inline-flex",
+              alignItems: "center",
               gap: 6,
               border: `1px dashed ${palette.line}`,
-              background: 'transparent',
+              background: "transparent",
               color: palette.muted,
               borderRadius: 999,
-              padding: '7px 11px',
+              padding: "7px 11px",
               fontSize: 11,
               fontWeight: 700,
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-              cursor: 'pointer',
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
+              cursor: "pointer",
             }}
           >
             <RotateCcw size={12} /> Nu
@@ -138,6 +132,11 @@ export function CustomerPlannerGrid({
           Bakåt <ArrowDown size={13} />
         </PlannerButton>
       </div>
+
+      <style>{`
+        .demo-planner-cell:hover .demo-planner-details { opacity: 1 !important; pointer-events: auto !important; }
+        .demo-planner-cell:hover .demo-planner-face { opacity: 0 !important; }
+      `}</style>
     </div>
   );
 }
@@ -157,21 +156,21 @@ function PlannerButton({
       disabled={disabled}
       onClick={onClick}
       style={{
-        display: 'inline-flex',
-        alignItems: 'center',
+        display: "inline-flex",
+        alignItems: "center",
         gap: 7,
         border: `1px solid ${palette.line}`,
         background: palette.paper,
         color: palette.brown,
         borderRadius: 999,
-        padding: '8px 14px',
+        padding: "8px 14px",
         fontSize: 11,
         fontWeight: 800,
-        textTransform: 'uppercase',
-        letterSpacing: '0.06em',
-        cursor: disabled ? 'not-allowed' : 'pointer',
+        textTransform: "uppercase",
+        letterSpacing: "0.06em",
+        cursor: disabled ? "not-allowed" : "pointer",
         opacity: disabled ? 0.4 : 1,
-        boxShadow: '0 8px 18px rgba(74, 47, 24, 0.08)',
+        boxShadow: "0 8px 18px rgba(74, 47, 24, 0.08)",
       }}
     >
       {children}
@@ -201,30 +200,24 @@ function PlannerCell({
     <div
       className="demo-planner-cell"
       style={{
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        aspectRatio: '9 / 16',
-        overflow: 'hidden',
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        aspectRatio: "9 / 16",
+        overflow: "hidden",
         borderRadius: 18,
         padding: 12,
         opacity,
-        cursor: interactive ? 'pointer' : 'default',
-        border: isNow ? `2px solid ${palette.caramel}` : `1px solid ${slot ? 'rgba(74,47,24,0.34)' : palette.line}`,
-        background: hasThumbnail
-          ? undefined
-          : isNow
-            ? palette.blush
-            : isPast
-              ? 'rgba(74,47,24,0.04)'
-              : palette.paper,
+        cursor: interactive ? "pointer" : "default",
+        border: isNow ? `2px solid ${palette.caramel}` : `1px solid ${slot ? "rgba(74,47,24,0.34)" : palette.line}`,
+        background: hasThumbnail ? undefined : isNow ? palette.blush : isPast ? "rgba(74,47,24,0.04)" : palette.paper,
         backgroundImage: hasThumbnail
           ? `linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.68)), url(${thumbnailUrl})`
           : undefined,
-        backgroundSize: hasThumbnail ? 'cover' : undefined,
-        backgroundPosition: hasThumbnail ? 'center' : undefined,
-        boxShadow: isNow ? '0 14px 30px rgba(74,47,24,0.14)' : '0 8px 22px rgba(74,47,24,0.08)',
+        backgroundSize: hasThumbnail ? "cover" : undefined,
+        backgroundPosition: hasThumbnail ? "center" : undefined,
+        boxShadow: isNow ? "0 14px 30px rgba(74,47,24,0.14)" : "0 8px 22px rgba(74,47,24,0.08)",
       }}
     >
       {slot ? (
@@ -248,35 +241,35 @@ function FilledCell({
   isNow: boolean;
   hasThumbnail: boolean;
 }) {
-  const isImported = slot.source === 'tiktok' || slot.source === 'imported_history';
-  const badgeText = isNow ? 'Nu' : isImported ? 'TT' : 'LeT';
-  const titleColor = hasThumbnail ? '#fff' : palette.ink;
-  const metaColor = hasThumbnail ? 'rgba(255,255,255,0.76)' : palette.muted;
+  const isImported = slot.source === "tiktok" || slot.source === "imported_history";
+  const badgeText = isNow ? "Nu" : isImported ? "TT" : "LeT";
+  const titleColor = hasThumbnail ? "#fff" : palette.ink;
+  const metaColor = hasThumbnail ? "rgba(255,255,255,0.76)" : palette.muted;
 
   return (
     <div
       className="demo-planner-face"
       style={{
-        position: 'relative',
+        position: "relative",
         zIndex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        height: '100%',
-        transition: 'opacity 150ms ease',
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        height: "100%",
+        transition: "opacity 150ms ease",
       }}
     >
       <span
         style={{
-          alignSelf: 'flex-start',
+          alignSelf: "flex-start",
           borderRadius: 999,
-          padding: '4px 8px',
-          background: hasThumbnail ? 'rgba(0,0,0,0.44)' : isImported ? palette.blush : palette.brown,
-          color: hasThumbnail ? '#fff' : isImported ? palette.brown : palette.cream,
+          padding: "4px 8px",
+          background: hasThumbnail ? "rgba(0,0,0,0.44)" : isImported ? palette.blush : palette.brown,
+          color: hasThumbnail ? "#fff" : isImported ? palette.brown : palette.cream,
           fontSize: 10,
           fontWeight: 900,
-          textTransform: 'uppercase',
-          letterSpacing: '0.08em',
+          textTransform: "uppercase",
+          letterSpacing: "0.08em",
         }}
       >
         {badgeText}
@@ -288,11 +281,11 @@ function FilledCell({
           fontSize: 13,
           fontWeight: 800,
           lineHeight: 1.18,
-          textShadow: hasThumbnail ? '0 1px 3px rgba(0,0,0,0.65)' : undefined,
-          display: '-webkit-box',
+          textShadow: hasThumbnail ? "0 1px 3px rgba(0,0,0,0.65)" : undefined,
+          display: "-webkit-box",
           WebkitLineClamp: 5,
-          WebkitBoxOrient: 'vertical',
-          overflow: 'hidden',
+          WebkitBoxOrient: "vertical",
+          overflow: "hidden",
         }}
       >
         {slot.title}
@@ -301,51 +294,45 @@ function FilledCell({
       <div style={{ color: metaColor, fontSize: 11, lineHeight: 1.2 }}>
         {isImported && slot.publishedAt ? (
           <div>
-            {new Date(slot.publishedAt).toLocaleDateString('sv-SE', {
-              month: 'short',
-              year: 'numeric',
+            {new Date(slot.publishedAt).toLocaleDateString("sv-SE", {
+              month: "short",
+              year: "numeric",
             })}
           </div>
         ) : null}
-        {typeof slot.views === 'number' ? <div>{formatCompactViews(slot.views)} visn.</div> : null}
+        {typeof slot.views === "number" ? <div>{formatCompactViews(slot.views)} visn.</div> : null}
         {!isImported && slot.tag && !hasThumbnail ? <div>#{slot.tag}</div> : null}
       </div>
     </div>
   );
 }
 
-function ConceptHoverDetails({
-  slot,
-  companyName,
-}: {
-  slot: CustomerPlannerSlot;
-  companyName?: string;
-}) {
+function ConceptHoverDetails({ slot, companyName }: { slot: CustomerPlannerSlot; companyName?: string }) {
   const headline = slot.headline ?? slot.title;
-  const whyFitsLabel = companyName ? `Varför det passar ${companyName}` : 'Varför det passar er';
+  const whyFitsLabel = companyName ? `Varför det passar ${companyName}` : "Varför det passar er";
 
   return (
     <div
       className="demo-planner-details"
       style={{
-        position: 'absolute',
+        position: "absolute",
         inset: 0,
         zIndex: 2,
-        display: 'flex',
-        flexDirection: 'column',
+        display: "flex",
+        flexDirection: "column",
         gap: 10,
-        overflowY: 'auto',
+        overflowY: "auto",
         borderRadius: 16,
-        background: 'rgba(255,255,255,0.97)',
+        background: "rgba(255,255,255,0.97)",
         color: palette.ink,
         padding: 14,
         opacity: 0,
-        pointerEvents: 'none',
-        transition: 'opacity 150ms ease',
-        backdropFilter: 'blur(6px)',
+        pointerEvents: "none",
+        transition: "opacity 150ms ease",
+        backdropFilter: "blur(6px)",
       }}
     >
-      <h4 style={{ margin: 0, fontSize: 15, lineHeight: 1.15, fontFamily: 'Georgia, serif', color: palette.brown }}>
+      <h4 style={{ margin: 0, fontSize: 15, lineHeight: 1.15, fontFamily: "Georgia, serif", color: palette.brown }}>
         {headline}
       </h4>
 
@@ -359,21 +346,21 @@ function ConceptHoverDetails({
           rel="noopener noreferrer"
           onClick={(event) => event.stopPropagation()}
           style={{
-            marginTop: 'auto',
-            display: 'inline-flex',
-            alignItems: 'center',
-            alignSelf: 'flex-start',
+            marginTop: "auto",
+            display: "inline-flex",
+            alignItems: "center",
+            alignSelf: "flex-start",
             gap: 6,
             borderRadius: 999,
             border: `1px solid ${palette.line}`,
             background: palette.cream,
             color: palette.brown,
-            padding: '7px 10px',
+            padding: "7px 10px",
             fontSize: 10,
             fontWeight: 900,
-            textTransform: 'uppercase',
-            letterSpacing: '0.06em',
-            textDecoration: 'none',
+            textTransform: "uppercase",
+            letterSpacing: "0.06em",
+            textDecoration: "none",
           }}
         >
           TikTok <ExternalLink size={12} />
@@ -386,12 +373,19 @@ function ConceptHoverDetails({
 function HoverBlock({ label, body }: { label: string; body: string }) {
   return (
     <div>
-      <p style={{ margin: 0, color: palette.caramel, fontSize: 9, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+      <p
+        style={{
+          margin: 0,
+          color: palette.caramel,
+          fontSize: 9,
+          fontWeight: 900,
+          textTransform: "uppercase",
+          letterSpacing: "0.1em",
+        }}
+      >
         {label}
       </p>
-      <p style={{ margin: '3px 0 0', color: 'rgba(31,26,20,0.82)', fontSize: 12, lineHeight: 1.35 }}>
-        {body}
-      </p>
+      <p style={{ margin: "3px 0 0", color: "rgba(31,26,20,0.82)", fontSize: 12, lineHeight: 1.35 }}>{body}</p>
     </div>
   );
 }
@@ -407,14 +401,26 @@ function EmptyCell({
 }) {
   if (isNow) {
     return (
-      <div style={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: palette.brown, fontSize: 12, fontWeight: 800, lineHeight: 1.25 }}>
-        {hasNearbyUpcoming ? 'Nästa steg är klart i planen' : 'Nästa steg förbereds av er CM'}
+      <div
+        style={{
+          display: "flex",
+          height: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          color: palette.brown,
+          fontSize: 12,
+          fontWeight: 800,
+          lineHeight: 1.25,
+        }}
+      >
+        {hasNearbyUpcoming ? "Nästa steg är klart i planen" : "Nästa steg förbereds av er CM"}
       </div>
     );
   }
   if (feedOrder < 0) {
     return (
-      <div style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ display: "flex", flex: 1, alignItems: "center", justifyContent: "center" }}>
         <div style={{ width: 18, height: 1, background: palette.line }} />
       </div>
     );
