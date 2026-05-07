@@ -64,7 +64,7 @@ function TikTokGlyph({ className }: { className?: string }) {
 function LeTBadge({ onThumb, size = "md" }: { onThumb?: boolean; size?: "sm" | "md" | "lg" }) {
   return (
     <img
-      src="/let-logo.png"
+      src={`${import.meta.env.BASE_URL}let-logo.png`}
       alt="LeTrend"
       className={cn(
         "object-contain flex-shrink-0 pointer-events-none select-none",
