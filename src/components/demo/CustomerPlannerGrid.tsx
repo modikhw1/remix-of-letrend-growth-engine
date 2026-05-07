@@ -485,7 +485,7 @@ function ConceptPopup({
       )}
 
       {headline && (
-        <h4 className="text-base font-bold leading-snug text-foreground">{headline}</h4>
+        <h4 className="text-[13px] font-bold leading-snug text-foreground">{headline}</h4>
       )}
 
       {isHistory && caption && (
@@ -545,10 +545,10 @@ function ConceptPopup({
 function PopupBlock({ label, body }: { label: string; body: string }) {
   return (
     <div>
-      <p className="text-[10px] font-bold uppercase tracking-widest text-accent-foreground/70">
+      <p className="text-[10px] font-bold uppercase tracking-widest text-foreground">
         {label}
       </p>
-      <p className="mt-0.5 text-[12px] leading-snug text-foreground/85">{body}</p>
+      <p className="mt-1 text-[12px] leading-snug text-foreground">{body}</p>
     </div>
   );
 }
