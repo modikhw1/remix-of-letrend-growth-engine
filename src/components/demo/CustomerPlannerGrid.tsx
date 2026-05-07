@@ -485,7 +485,7 @@ function ConceptPopup({
       )}
 
       {headline && (
-        <h4 className="text-sm font-bold leading-snug text-foreground">{headline}</h4>
+        <h4 className="text-base font-bold leading-snug text-foreground">{headline}</h4>
       )}
 
       {isHistory && caption && (
@@ -504,7 +504,6 @@ function ConceptPopup({
         </p>
       )}
 
-      {slot.whyWorks && <PopupBlock label="Varför det fungerar" body={slot.whyWorks} />}
       {slot.whyFits && <PopupBlock label={whyFitsLabel} body={slot.whyFits} />}
 
       {isHistory && (slot.views != null || slot.likes != null || slot.comments != null) && (
