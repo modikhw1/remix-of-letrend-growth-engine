@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { ExternalLink, Heart, MessageCircle, Play, RotateCcw, ArrowDown, ArrowUp } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ExternalLink, Heart, MessageCircle, Play, RotateCcw, ArrowDown, ArrowUp, Info } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
 export type CustomerPlannerSlot = {
@@ -79,54 +80,80 @@ function LeTBadge({ onThumb, size = "md" }: { onThumb?: boolean; size?: "sm" | "
   );
 }
 
-// ── Custom hover popup — positioned at mouse cursor, works in iframe + any overflow context ──
+// ── Anchored popover — hover on desktop, tap on mobile ──
 
-function HoverTrigger({
+function ConceptPopoverWrapper({
   children,
   popup,
 }: {
   children: React.ReactNode;
   popup: React.ReactNode;
 }) {
-  const [visible, setVisible] = useState(false);
-  const [pos, setPos] = useState({ top: 0, left: 0 });
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isMobile = useIsMobile();
+  const [open, setOpen] = useState(false);
+  const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  function open(e: React.MouseEvent) {
-    const mx = e.clientX;
-    const my = e.clientY;
-    timer.current = setTimeout(() => {
-      const popupW = 288;
-      const popupH = 340;
-      const flipLeft = mx + popupW + 16 > window.innerWidth;
-      const top = Math.min(my - 8, window.innerHeight - popupH - 8);
-      const left = flipLeft ? mx - popupW - 10 : mx + 14;
-      setPos({ top: Math.max(8, top), left });
-      setVisible(true);
-    }, 120);
+  useEffect(() => {
+    return () => {
+      if (openTimer.current) clearTimeout(openTimer.current);
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, []);
+
+  function scheduleOpen() {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    openTimer.current = setTimeout(() => setOpen(true), 140);
+  }
+  function scheduleClose() {
+    if (openTimer.current) clearTimeout(openTimer.current);
+    closeTimer.current = setTimeout(() => setOpen(false), 120);
   }
 
-  function close() {
-    if (timer.current) clearTimeout(timer.current);
-    setVisible(false);
-  }
+  // Desktop: hover on mouse pointers only. Mobile: tap to toggle.
+  const desktopProps = !isMobile
+    ? {
+        onPointerEnter: (e: React.PointerEvent) => {
+          if (e.pointerType === "mouse") scheduleOpen();
+        },
+        onPointerLeave: (e: React.PointerEvent) => {
+          if (e.pointerType === "mouse") scheduleClose();
+        },
+      }
+    : {};
 
   return (
-    <div onMouseEnter={open} onMouseLeave={close} className="contents">
-      {children}
-      {visible &&
-        createPortal(
-          <div
-            style={{ position: "fixed", top: pos.top, left: pos.left, zIndex: 9999, width: 288 }}
-            onMouseEnter={(e) => { if (timer.current) clearTimeout(timer.current); }}
-            onMouseLeave={close}
-            className="rounded-xl border-2 border-foreground bg-card p-4 shadow-hard"
-          >
-            {popup}
-          </div>,
-          document.body,
-        )}
-    </div>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <button
+          type="button"
+          {...desktopProps}
+          onClick={(e) => {
+            // On mobile, toggle. On desktop, also allow click as fallback.
+            if (isMobile) {
+              e.preventDefault();
+              setOpen((v) => !v);
+            }
+          }}
+          className="block w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-xl"
+        >
+          {children}
+        </button>
+      </PopoverTrigger>
+      <PopoverContent
+        side="top"
+        align="center"
+        sideOffset={10}
+        collisionPadding={12}
+        onPointerEnter={!isMobile ? () => {
+          if (closeTimer.current) clearTimeout(closeTimer.current);
+        } : undefined}
+        onPointerLeave={!isMobile ? scheduleClose : undefined}
+        className="w-72 border-2 border-foreground bg-card p-4 shadow-hard"
+      >
+        {popup}
+      </PopoverContent>
+    </Popover>
   );
 }
 
@@ -160,12 +187,16 @@ export function CustomerPlannerGrid({
         ))}
       </div>
 
+      <p className="mt-3 flex items-center justify-center gap-1.5 text-[11px] text-muted-foreground md:hidden">
+        <Info className="h-3 w-3" /> Tryck på ett kort för mer information
+      </p>
+
       <div className="mt-5 flex items-center justify-center gap-3">
         <button
           type="button"
           onClick={() => setWindowOffset((o) => Math.min(o + WINDOW_STEP, MAX_WINDOW_OFFSET))}
           disabled={!canGoForward}
-          className="inline-flex items-center gap-2 rounded-full border-2 border-foreground bg-card px-4 py-1.5 text-[11px] font-bold uppercase tracking-wider text-foreground shadow-hard-sm transition-all hover:translate-y-[1px] hover:shadow-none disabled:opacity-30 disabled:hover:translate-y-0 disabled:hover:shadow-hard-sm"
+          className="inline-flex items-center gap-2 rounded-full border-2 border-foreground bg-card px-4 py-1.5 text-[12px] font-bold uppercase tracking-wider text-foreground shadow-hard-sm transition-all hover:translate-y-[1px] hover:shadow-none disabled:opacity-30 disabled:hover:translate-y-0 disabled:hover:shadow-hard-sm"
         >
           <ArrowUp className="h-3 w-3" /> Framåt
         </button>
@@ -174,7 +205,7 @@ export function CustomerPlannerGrid({
           <button
             type="button"
             onClick={() => setWindowOffset(0)}
-            className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-foreground/40 bg-transparent px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
+            className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-foreground/40 bg-transparent px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
           >
             <RotateCcw className="h-3 w-3" /> Nu
           </button>
@@ -184,7 +215,7 @@ export function CustomerPlannerGrid({
           type="button"
           onClick={() => setWindowOffset((o) => Math.max(o - WINDOW_STEP, MIN_WINDOW_OFFSET))}
           disabled={!canGoBack}
-          className="inline-flex items-center gap-2 rounded-full border-2 border-foreground bg-card px-4 py-1.5 text-[11px] font-bold uppercase tracking-wider text-foreground shadow-hard-sm transition-all hover:translate-y-[1px] hover:shadow-none disabled:opacity-30 disabled:hover:translate-y-0 disabled:hover:shadow-hard-sm"
+          className="inline-flex items-center gap-2 rounded-full border-2 border-foreground bg-card px-4 py-1.5 text-[12px] font-bold uppercase tracking-wider text-foreground shadow-hard-sm transition-all hover:translate-y-[1px] hover:shadow-none disabled:opacity-30 disabled:hover:translate-y-0 disabled:hover:shadow-hard-sm"
         >
           Bakåt <ArrowDown className="h-3 w-3" />
         </button>
@@ -226,9 +257,9 @@ function PlannerCell({
   if (!hasPopup) return cardEl;
 
   return (
-    <HoverTrigger popup={<ConceptPopup slot={slot} companyName={companyName} isHistory={isHistory} />}>
+    <ConceptPopoverWrapper popup={<ConceptPopup slot={slot} companyName={companyName} isHistory={isHistory} />}>
       {cardEl}
-    </HoverTrigger>
+    </ConceptPopoverWrapper>
   );
 }
 
@@ -260,7 +291,7 @@ function UpcomingCard({ slot, isNow }: { slot: CustomerPlannerSlot; isNow: boole
       <div className="flex items-start justify-between p-2.5">
         <LeTBadge onThumb={hasThumb} size="sm" />
         {isNow && (
-          <span className="rounded-full bg-accent px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-accent-foreground">
+          <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-accent-foreground">
             Nu
           </span>
         )}
@@ -272,7 +303,7 @@ function UpcomingCard({ slot, isNow }: { slot: CustomerPlannerSlot; isNow: boole
         {displayTitle && (
           <p
             className={cn(
-              "text-xs font-bold leading-snug",
+              "text-[13px] font-bold leading-snug md:text-xs",
               hasThumb ? "text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.7)]" : "text-foreground",
             )}
             style={{ display: "-webkit-box", WebkitLineClamp: 4, WebkitBoxOrient: "vertical", overflow: "hidden" }}
@@ -282,12 +313,12 @@ function UpcomingCard({ slot, isNow }: { slot: CustomerPlannerSlot; isNow: boole
         )}
         <div className="flex items-center justify-between gap-1">
           {slot.tag && (
-            <span className={cn("text-[9px]", hasThumb ? "text-white/60" : "text-muted-foreground")}>
+            <span className={cn("text-[10px]", hasThumb ? "text-white/60" : "text-muted-foreground")}>
               #{slot.tag}
             </span>
           )}
           {dateStr && (
-            <span className={cn("text-[9px] ml-auto tabular-nums", hasThumb ? "text-white/55" : "text-muted-foreground")}>
+            <span className={cn("text-[10px] ml-auto tabular-nums", hasThumb ? "text-white/55" : "text-muted-foreground")}>
               {dateStr}
             </span>
           )}
@@ -342,7 +373,7 @@ function HistoryCard({ slot, isNow }: { slot: CustomerPlannerSlot; isNow: boolea
             {caption && (
               <p
                 className={cn(
-                  "text-[11px] font-medium leading-snug",
+                  "text-[12px] font-medium leading-snug md:text-[11px]",
                   hasThumb
                     ? "text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.7)]"
                     : "text-foreground",
@@ -360,7 +391,7 @@ function HistoryCard({ slot, isNow }: { slot: CustomerPlannerSlot; isNow: boolea
             {dateStr && (
               <p
                 className={cn(
-                  "text-[9px] mt-0.5 tabular-nums",
+                  "text-[10px] mt-0.5 tabular-nums",
                   hasThumb ? "text-white/55" : "text-muted-foreground",
                 )}
               >
@@ -418,7 +449,7 @@ function StatPill({
       <span className={onThumb ? "text-white/70" : "text-muted-foreground"}>{icon}</span>
       <span
         className={cn(
-          "text-[10px] font-bold leading-none tabular-nums",
+            "text-[11px] font-bold leading-none tabular-nums",
           onThumb ? "text-white" : "text-foreground",
         )}
       >
@@ -447,7 +478,7 @@ function ConceptPopup({
       {!isHistory && (
         <div className="flex items-center gap-2 pb-1 border-b border-border">
           <LeTBadge size="sm" />
-          <span className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
             LeTrend-koncept
           </span>
         </div>
@@ -462,7 +493,7 @@ function ConceptPopup({
       )}
 
       {!isHistory && dateStr && (
-        <p className="text-[10px] text-muted-foreground">
+        <p className="text-[11px] text-muted-foreground">
           <span className="font-semibold">Planerat:</span> {dateStr}
         </p>
       )}
@@ -477,7 +508,7 @@ function ConceptPopup({
       {slot.whyFits && <PopupBlock label={whyFitsLabel} body={slot.whyFits} />}
 
       {isHistory && (slot.views != null || slot.likes != null || slot.comments != null) && (
-        <div className="flex gap-3 rounded-md border border-border bg-muted/50 px-3 py-2 text-[11px] text-foreground/80">
+        <div className="flex gap-3 rounded-md border border-border bg-muted/50 px-3 py-2 text-[12px] text-foreground/80">
           {slot.views != null && (
             <span className="inline-flex items-center gap-1">
               <Play className="h-3 w-3" /> {formatCompact(slot.views)}
@@ -502,7 +533,7 @@ function ConceptPopup({
           target="_blank"
           rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation()}
-          className="inline-flex items-center gap-1.5 rounded-full border border-foreground/70 bg-background px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-foreground transition-colors hover:bg-foreground hover:text-background"
+          className="inline-flex items-center gap-1.5 rounded-full border border-foreground/70 bg-background px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-foreground transition-colors hover:bg-foreground hover:text-background"
         >
           {isHistory ? "Öppna på TikTok" : "Inspiration"}{" "}
           <ExternalLink className="h-3 w-3" />
@@ -515,10 +546,10 @@ function ConceptPopup({
 function PopupBlock({ label, body }: { label: string; body: string }) {
   return (
     <div>
-      <p className="text-[9px] font-bold uppercase tracking-widest text-accent-foreground/70">
+      <p className="text-[10px] font-bold uppercase tracking-widest text-accent-foreground/70">
         {label}
       </p>
-      <p className="mt-0.5 text-[11px] leading-snug text-foreground/85">{body}</p>
+      <p className="mt-0.5 text-[12px] leading-snug text-foreground/85">{body}</p>
     </div>
   );
 }
@@ -527,7 +558,7 @@ function NowEmptyCell({ hasNearbyUpcoming }: { hasNearbyUpcoming: boolean }) {
   return (
     <div className="flex aspect-[9/16] flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-accent/50 bg-blush/50 p-3 text-center">
       <LeTBadge size="md" />
-      <span className="text-[11px] font-medium leading-snug text-foreground/60">
+      <span className="text-[12px] font-medium leading-snug text-foreground/60">
         {hasNearbyUpcoming
           ? "Nästa steg är klart i din plan"
           : "Nästa steg förbereds av din CM"}
