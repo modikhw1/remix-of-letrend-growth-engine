@@ -16,6 +16,10 @@ export default {
       fontFamily: {
         sans: ["'Outfit'", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
       },
+      boxShadow: {
+        hard: "4px 4px 0 #1F1A14",
+        "hard-sm": "2px 2px 0 #1F1A14",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -127,3 +131,4 @@ export default {
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;
+
