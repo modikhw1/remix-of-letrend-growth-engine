@@ -106,13 +106,13 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
       {/* ═══ HERO ═══ */}
       <section className="relative overflow-hidden border-b-2 border-foreground bg-brand py-20 text-brand-foreground md:py-28">
         <div className="container relative z-10 mx-auto max-w-4xl px-6">
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-gold">
+          <p className="mb-4 text-[13px] font-bold uppercase tracking-[0.2em] text-gold md:text-xs">
             LeTrend · Demo för {demo.companyName}
           </p>
           <h1 className="font-serif-display text-4xl font-black leading-[1.05] md:text-6xl">
             En kort interaktiv demo.
           </h1>
-          <div className="mt-6 max-w-2xl space-y-4 text-base opacity-85 md:text-lg">
+          <div className="mt-6 max-w-2xl space-y-4 text-[17px] leading-relaxed opacity-85 md:text-lg">
             <p>
               Hej {greetingName}. LeTrend är i grund och botten en marknadsföringstjänst för TikTok. Med en egen
               plattform, AI-funktioner och mänsklig hjälp guidar vi er strategi för att nå fler ögon och kunder.
@@ -135,11 +135,11 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
         <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
           <div className="grid items-stretch gap-10 md:grid-cols-[5fr_7fr] md:gap-16">
             <div className="flex flex-col">
-              <p className="mb-2 text-xs font-bold uppercase tracking-widest text-accent">Feedplan</p>
+              <p className="mb-2 text-[13px] font-bold uppercase tracking-widest text-accent md:text-xs">Feedplan</p>
               <h2 className="font-serif-display text-3xl font-bold leading-tight md:text-4xl">
                 Så här skulle er feed kunna se ut
               </h2>
-              <div className="mt-5 space-y-4 text-sm leading-relaxed text-foreground/85 md:text-base">
+              <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-foreground/85 md:text-base">
                 <p>
                   LeTrend arbetar med kreativt bricolage — samma typ av pyssel som när man var liten och klippte ihop
                   delar från olika tidningar till något nytt.
@@ -167,7 +167,7 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
                   height={56}
                   className="h-12 w-12 rounded-full border-2 border-foreground object-cover"
                 />
-                <div className="text-sm leading-snug text-foreground/85">
+                <div className="text-[15px] leading-snug text-foreground/85 md:text-sm">
                   <strong className="text-foreground">{cmName}</strong> är er content manager — kurerar koncepten i
                   feeden och guidar er vecka för vecka.
                 </div>
@@ -186,9 +186,9 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
         <div className="container mx-auto max-w-5xl px-6">
           <div className="grid items-stretch gap-10 md:grid-cols-[5fr_7fr] md:gap-14">
             <div className="flex flex-col">
-              <p className="mb-2 text-xs font-bold uppercase tracking-widest text-accent">Game Plan</p>
+              <p className="mb-2 text-[13px] font-bold uppercase tracking-widest text-accent md:text-xs">Game Plan</p>
               <h2 className="font-serif-display text-3xl font-bold leading-tight md:text-4xl">Våra spaningar</h2>
-              <div className="mt-4 space-y-4 text-sm leading-relaxed text-foreground/85 md:text-base">
+              <div className="mt-4 space-y-4 text-[15px] leading-relaxed text-foreground/85 md:text-base">
                 <p>
                   Game Plan är arbetsdokumentet där er content manager samlar allt som rör er strategi — vad ni redan
                   gör bra, vad som kan skärpas, referenser värda att titta på och vilka format vi tror på framåt.
@@ -197,7 +197,7 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
                   Dokumentet är levande. Det börjar redan innan vi pratats vid och fylls på vecka för vecka i takt med
                   att vi lär känna er och era kunder bättre.
                 </p>
-                <p className="text-xs text-muted-foreground">Nedan: ett tidigt utdrag för {demo.companyName}.</p>
+                <p className="text-[13px] text-muted-foreground md:text-xs">Nedan: ett tidigt utdrag för {demo.companyName}.</p>
               </div>
 
               <div className="mt-6 flex items-center gap-3">
@@ -209,7 +209,7 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
                   height={48}
                   className="h-10 w-10 rounded-full border-2 border-foreground object-cover"
                 />
-                <div className="text-xs text-muted-foreground">
+                <div className="text-[13px] text-muted-foreground md:text-xs">
                   Skrivet av <strong className="text-foreground">{cmName}</strong>
                   {" · senast uppdaterat idag"}
                 </div>
@@ -219,16 +219,16 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
             {/* Notepad */}
             <div className="flex flex-col rounded-md border-2 border-foreground bg-[#fdfcf7] shadow-hard">
               <div className="flex items-center justify-between gap-3 border-b-2 border-foreground/15 px-5 py-2.5">
-                <div className="flex items-center gap-2 font-mono text-[11px] text-foreground/60">
+              <div className="flex items-center gap-2 font-mono text-[12px] text-foreground/60">
                   <span className="h-2 w-2 rounded-full bg-foreground/30" />
                   game-plan / {demo.companyName.toLowerCase().replace(/\s+/g, "-")}.md
                 </div>
-                <div className="font-mono text-[10px] uppercase tracking-widest text-foreground/40">utkast</div>
+              <div className="font-mono text-[11px] uppercase tracking-widest text-foreground/40">utkast</div>
               </div>
 
-              <div className="flex-1 px-6 py-6 font-serif-display text-[15px] leading-[1.75] text-foreground md:px-8 md:py-7">
+              <div className="flex-1 px-6 py-6 font-serif-display text-[16px] leading-[1.75] text-foreground md:px-8 md:py-7 md:text-[15px]">
                 <h3 className="mb-1 text-xl font-bold">Första intryck — {tiktokHandleClean}</h3>
-                <p className="mb-5 font-sans text-xs text-muted-foreground">
+                <p className="mb-5 font-sans text-[13px] text-muted-foreground md:text-xs">
                   Anteckningar efter en första genomgång av kontot.
                 </p>
 
@@ -257,7 +257,7 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
                   </>
                 )}
 
-                <div className="mt-6 flex items-center gap-2 border-t-2 border-dashed border-foreground/15 pt-3 font-mono text-[11px] text-muted-foreground">
+                <div className="mt-6 flex items-center gap-2 border-t-2 border-dashed border-foreground/15 pt-3 font-mono text-[12px] text-muted-foreground">
                   <span className="inline-block h-3 w-[1.5px] animate-pulse bg-foreground/60" />
                   fortsätter skriva…
                 </div>
@@ -280,17 +280,17 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
 
               <div className="flex flex-1 flex-col rounded-2xl border-2 border-foreground bg-card p-5 shadow-hard-sm">
                 <div className="mb-3 flex items-center justify-between">
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-foreground/70">
+                  <p className="text-[12px] font-bold uppercase tracking-widest text-foreground/70">
                     Visningar per klipp · senaste 30 dagar
                   </p>
-                  <div className="flex flex-wrap gap-2 text-[10px] text-muted-foreground">
+                  <div className="flex flex-wrap gap-2 text-[11px] text-muted-foreground">
                     <Legend swatchClass="bg-accent" label="Klipp" />
                     <Legend swatchClass="bg-gold" label="Hit" />
                     <Legend swatchClass="bg-brand" label="Viral" />
                   </div>
                 </div>
                 <ViralityChart values={chartValues} avgViews={avgViews30d} />
-                <div className="mt-2 flex justify-between text-[10px] text-muted-foreground">
+                <div className="mt-2 flex justify-between text-[11px] text-muted-foreground">
                   <span>30 dagar sedan</span>
                   <span>Idag</span>
                 </div>
@@ -298,11 +298,11 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
             </div>
 
             <div className="flex flex-col">
-              <p className="mb-2 text-xs font-bold uppercase tracking-widest text-accent">Datadrivet</p>
+              <p className="mb-2 text-[13px] font-bold uppercase tracking-widest text-accent md:text-xs">Datadrivet</p>
               <h2 className="font-serif-display text-3xl font-bold leading-tight md:text-4xl">
                 Vi räknar på det som faktiskt betyder något
               </h2>
-              <div className="mt-4 space-y-3 text-sm leading-relaxed text-foreground/85">
+              <div className="mt-4 space-y-3 text-[15px] leading-relaxed text-foreground/85 md:text-sm">
                 <p>
                   Bra snitt-visningar är trevligt, men berättar inte hela historien. Det viktiga är vilka{" "}
                   <em>signaler</em> ni skickar ut — att verksamheten känns genomtänkt, schysst och värd ett besök. Det
@@ -317,7 +317,7 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
                   <strong>Like rate</strong> är ingen dålig metric. Får ni sällan likes slutar algoritmen pusha er. Det
                   säger något om hur engagerande, välproducerat och rätt-i-tiden innehållet är.
                 </p>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-[13px] text-muted-foreground md:text-xs">
                   Siffrorna ovan hämtas från ert konto och uppdateras löpande när ni är kund.
                 </p>
               </div>
@@ -352,9 +352,9 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
             <div key={b.title} className={`rounded-2xl border-2 border-foreground ${b.bg} p-6 shadow-hard-sm`}>
               <div className="flex items-center gap-2 text-foreground">
                 {b.icon}
-                <h3 className="text-sm font-bold uppercase tracking-wider">{b.title}</h3>
+                <h3 className="text-[15px] font-bold uppercase tracking-wider md:text-sm">{b.title}</h3>
               </div>
-              <p className="mt-2 text-sm leading-relaxed text-foreground/80">{b.body}</p>
+              <p className="mt-2 text-[15px] leading-relaxed text-foreground/80 md:text-sm">{b.body}</p>
             </div>
           ))}
         </div>
@@ -373,24 +373,24 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
           </div>
 
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-accent/15 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-accent">
+            <div className="inline-flex items-center gap-2 rounded-full bg-accent/15 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-accent">
               <Wand2 className="h-3 w-3" /> Kommer i abonnemanget
             </div>
             <h2 className="mt-3 font-serif-display text-3xl font-bold md:text-4xl">
               Spela in scenerna — appen gör resten
             </h2>
-            <div className="mt-4 space-y-3 text-sm leading-relaxed text-foreground/85 md:text-base">
+            <div className="mt-4 space-y-3 text-[15px] leading-relaxed text-foreground/85 md:text-base">
               <p>
                 Vi arbetar på en mobilapp som guidar er genom processen att spela in. Ni spelar in med mobilen — vilket
                 tar bort kostnaden för produktion — och appen gör resten.
               </p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-[14px] text-muted-foreground md:text-sm">
                 Har ni en bra mick och en mobil med bra inspelning är det ett plus. Annars riskerar innehållet upplevas
                 mindre proffsigt.
               </p>
             </div>
 
-            <ul className="mt-5 space-y-3 text-sm text-foreground">
+            <ul className="mt-5 space-y-3 text-[15px] text-foreground md:text-sm">
               <li className="flex gap-3">
                 <Smartphone className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                 <span>Scen-baserad inspelning kopplad till varje koncept i feedplanen.</span>
@@ -416,13 +416,13 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
         <div className="container mx-auto max-w-5xl px-6">
           <div className="grid items-stretch gap-10 md:grid-cols-[5fr_6fr] md:gap-14">
             <div className="flex flex-col">
-              <div className="inline-flex w-fit items-center gap-2 rounded-full bg-foreground/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-foreground">
+              <div className="inline-flex w-fit items-center gap-2 rounded-full bg-foreground/10 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-foreground">
                 <Handshake className="h-3 w-3" /> Byrå-tillägg
               </div>
               <h2 className="mt-3 font-serif-display text-3xl font-bold leading-tight md:text-4xl">
                 Samarbeten med UGC-kreatörer
               </h2>
-              <div className="mt-4 space-y-3 text-sm leading-relaxed text-foreground/85 md:text-base">
+              <div className="mt-4 space-y-3 text-[15px] leading-relaxed text-foreground/85 md:text-base">
                 <p>
                   Ibland räcker inte er egen feed. När ni vill nå nya målgrupper matchar vi er med UGC-kreatörer som
                   passar tonen, branschen och budgeten.
@@ -440,10 +440,10 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
 
             <div className="rounded-2xl border-2 border-foreground bg-card p-5 shadow-hard">
               <div className="mb-3 flex items-center justify-between">
-                <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-accent">
+                <div className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest text-accent">
                   <Sparkles className="h-3 w-3" /> Nytt samarbete
                 </div>
-                <span className="rounded-full bg-mint px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-foreground">
+                <span className="rounded-full bg-mint px-2 py-0.5 text-[11px] font-bold uppercase tracking-widest text-foreground">
                   Förslag
                 </span>
               </div>
@@ -457,14 +457,14 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
                 />
                 <div>
                   <div className="font-serif-display text-lg font-bold leading-tight">Emma Lindqvist</div>
-                  <div className="text-xs text-muted-foreground">@emmilq · 28k följare · Mat & livsstil</div>
-                  <div className="mt-1 inline-flex items-center gap-1 text-[11px] text-foreground/70">
+                  <div className="text-[13px] text-muted-foreground md:text-xs">@emmilq · 28k följare · Mat & livsstil</div>
+                  <div className="mt-1 inline-flex items-center gap-1 text-[12px] text-foreground/70">
                     <Star className="h-3 w-3 fill-gold text-gold" /> 4,9 · snitt 18k visningar
                   </div>
                 </div>
               </div>
 
-              <div className="mt-4 space-y-2 text-sm text-foreground/85">
+              <div className="mt-4 space-y-2 text-[15px] text-foreground/85 md:text-sm">
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                   <span>Medverka i video</span>
@@ -479,18 +479,18 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
                 </div>
               </div>
 
-              <div className="mt-4 grid grid-cols-2 gap-3 border-t-2 border-dashed border-foreground/15 pt-4 text-xs">
+              <div className="mt-4 grid grid-cols-2 gap-3 border-t-2 border-dashed border-foreground/15 pt-4 text-[13px] md:text-xs">
                 <div>
                   <p className="font-bold uppercase tracking-widest text-muted-foreground">Datum</p>
-                  <p className="mt-1 text-sm text-foreground">28 feb</p>
+                  <p className="mt-1 text-[15px] text-foreground md:text-sm">28 feb</p>
                 </div>
                 <div>
                   <p className="font-bold uppercase tracking-widest text-muted-foreground">Pris</p>
-                  <p className="mt-1 text-sm font-bold text-foreground">3 500 kr</p>
+                  <p className="mt-1 text-[15px] font-bold text-foreground md:text-sm">3 500 kr</p>
                 </div>
               </div>
 
-              <div className="mt-4 text-[11px] text-muted-foreground">
+              <div className="mt-4 text-[12px] text-muted-foreground">
                 LeTrend sköter dialogen. Ni klickar bekräfta när ni är nöjda.
               </div>
             </div>
@@ -514,13 +514,13 @@ export function DemoLandingView({ payload }: { payload: DemoPreviewPayload }) {
             <MessageCircle className="h-4 w-4" />
             Boka samtal
           </a>
-          <div className="mt-3 text-[11px] text-muted-foreground">
+          <div className="mt-3 text-[12px] text-muted-foreground">
             Eller svara direkt på mailet ni fick — vi återkopplar inom 1 arbetsdag.
           </div>
         </div>
       </section>
 
-      <footer className="py-8 text-center text-xs text-muted-foreground">
+      <footer className="py-8 text-center text-[13px] text-muted-foreground md:text-xs">
         © LeTrend · Demo förberedd för {demo.companyName}
       </footer>
     </main>
@@ -539,9 +539,9 @@ function Legend({ swatchClass, label }: { swatchClass: string; label: string }) 
 function StatCard({ label, value, hint }: { label: string; value: string; hint: string }) {
   return (
     <div className="rounded-2xl border-2 border-foreground bg-card p-4 shadow-hard-sm">
-      <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{label}</p>
+      <p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">{label}</p>
       <p className="mt-1 font-serif-display text-2xl font-bold leading-none">{value}</p>
-      <p className="mt-1.5 text-[10px] text-muted-foreground">{hint}</p>
+      <p className="mt-1.5 text-[11px] text-muted-foreground">{hint}</p>
     </div>
   );
 }
