@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { ArrowDown, ArrowUp, ExternalLink, RotateCcw } from "lucide-react";
+import { ArrowDown, ArrowUp, ExternalLink, Heart, MessageCircle, Play, RotateCcw } from "lucide-react";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { cn } from "@/lib/utils";
 
 export type CustomerPlannerSlot = {
   feedOrder: number;
@@ -9,6 +11,9 @@ export type CustomerPlannerSlot = {
   thumbnailUrl?: string | null;
   publishedAt?: string | null;
   views?: number | null;
+  likes?: number | null;
+  comments?: number | null;
+  description?: string | null;
   headline?: string | null;
   whyWorks?: string | null;
   whyFits?: string | null;
@@ -18,8 +23,8 @@ export type CustomerPlannerSlot = {
 const CURRENT_SLOT_INDEX = 4;
 const TOTAL_SLOTS = 9;
 const WINDOW_STEP = 3;
-const MAX_WINDOW_OFFSET = 12;
-const MIN_WINDOW_OFFSET = -12;
+const MAX_WINDOW_OFFSET = 3;
+const MIN_WINDOW_OFFSET = -9;
 
 type GridCell = {
   slotIndex: number;
@@ -38,10 +43,18 @@ function buildSlotMap(slots: CustomerPlannerSlot[], windowOffset: number): GridC
   });
 }
 
-function formatCompactViews(n: number): string {
+function formatCompact(n: number): string {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1).replace(".0", "")}M`;
   if (n >= 1_000) return `${(n / 1_000).toFixed(1).replace(".0", "")}k`;
   return String(n);
+}
+
+function TikTokGlyph({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden className={className} fill="currentColor">
+      <path d="M19.5 6.6c-1.6-.3-2.9-1.3-3.6-2.6-.3-.5-.4-1-.4-1.5V2h-3.2v12.6c0 1.4-1.1 2.5-2.5 2.5S7.3 16 7.3 14.6 8.4 12 9.8 12c.3 0 .6 0 .8.1V8.8c-.3 0-.5-.1-.8-.1-3.1 0-5.7 2.5-5.7 5.7s2.5 5.7 5.7 5.7 5.7-2.5 5.7-5.7V9.6c1.1.7 2.4 1.1 3.8 1.1V7.5c-.1 0 0-.6.2-.9z" />
+    </svg>
+  );
 }
 
 export function CustomerPlannerGrid({
@@ -117,134 +130,263 @@ function PlannerCell({
   const { feedOrder, slot } = cell;
   const isNow = feedOrder === 0;
   const isPast = feedOrder < 0;
-  const depth = isPast ? Math.abs(feedOrder) : 0;
-  const thumbnailUrl = slot?.thumbnailUrl ?? null;
-  const hasThumbnail = Boolean(thumbnailUrl);
-  const opacity = isPast ? Math.max(0.5, 1 - depth * 0.13) : 1;
 
-  const baseClasses =
-    "group relative flex aspect-[9/16] flex-col justify-between overflow-hidden rounded-xl p-3 transition-all box-border";
-
-  let stateClasses = "";
-  if (hasThumbnail) {
-    stateClasses = isNow ? "border-2 border-accent shadow-hard-sm" : "border-2 border-foreground/80";
-  } else if (isNow && slot) {
-    stateClasses = "bg-blush border-2 border-accent shadow-hard-sm";
-  } else if (isNow) {
-    stateClasses = "bg-blush/60 border-2 border-dashed border-accent/60";
-  } else if (isPast) {
-    stateClasses = "bg-muted/60 border-2 border-foreground/30";
-  } else {
-    stateClasses = "bg-card border-2 border-foreground/80";
+  if (!slot) {
+    if (isNow) {
+      return <NowEmptyCell hasNearbyUpcoming={hasNearbyUpcoming} />;
+    }
+    return <EmptyLetCard variant={isPast ? "past" : "future"} />;
   }
 
-  const interactive = Boolean(slot && (slot.headline || slot.whyWorks || slot.whyFits || slot.title));
+  const isHistory = isPast || slot.source === "tiktok" || slot.source === "imported_history";
+  const hasPopup = Boolean(
+    slot.headline || slot.whyWorks || slot.whyFits || slot.originalUrl || slot.description,
+  );
+
+  const cardEl = isHistory ? (
+    <HistoryCard slot={slot} isNow={isNow} />
+  ) : (
+    <UpcomingCard slot={slot} isNow={isNow} />
+  );
+
+  if (!hasPopup) return cardEl;
 
   return (
-    <div
-      className={`${baseClasses} ${stateClasses} ${interactive ? "cursor-pointer hover:shadow-hard-sm" : ""}`}
-      style={{
-        opacity,
-        backgroundImage: hasThumbnail
-          ? `linear-gradient(to bottom, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.62) 100%), url(${thumbnailUrl})`
-          : undefined,
-        backgroundSize: hasThumbnail ? "cover" : undefined,
-        backgroundPosition: hasThumbnail ? "center" : undefined,
-      }}
-    >
-      {slot ? (
-        <>
-          <FilledCell slot={slot} isNow={isNow} hasThumbnail={hasThumbnail} />
-          {interactive && <ConceptHoverDetails slot={slot} companyName={companyName} />}
-        </>
-      ) : (
-        <EmptyCell feedOrder={feedOrder} isNow={isNow} hasNearbyUpcoming={hasNearbyUpcoming} />
-      )}
-    </div>
+    <HoverCard openDelay={120} closeDelay={80}>
+      <HoverCardTrigger asChild>{cardEl}</HoverCardTrigger>
+      <HoverCardContent
+        side="right"
+        align="start"
+        sideOffset={10}
+        collisionPadding={12}
+        className="w-72 border-2 border-foreground bg-card p-4 shadow-hard"
+      >
+        <ConceptPopup slot={slot} companyName={companyName} isHistory={isHistory} />
+      </HoverCardContent>
+    </HoverCard>
   );
 }
 
-function FilledCell({
-  slot,
-  isNow,
-  hasThumbnail,
-}: {
-  slot: CustomerPlannerSlot;
-  isNow: boolean;
-  hasThumbnail: boolean;
-}) {
-  const isImported = slot.source === "tiktok" || slot.source === "imported_history";
-  const badgeText = isNow ? "NU" : isImported ? "TT" : "LeT";
-
-  const badgeClass = hasThumbnail
-    ? "bg-black/45 text-white border border-white/20"
-    : isNow
-      ? "bg-accent text-accent-foreground"
-      : isImported
-        ? "bg-secondary text-secondary-foreground"
-        : "bg-foreground text-background";
-
-  const titleClass = hasThumbnail
-    ? "text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.6)]"
-    : "text-foreground";
-
-  const metaClass = hasThumbnail ? "text-white/70" : "text-muted-foreground";
+function UpcomingCard({ slot, isNow }: { slot: CustomerPlannerSlot; isNow: boolean }) {
+  const thumb = slot.thumbnailUrl ?? null;
+  const hasThumb = Boolean(thumb);
 
   return (
-    <div className="relative z-0 flex h-full flex-col justify-between transition-opacity group-hover:opacity-0">
-      <div>
-        <span className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${badgeClass}`}>
-          {badgeText}
-        </span>
+    <div
+      className={cn(
+        "group relative flex aspect-[9/16] cursor-pointer flex-col justify-between overflow-hidden rounded-xl p-3 box-border transition-shadow",
+        isNow
+          ? "border-2 border-accent shadow-hard-sm"
+          : "border-2 border-foreground/80 hover:shadow-hard-sm",
+        !hasThumb && (isNow ? "bg-blush" : "bg-card"),
+      )}
+      style={
+        hasThumb
+          ? {
+              backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.62) 100%), url(${thumb})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }
+          : undefined
+      }
+    >
+      <div className="flex items-start justify-between">
+        <SourceBadge variant="let" onThumb={hasThumb} />
+        {isNow && (
+          <span className="rounded-full bg-accent px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-accent-foreground">
+            Nu
+          </span>
+        )}
       </div>
 
       <div
-        className={`text-xs font-semibold leading-snug md:text-sm ${titleClass} overflow-hidden`}
+        className={cn(
+          "text-xs font-semibold leading-snug md:text-sm overflow-hidden",
+          hasThumb ? "text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.6)]" : "text-foreground",
+        )}
         style={{ display: "-webkit-box", WebkitLineClamp: 4, WebkitBoxOrient: "vertical" }}
       >
         {slot.title}
       </div>
 
-      <div className={`text-[10px] leading-tight md:text-xs ${metaClass}`}>
-        {isImported && slot.publishedAt && (
-          <div>
-            {new Date(slot.publishedAt).toLocaleDateString("sv-SE", { month: "short", year: "numeric" })}
-          </div>
-        )}
-        {isImported && typeof slot.views === "number" && <div>{formatCompactViews(slot.views)} visn</div>}
-        {!isImported && slot.tag && !hasThumbnail && <div className="truncate">#{slot.tag}</div>}
+      <div className={cn("text-[10px]", hasThumb ? "text-white/70" : "text-muted-foreground")}>
+        {slot.tag && !hasThumb ? <span>#{slot.tag}</span> : null}
       </div>
     </div>
   );
 }
 
-function ConceptHoverDetails({
+function HistoryCard({ slot, isNow }: { slot: CustomerPlannerSlot; isNow: boolean }) {
+  const thumb = slot.thumbnailUrl ?? null;
+  const hasThumb = Boolean(thumb);
+  const caption =
+    slot.description?.trim() ||
+    (slot.title && slot.title !== "TikTok-klipp" ? slot.title : "");
+
+  return (
+    <div
+      className={cn(
+        "group relative flex aspect-[9/16] cursor-pointer flex-col overflow-hidden rounded-xl box-border transition-shadow",
+        isNow ? "border-2 border-accent shadow-hard-sm" : "border-2 border-foreground/40 hover:shadow-hard-sm",
+        !hasThumb && "bg-muted/40",
+      )}
+      style={
+        hasThumb
+          ? {
+              backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.78) 100%), url(${thumb})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }
+          : undefined
+      }
+    >
+      <div className="flex items-start justify-between p-2.5">
+        <span
+          className={cn(
+            "flex h-6 w-6 items-center justify-center rounded-full",
+            hasThumb ? "bg-black/55 text-white" : "bg-foreground text-background",
+          )}
+          aria-label="TikTok"
+        >
+          <TikTokGlyph className="h-3.5 w-3.5" />
+        </span>
+        {slot.publishedAt && (
+          <span
+            className={cn(
+              "rounded-full px-2 py-0.5 text-[9px] font-semibold",
+              hasThumb ? "bg-black/45 text-white/90" : "bg-card text-muted-foreground",
+            )}
+          >
+            {new Date(slot.publishedAt).toLocaleDateString("sv-SE", {
+              day: "numeric",
+              month: "short",
+            })}
+          </span>
+        )}
+      </div>
+
+      <div className="flex-1 px-2.5">
+        {caption ? (
+          <p
+            className={cn(
+              "text-[11px] font-medium leading-snug",
+              hasThumb ? "text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.65)]" : "text-foreground",
+            )}
+            style={{ display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}
+          >
+            {caption}
+          </p>
+        ) : null}
+      </div>
+
+      <div
+        className={cn(
+          "grid grid-cols-3 border-t text-center",
+          hasThumb ? "border-white/20 bg-black/30 backdrop-blur-[2px]" : "border-border bg-card/80",
+        )}
+      >
+        <StatPill icon={<Play className="h-2.5 w-2.5" />} value={slot.views} onThumb={hasThumb} />
+        <StatPill icon={<Heart className="h-2.5 w-2.5" />} value={slot.likes} onThumb={hasThumb} divider />
+        <StatPill icon={<MessageCircle className="h-2.5 w-2.5" />} value={slot.comments} onThumb={hasThumb} divider />
+      </div>
+    </div>
+  );
+}
+
+function StatPill({
+  icon,
+  value,
+  onThumb,
+  divider,
+}: {
+  icon: React.ReactNode;
+  value: number | null | undefined;
+  onThumb: boolean;
+  divider?: boolean;
+}) {
+  return (
+    <div
+      className={cn(
+        "flex flex-col items-center justify-center gap-0.5 py-1.5",
+        divider && (onThumb ? "border-l border-white/20" : "border-l border-border"),
+      )}
+    >
+      <span className={onThumb ? "text-white/80" : "text-muted-foreground"}>{icon}</span>
+      <span
+        className={cn(
+          "text-[10px] font-bold leading-none tabular-nums",
+          onThumb ? "text-white" : "text-foreground",
+        )}
+      >
+        {typeof value === "number" ? formatCompact(value) : "—"}
+      </span>
+    </div>
+  );
+}
+
+function SourceBadge({ variant, onThumb }: { variant: "let" | "tiktok"; onThumb: boolean }) {
+  if (variant === "let") {
+    return (
+      <span
+        className={cn(
+          "inline-flex h-6 items-center rounded-full px-2 text-[10px] font-black uppercase tracking-wider",
+          onThumb ? "bg-black/55 text-white" : "bg-foreground text-background",
+        )}
+      >
+        LeT
+      </span>
+    );
+  }
+  return null;
+}
+
+function ConceptPopup({
   slot,
   companyName,
+  isHistory,
 }: {
   slot: CustomerPlannerSlot;
   companyName?: string;
+  isHistory: boolean;
 }) {
-  const headline = slot.headline ?? slot.title;
+  const headline = slot.headline ?? (slot.title !== "TikTok-klipp" ? slot.title : null);
   const whyFitsLabel = companyName ? `Varför det passar ${companyName}` : "Varför det passar er";
+  const caption = slot.description?.trim() || null;
 
   return (
-    <div className="absolute inset-0 z-10 flex flex-col gap-2 overflow-y-auto rounded-[10px] bg-card/[0.98] p-3 text-left text-foreground opacity-0 backdrop-blur-sm transition-opacity duration-150 group-hover:opacity-100 md:p-4">
-      <h4 className="text-sm font-bold leading-snug md:text-base">{headline}</h4>
+    <div className="space-y-3 text-foreground">
+      {headline && (
+        <h4 className="font-sans text-sm font-bold leading-snug">{headline}</h4>
+      )}
+
+      {isHistory && caption && (
+        <p className="text-xs leading-snug text-foreground/85">{caption}</p>
+      )}
+
+      {isHistory && (slot.views != null || slot.likes != null || slot.comments != null) && (
+        <div className="flex gap-3 rounded-md border border-border bg-muted/50 px-3 py-2 text-[11px] text-foreground/80">
+          {slot.views != null && (
+            <span className="inline-flex items-center gap-1">
+              <Play className="h-3 w-3" /> {formatCompact(slot.views)}
+            </span>
+          )}
+          {slot.likes != null && (
+            <span className="inline-flex items-center gap-1">
+              <Heart className="h-3 w-3" /> {formatCompact(slot.likes)}
+            </span>
+          )}
+          {slot.comments != null && (
+            <span className="inline-flex items-center gap-1">
+              <MessageCircle className="h-3 w-3" /> {formatCompact(slot.comments)}
+            </span>
+          )}
+        </div>
+      )}
 
       {slot.whyWorks && (
-        <div>
-          <p className="text-[9px] font-bold uppercase tracking-widest text-accent">Varför det fungerar</p>
-          <p className="mt-0.5 text-[11px] leading-snug text-foreground/85 md:text-xs">{slot.whyWorks}</p>
-        </div>
+        <PopupBlock label="Varför det fungerar" body={slot.whyWorks} />
       )}
-
-      {slot.whyFits && (
-        <div>
-          <p className="text-[9px] font-bold uppercase tracking-widest text-accent">{whyFitsLabel}</p>
-          <p className="mt-0.5 text-[11px] leading-snug text-foreground/85 md:text-xs">{slot.whyFits}</p>
-        </div>
-      )}
+      {slot.whyFits && <PopupBlock label={whyFitsLabel} body={slot.whyFits} />}
 
       {slot.originalUrl && (
         <a
@@ -252,41 +394,45 @@ function ConceptHoverDetails({
           target="_blank"
           rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation()}
-          className="mt-auto inline-flex items-center gap-1.5 self-start rounded-full border border-foreground/70 bg-background px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-foreground transition-colors hover:bg-foreground hover:text-background"
+          className="inline-flex items-center gap-1.5 rounded-full border border-foreground/70 bg-background px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-foreground transition-colors hover:bg-foreground hover:text-background"
         >
-          Originalklipp <ExternalLink className="h-3 w-3" />
+          {isHistory ? "Originalklipp" : "Inspiration"} <ExternalLink className="h-3 w-3" />
         </a>
       )}
     </div>
   );
 }
 
-function EmptyCell({
-  feedOrder,
-  isNow,
-  hasNearbyUpcoming,
-}: {
-  feedOrder: number;
-  isNow: boolean;
-  hasNearbyUpcoming: boolean;
-}) {
-  if (isNow) {
-    return (
-      <div className="flex flex-1 items-center justify-center px-2 text-center">
-        <div className="text-xs font-medium leading-snug text-accent">
-          {hasNearbyUpcoming ? "Nästa steg är klart i din plan" : "Nästa steg förbereds av din CM"}
-        </div>
-      </div>
-    );
-  }
+function PopupBlock({ label, body }: { label: string; body: string }) {
+  return (
+    <div>
+      <p className="text-[9px] font-bold uppercase tracking-widest text-accent-foreground/70">{label}</p>
+      <p className="mt-0.5 text-[11px] leading-snug text-foreground/85">{body}</p>
+    </div>
+  );
+}
 
-  if (feedOrder < 0) {
-    return (
-      <div className="flex flex-1 items-center justify-center">
-        <div className="h-px w-4 bg-border" />
-      </div>
-    );
-  }
+function NowEmptyCell({ hasNearbyUpcoming }: { hasNearbyUpcoming: boolean }) {
+  return (
+    <div className="flex aspect-[9/16] flex-col items-center justify-center rounded-xl border-2 border-dashed border-accent/60 bg-blush/60 p-3 text-center">
+      <span className="text-xs font-medium leading-snug text-foreground/70">
+        {hasNearbyUpcoming ? "Nästa steg är klart i din plan" : "Nästa steg förbereds av din CM"}
+      </span>
+    </div>
+  );
+}
 
-  return <div className="flex-1" />;
+function EmptyLetCard({ variant }: { variant: "past" | "future" }) {
+  return (
+    <div
+      className={cn(
+        "flex aspect-[9/16] items-center justify-center rounded-xl border border-dashed",
+        variant === "past"
+          ? "border-foreground/15 bg-muted/20"
+          : "border-foreground/20 bg-card/40",
+      )}
+    >
+      <span className="font-sans text-base font-black text-foreground/20 md:text-lg">LeT</span>
+    </div>
+  );
 }
